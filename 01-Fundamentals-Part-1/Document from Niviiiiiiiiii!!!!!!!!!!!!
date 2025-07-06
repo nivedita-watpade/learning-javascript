@@ -1,0 +1,101 @@
+// 1) Task: Using only 2 variables (x, y), swap the values of x and y, then console log both:
+// Example start:
+let x = 10;
+let y = 20;
+// Swap here...
+// After 
+//log: x: 20, y: 10
+
+
+// 2)  Slope of a Line, Given two points on a plane:
+
+let x1 = 2, y1 = 5;  
+let x2 = 7, y2 = 20;  
+
+// Calulate slope m=(y2−y1)/(x2−x1) and console log:  “Slope between (2,5) and (7,20) is 3”
+
+
+//3 
+let a = 6;
+let b = 3;
+
+// PREDICT each result & type:
+let r1 = a + b * 2;
+let r2 = (a + b) * 2;
+let r3 = a -= 2;    
+console.log(r1, r2, r3);
+
+// 4)
+// Task: You bought 3 items costing ₹120, ₹250, and ₹90.
+
+//Compute the total bill.
+
+//Apply a 10% discount using an assignment shorthand.
+
+//Compare if the discounted total is greater than ₹400.
+
+//Log a message: "Original: ₹460, After 10% off: ₹414, Above 400? true"
+
+
+// 5
+// Predict the output:
+console.log(4 + 6 / 2 * (3 - 1) - 5);
+console.log((2 + (3 * 4)) - (8 / (2 + 2)));
+
+//6 
+let x = 7;
+let y = 5;
+// Expected console log:  “Sum: 12, Difference: 2, Product: 35.”
+
+//7 
+// Hard-code three angles in degrees:
+let angle1 = 60;
+let angle2 = 60;
+let angle3 = 60;
+
+//  A triangle is valid if the sum of its angles is exactly 180:
+// If triagnle is valid then log triangle is valid if not log triangle is not valid
+
+//8
+// Speed limit check on a road, if speed limit is greater than 100 then log the warning 
+
+//9
+// What is type conversion and type coercion? Explain the difference
+
+//10
+// Convert String to Number
+const age = "85";
+
+// Convert Number to String
+const catalogCode = 85;
+
+// 11
+let str = "hello";
+let num = Number(str); // PREDICT THE OUTPUT AND EXPLAIN
+
+// 12) Convert it to a number and subtract it from 2030. Print how many years remain. 
+let year = "2024";
+
+// 13
+console.log("10" + 5);   // ?
+console.log("10" - 5);   // ?
+console.log(5 + "5");    // ?
+console.log(5 - "2");    // ?
+
+
+// 14
+//Coercion Detective
+//Write a program that demonstrates different cases of coercion:
+
+// What happens when you multiply a string number by a number?
+// What happens when you add string number to actual number?
+
+
+//15
+//Shopping Cart Calculator
+//Create a simple shopping cart that:
+
+//Has prices stored as strings (e.g., "10.99", "24.50")
+//Properly converts these to numbers
+//Calculates the total:
+//Console logs the total formatted as a currency string (e.g., "$39.48")
