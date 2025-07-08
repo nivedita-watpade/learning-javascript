@@ -264,14 +264,110 @@
 
 // // console.log(checkType(true));
 
-const array = [1, 2, 3, 4];
+// const array = [1, 2, 3, 4];
 
-console.log(array[array.length - 2]);
+// console.log(array[array.length - 2]);
 
-console.log(array[1]);
+// console.log(array[1]);
 
-const numArray = new Array(1, 2, 3, 4, 5);
+// const numArray = new Array(1, 2, 3, 4, 5);
 
-console.log(numArray[numArray.length - 2]);
+// console.log(numArray[numArray.length - 2]);
 
-console.log(numArray[3]);
+// console.log(numArray[3]);
+
+const book = {
+  title: "The Alchemist",
+  author: "Paulo Coelho",
+  pages: 208,
+};
+
+console.log(book.author);
+
+console.log(book["title"]);
+
+const fruit = {
+  name: "Apple",
+  color: "Red",
+  taste: "Sweet",
+};
+const propertyName = "color";
+
+console.log(fruit[propertyName]);
+
+const car = {
+  brandName: "Toyota",
+  modelName: "Camry",
+};
+
+const key = "Name";
+
+console.log(car.brand + key);
+
+console.log(car["brand" + key]);
+
+const property = "taste";
+const fruitData = {
+  name: "Apple",
+  color: "Red",
+  taste: "Sweet",
+};
+
+//  - Write code that prints the value of the property if it exists, otherwise prints: "Property not found."
+
+if (fruitData[property]) {
+  console.log(fruitData[property]);
+} else {
+  console.log("Property Not Found");
+}
+
+const movie = {
+  title: "Inception",
+  year: 2010,
+};
+
+//  - Add a new property `director` with value 'Christopher Nolan' using dot notation.- Print the updated object.
+
+movie.director = "Christopher Nolan";
+
+console.log(movie);
+
+const city = {
+  name: "Paris",
+  country: "France",
+};
+
+//  - Add a new property `population` with value 2000000 using bracket notation.- Print the updated object
+
+city["population"] = 2000000;
+
+console.log(city);
+
+//  Q8. Dynamic Property Names
+
+const key1 = "language";
+const value = "JavaScript";
+const course = {};
+
+// Add a property to the `course` object so that it becomes:
+//   { language: 'JavaScript' }
+//  (using bracket notation)
+course[key1] = value;
+
+console.log(course);
+
+// Q3. Build Object Dynamically
+// Write a function createObject that:
+// Takes a key and a value as parameters.
+// Returns an object with that key/value pair.
+
+// Example:('language', 'JavaScript');
+// should return:{ language: 'JavaScript' }
+
+function createObject(key, value) {
+  const object = { [key]: value };
+  //object[key] = value;
+  return object;
+}
+
+console.log(createObject("language", "JavaScript"));

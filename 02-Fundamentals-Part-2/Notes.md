@@ -202,9 +202,6 @@ includes() - it returns a true if element is in array and return a false if elem
 console.log(friends.includes('kanchi')); //true
 console.log(friends.includes('rutu')); //false
 
-
-
-
 =============================== objects =======================================
 
 objects: objects are data structure like an array. Ojects contain a key pair values
@@ -212,9 +209,9 @@ While arrays are great for ordered data, objects let us define key-value pairs:
 Example:
 
 const nivi = {
-    firstName: 'Nivedita',
-    lastName: 'Watpade',
-    friends: ['anki', 'gangi']
+firstName: 'Nivedita',
+lastName: 'Watpade',
+friends: ['anki', 'gangi']
 };
 
 This is called an object literal syntax - we're literally writing down the object content.
@@ -224,3 +221,34 @@ Give each piece of data a name (key or property name)
 Store unstructured and related data
 Access data by its name rather than position
 Unlike arrays, the order of properties in objects doesn't matter when retrieving data.
+
+========================= Dot vs. Bracket Notation ================================
+
+There are two ways to access object properties:
+
+1.  Dot Notation:
+
+const nivi = {
+firstName: "Nivedita",
+lastName: "Watpade",
+friends: ["anki", "gangi"],
+};
+
+console.log(nivi.lastName); // 'Watpade'
+
+console.log(
+`Nivi has ${nivi["friends"].length} friends, and her best friend is called ${nivi["friends"][0]}`
+);
+
+2. Bracket Notation:
+   console.log(nivi['lastName']); // 'Watpade'
+
+const nameKey = 'Name';
+Here, 'first' + nameKey computed first
+console.log(nivi['first' + nameKey]); // 'Nivedita' ----
+console.log(nivi['last' + nameKey]); // 'Watpade'
+
+We can also add new properties to objects using either notation:
+jonas.location = 'Portugal';
+jonas['twitter'] = '@jonasschmedtman';
+console.log(jonas);

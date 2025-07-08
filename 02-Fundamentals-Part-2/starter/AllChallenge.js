@@ -190,3 +190,31 @@ temperatureData.push(
 );
 
 console.log(temperatureData);
+
+const nivi = {
+  firstName: "Nivedita",
+  lastName: "Watpade",
+  friends: ["anki", "gangi"],
+};
+
+console.log(
+  `Nivi has ${nivi["friends"].length} friends, and her best friend is called ${nivi["friends"][0]}`
+);
+
+console.log(
+  `Nivi has ${nivi.friends.length} friends, and her best friend is called ${nivi.friends[0]}`
+);
+
+console.log(nivi["friends"][1]);
+
+console.log(nivi["firstName"]);
+
+const data = {
+  firstName: "Pranit",
+  lastName: "Chavan",
+  age: 25,
+};
+
+const keys = ["firstName", "lastName", "age"];
+
+console.log(data[keys[0]], data[keys[1]], data[keys[2]]);
