@@ -252,3 +252,39 @@ We can also add new properties to objects using either notation:
 jonas.location = 'Portugal';
 jonas['twitter'] = '@jonasschmedtman';
 console.log(jonas);
+
+============================ Object Methods =========================
+
+functions are just values in JavaScript, we can add them as properties to objects.
+
+const nivi = {
+firstName: "Nivedita",
+lastName: "Watpade",
+friends: ["anki", "gangi"],
+birthYear: 2000,
+calcAge: function(birthYear){
+return 2037 - birthYear;
+}
+};
+
+Functions attached to objects are called methods.
+
+We can call them like this
+
+console.log(nivi.calcAge(2000));
+console.log(nivi['calcAge'](2000));
+
+this keyword refers to the object calling the method. This allows methods to access and manipulate the object's other properties
+Example
+const nivi = {
+firstName: "Nivedita",
+lastName: "Watpade",
+friends: ["anki", "gangi"],
+birthYear: 2000,
+calcAge: function () {
+const age = 2037 - this.birthYear;
+return `${this.firstName} is ${age} years old`;
+},
+};
+
+console.log(nivi.calcAge());

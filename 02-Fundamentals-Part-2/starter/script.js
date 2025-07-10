@@ -371,3 +371,43 @@ function createObject(key, value) {
 }
 
 console.log(createObject("language", "JavaScript"));
+
+const nivi = {
+  firstName: "Nivedita",
+  lastName: "Watpade",
+  friends: ["anki", "gangi"],
+  birthYear: 2000,
+  hasDriveLicense: false,
+  calcAge: function () {
+    this.age = 2037 - this.birthYear;
+    return `${this.firstName} is ${this.age} years old`;
+  },
+
+  getSummary: function () {
+    return `${this.firstName} ${this.lastName} is a ${
+      this.age
+    } years old and has ${
+      this.hasDriveLicense ? "a" : "no"
+    } driver license  and her true friend is ${this.friends[0]}`;
+  },
+};
+
+console.log(nivi.calcAge());
+console.log(nivi.getSummary());
+
+// "Nivedita Watpade is a 24 years old and has a/no driver license and her true friend is Anki/Gangi"
+// if (nivi.hasDriveLicense) {
+//   console.log(
+//     `${nivi.firstName} ${nivi.lastName} is a ${nivi.age} years old and has a driver license  and her true friend is ${nivi.friends[0]}`
+//   );
+// } else {
+//   console.log(
+//     `${nivi.firstName} ${nivi.lastName} is a ${nivi.age} years old and has no driver license  and her true friend is ${nivi.friends[0]}`
+//   );
+// }
+
+// console.log(
+//   `${nivi.firstName} ${nivi.lastName} is a ${nivi.age} years old and has ${
+//     nivi.hasDriveLicense ? "a" : "no"
+//   } driver license  and her true friend is ${nivi.friends[0]}`
+// );
