@@ -288,3 +288,18 @@ return `${this.firstName} is ${age} years old`;
 };
 
 console.log(nivi.calcAge());
+
+================================= for loop =======================================
+
+Loops allow us to automate repetitive tasks. The for loop is commonly used when you know exactly how many iterations you need
+
+for (let rep = 1; rep <= 50; rep++) {
+console.log(`Lifiting weights repetition ${rep}`);
+}
+
+for loop has three parts:
+. Initialization: let rep = 1 - sets the initial counter value
+. Condition: rep <= 10 - the loop continues as long as this is true
+. Update: rep++ - updates the counter after each iteration
+
+The loop executes the code block for each iteration as long as the condition remains true

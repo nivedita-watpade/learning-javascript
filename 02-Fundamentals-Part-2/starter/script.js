@@ -411,3 +411,51 @@ console.log(nivi.getSummary());
 //     nivi.hasDriveLicense ? "a" : "no"
 //   } driver license  and her true friend is ${nivi.friends[0]}`
 // );
+
+// ========================= for loop========================
+
+for (let rep = 1; rep <= 50; rep++) {
+  console.log(`Lifiting weights repetition ${rep}`);
+}
+
+const names = ["Nivi", "Pranit", "Adira", "Dityashree", "Pranvi"];
+
+for (let index = 0; index < names.length; index++) {
+  const name = names[index];
+
+  if (index === 0) {
+    console.log("Nivedita Watpade");
+  } else {
+    console.log(name);
+  }
+}
+
+// for (let index = 0; index < names.length; index++) {
+//   const name = names[index];
+
+//   if (index === names.length - 1) {
+//     console.log("Pranvi Chavan");
+//   } else {
+//     console.log(name);
+//   }
+// }
+
+let sum = 0;
+
+for (let i = 1; i <= 4; i++) {
+  sum += i;
+}
+
+console.log(sum); //10
+
+// // sum = 0 + 1 == 1
+
+// 2 + 1 = 3
+
+// 3 + 3 = 6
+
+for (let i = 10; i < 5; i++) {
+  console.log(i);
+}
+
+// Will this loop run? If yes, how many times?
