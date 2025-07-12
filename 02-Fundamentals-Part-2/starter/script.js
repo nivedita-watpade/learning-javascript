@@ -276,186 +276,259 @@
 
 // console.log(numArray[3]);
 
-const book = {
-  title: "The Alchemist",
-  author: "Paulo Coelho",
-  pages: 208,
-};
+// const book = {
+//   title: "The Alchemist",
+//   author: "Paulo Coelho",
+//   pages: 208,
+// };
 
-console.log(book.author);
+// console.log(book.author);
 
-console.log(book["title"]);
+// console.log(book["title"]);
 
-const fruit = {
-  name: "Apple",
-  color: "Red",
-  taste: "Sweet",
-};
-const propertyName = "color";
+// const fruit = {
+//   name: "Apple",
+//   color: "Red",
+//   taste: "Sweet",
+// };
+// const propertyName = "color";
 
-console.log(fruit[propertyName]);
+// console.log(fruit[propertyName]);
 
-const car = {
-  brandName: "Toyota",
-  modelName: "Camry",
-};
+// const car = {
+//   brandName: "Toyota",
+//   modelName: "Camry",
+// };
 
-const key = "Name";
+// const key = "Name";
 
-console.log(car.brand + key);
+// console.log(car.brand + key);
 
-console.log(car["brand" + key]);
+// console.log(car["brand" + key]);
 
-const property = "taste";
-const fruitData = {
-  name: "Apple",
-  color: "Red",
-  taste: "Sweet",
-};
+// const property = "taste";
+// const fruitData = {
+//   name: "Apple",
+//   color: "Red",
+//   taste: "Sweet",
+// };
 
-//  - Write code that prints the value of the property if it exists, otherwise prints: "Property not found."
+// //  - Write code that prints the value of the property if it exists, otherwise prints: "Property not found."
 
-if (fruitData[property]) {
-  console.log(fruitData[property]);
-} else {
-  console.log("Property Not Found");
-}
-
-const movie = {
-  title: "Inception",
-  year: 2010,
-};
-
-//  - Add a new property `director` with value 'Christopher Nolan' using dot notation.- Print the updated object.
-
-movie.director = "Christopher Nolan";
-
-console.log(movie);
-
-const city = {
-  name: "Paris",
-  country: "France",
-};
-
-//  - Add a new property `population` with value 2000000 using bracket notation.- Print the updated object
-
-city["population"] = 2000000;
-
-console.log(city);
-
-//  Q8. Dynamic Property Names
-
-const key1 = "language";
-const value = "JavaScript";
-const course = {};
-
-// Add a property to the `course` object so that it becomes:
-//   { language: 'JavaScript' }
-//  (using bracket notation)
-course[key1] = value;
-
-console.log(course);
-
-// Q3. Build Object Dynamically
-// Write a function createObject that:
-// Takes a key and a value as parameters.
-// Returns an object with that key/value pair.
-
-// Example:('language', 'JavaScript');
-// should return:{ language: 'JavaScript' }
-
-function createObject(key, value) {
-  const object = { [key]: value };
-  //object[key] = value;
-  return object;
-}
-
-console.log(createObject("language", "JavaScript"));
-
-const nivi = {
-  firstName: "Nivedita",
-  lastName: "Watpade",
-  friends: ["anki", "gangi"],
-  birthYear: 2000,
-  hasDriveLicense: false,
-  calcAge: function () {
-    this.age = 2037 - this.birthYear;
-    return `${this.firstName} is ${this.age} years old`;
-  },
-
-  getSummary: function () {
-    return `${this.firstName} ${this.lastName} is a ${
-      this.age
-    } years old and has ${
-      this.hasDriveLicense ? "a" : "no"
-    } driver license  and her true friend is ${this.friends[0]}`;
-  },
-};
-
-console.log(nivi.calcAge());
-console.log(nivi.getSummary());
-
-// "Nivedita Watpade is a 24 years old and has a/no driver license and her true friend is Anki/Gangi"
-// if (nivi.hasDriveLicense) {
-//   console.log(
-//     `${nivi.firstName} ${nivi.lastName} is a ${nivi.age} years old and has a driver license  and her true friend is ${nivi.friends[0]}`
-//   );
+// if (fruitData[property]) {
+//   console.log(fruitData[property]);
 // } else {
-//   console.log(
-//     `${nivi.firstName} ${nivi.lastName} is a ${nivi.age} years old and has no driver license  and her true friend is ${nivi.friends[0]}`
-//   );
+//   console.log("Property Not Found");
 // }
 
-// console.log(
-//   `${nivi.firstName} ${nivi.lastName} is a ${nivi.age} years old and has ${
-//     nivi.hasDriveLicense ? "a" : "no"
-//   } driver license  and her true friend is ${nivi.friends[0]}`
-// );
+// const movie = {
+//   title: "Inception",
+//   year: 2010,
+// };
 
-// ========================= for loop========================
+// //  - Add a new property `director` with value 'Christopher Nolan' using dot notation.- Print the updated object.
 
-for (let rep = 1; rep <= 50; rep++) {
-  console.log(`Lifiting weights repetition ${rep}`);
-}
+// movie.director = "Christopher Nolan";
 
-const names = ["Nivi", "Pranit", "Adira", "Dityashree", "Pranvi"];
+// console.log(movie);
 
-for (let index = 0; index < names.length; index++) {
-  const name = names[index];
+// const city = {
+//   name: "Paris",
+//   country: "France",
+// };
 
-  if (index === 0) {
-    console.log("Nivedita Watpade");
-  } else {
-    console.log(name);
-  }
-}
+// //  - Add a new property `population` with value 2000000 using bracket notation.- Print the updated object
+
+// city["population"] = 2000000;
+
+// console.log(city);
+
+// //  Q8. Dynamic Property Names
+
+// const key1 = "language";
+// const value = "JavaScript";
+// const course = {};
+
+// // Add a property to the `course` object so that it becomes:
+// //   { language: 'JavaScript' }
+// //  (using bracket notation)
+// course[key1] = value;
+
+// console.log(course);
+
+// // Q3. Build Object Dynamically
+// // Write a function createObject that:
+// // Takes a key and a value as parameters.
+// // Returns an object with that key/value pair.
+
+// // Example:('language', 'JavaScript');
+// // should return:{ language: 'JavaScript' }
+
+// function createObject(key, value) {
+//   const object = { [key]: value };
+//   //object[key] = value;
+//   return object;
+// }
+
+// console.log(createObject("language", "JavaScript"));
+
+// const nivi = {
+//   firstName: "Nivedita",
+//   lastName: "Watpade",
+//   friends: ["anki", "gangi"],
+//   birthYear: 2000,
+//   hasDriveLicense: false,
+//   calcAge: function () {
+//     this.age = 2037 - this.birthYear;
+//     return `${this.firstName} is ${this.age} years old`;
+//   },
+
+//   getSummary: function () {
+//     return `${this.firstName} ${this.lastName} is a ${
+//       this.age
+//     } years old and has ${
+//       this.hasDriveLicense ? "a" : "no"
+//     } driver license  and her true friend is ${this.friends[0]}`;
+//   },
+// };
+
+// console.log(nivi.calcAge());
+// console.log(nivi.getSummary());
+
+// // "Nivedita Watpade is a 24 years old and has a/no driver license and her true friend is Anki/Gangi"
+// // if (nivi.hasDriveLicense) {
+// //   console.log(
+// //     `${nivi.firstName} ${nivi.lastName} is a ${nivi.age} years old and has a driver license  and her true friend is ${nivi.friends[0]}`
+// //   );
+// // } else {
+// //   console.log(
+// //     `${nivi.firstName} ${nivi.lastName} is a ${nivi.age} years old and has no driver license  and her true friend is ${nivi.friends[0]}`
+// //   );
+// // }
+
+// // console.log(
+// //   `${nivi.firstName} ${nivi.lastName} is a ${nivi.age} years old and has ${
+// //     nivi.hasDriveLicense ? "a" : "no"
+// //   } driver license  and her true friend is ${nivi.friends[0]}`
+// // );
+
+// // ========================= for loop========================
+
+// for (let rep = 1; rep <= 50; rep++) {
+//   console.log(`Lifiting weights repetition ${rep}`);
+// }
+
+// const names = ["Nivi", "Pranit", "Adira", "Dityashree", "Pranvi"];
 
 // for (let index = 0; index < names.length; index++) {
 //   const name = names[index];
 
-//   if (index === names.length - 1) {
-//     console.log("Pranvi Chavan");
+//   if (index === 0) {
+//     console.log("Nivedita Watpade");
 //   } else {
 //     console.log(name);
 //   }
 // }
 
-let sum = 0;
+// // for (let index = 0; index < names.length; index++) {
+// //   const name = names[index];
 
-for (let i = 1; i <= 4; i++) {
-  sum += i;
-}
+// //   if (index === names.length - 1) {
+// //     console.log("Pranvi Chavan");
+// //   } else {
+// //     console.log(name);
+// //   }
+// // }
 
-console.log(sum); //10
+// let sum = 0;
 
-// // sum = 0 + 1 == 1
+// for (let i = 1; i <= 4; i++) {
+//   sum += i;
+// }
 
-// 2 + 1 = 3
+// console.log(sum); //10
 
-// 3 + 3 = 6
+// // // sum = 0 + 1 == 1
 
-for (let i = 10; i < 5; i++) {
-  console.log(i);
-}
+// // 2 + 1 = 3
+
+// // 3 + 3 = 6
+
+// for (let i = 10; i < 5; i++) {
+//   console.log(i);
+// }
 
 // Will this loop run? If yes, how many times?
+
+const niviData = [
+  "Nivedita",
+  "Watpade",
+  24,
+  null,
+  "female",
+  true,
+  undefined,
+  0,
+];
+
+// const niviDataTypes = [];
+
+// for (let i = 0; i < niviData.length; i++) {
+//   // console.log(niviData[i], typeof niviData[i]);
+//   niviDataTypes.push(typeof niviData[i]);
+// }
+
+// console.log(niviDataTypes);
+
+// const yearsData = [1991, 2007, 1969, 2020];
+
+// function calculateAge(birthYear) {
+//   const age = 2025 - birthYear;
+//   return age;
+// }
+
+// const ages = [];
+
+// for (let j = 0; j < yearsData.length; j++) {
+//   ages.push(calculateAge(yearsData[j]));
+// }
+
+// console.log(ages);
+
+// console.log(` ------------------ continue ---------------------`);
+
+// for (let j = 0; j < yearsData.length; j++) {
+//   if (yearsData[j] > 2000) continue; /// skip the records which is greater than 2000 i.e 2007, 2020
+//   console.log(yearsData[j]);
+// }
+
+// console.log(` ------------------ break ---------------------`);
+// for (let i = 0; i < niviData.length; i++) {
+//   if (typeof niviData[i] === "number") break; /// break the loop iteration after it find the type number
+//   console.log(niviData[i]);
+// }
+
+// const niviData1 = [
+//   "Nivedita",
+//   "Watpade",
+//   24,
+//   null,
+//   "female",
+//   true,
+//   undefined,
+//   0,
+// ];
+
+for (let i = 0; i < niviData.length; i++) {
+  if (!niviData[i]) {
+    continue;
+  }
+  console.log(niviData[i]);
+}
+
+for (let i = 0; i < niviData.length; i++) {
+  if (!niviData[i]) {
+    break;
+  }
+  console.log(niviData[i]);
+}

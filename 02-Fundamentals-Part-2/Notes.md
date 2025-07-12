@@ -303,3 +303,19 @@ for loop has three parts:
 . Update: rep++ - updates the counter after each iteration
 
 The loop executes the code block for each iteration as long as the condition remains true
+
+<!-- ============================== continue and break statement ================== -->
+
+continue statement: The continue statement skips the current iteration and continues with the next one:
+Example
+for (let j = 0; j < yearsData.length; j++) {
+if (yearsData[j] > 2000) continue; /// skip the records which is greater than 2000 i.e 2007, 2020
+console.log(yearsData[j]);
+}
+
+break statement: The break statement completely terminates the loop
+
+for (let i = 0; i < niviData.length; i++) {
+if (typeof niviData[i] === "number") break; /// break the loop iteration after it find the type number
+console.log(niviData[i]);
+}
