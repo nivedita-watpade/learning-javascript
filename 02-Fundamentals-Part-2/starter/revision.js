@@ -263,15 +263,15 @@
 
 // Create a function greet(name, language) that returns a greeting like "Hola Maria!" if language is 'Spanish', or "Hello Maria!" if language is 'English'.
 
-function greet(name, language) {
-  if (language === "English") {
-    return `Hello ${name}`;
-  } else if (language === "Spanish") {
-    return `Halo ${name}`;
-  }
-}
+// function greet(name, language) {
+//   if (language === "English") {
+//     return `Hello ${name}`;
+//   } else if (language === "Spanish") {
+//     return `Halo ${name}`;
+//   }
+// }
 
-console.log(greet("Nivi", "English"));
+// console.log(greet("Nivi", "English"));
 
 // Define a function showUserDetails(name, age) that uses another function isSeniorCitizen(age) to add a tag if the user is 60+
 
@@ -313,3 +313,402 @@ console.log(greet("Nivi", "English"));
 // }
 
 // console.log(formatUser("Pranit", 55, false));
+//  Challenge 1: Print All Fruits
+//  Given this array:
+//  const fruits = ['apple', 'banana', 'cherry'];
+//  Your Task:- Write a function printFruits() that:
+//   - loops through the array
+//   - prints each fruit
+//  Expected output:
+//  apple
+//  banana
+//  cherry
+
+const fruits = ["apple", "banana", "cherry"];
+
+// for (let i = 0; i < fruits.length; i++) {
+//   console.log(fruits[i]);
+// }
+
+function printFruits(fruit) {
+  // console.log(fruit);
+  for (let i = 0; i < fruit.length; i++) {
+    console.log(fruit[i]);
+  }
+}
+
+printFruits(fruits);
+
+//  Challenge 2: Student Object and Favorite Subjects
+//  Given this object:
+//  const student = {
+//   name: 'Amit',
+//   subjects: ['Math', 'English', 'Science']
+//  };
+// Your Task:- Write a function printSubjects(studentObj) that:
+//   - takes the student object
+//   - loops through the subjects array
+//   - prints each subject like:
+//     Amit likes Math
+//     Amit likes English
+//     Amit likes Science
+
+const student = {
+  name: "Amit",
+  subjects: ["Math", "English", "Science"],
+};
+
+function printSubjects(studentObj) {
+  for (let i = 0; i < studentObj.subjects.length; i++) {
+    console.log(`${student.name} likes ${studentObj.subjects[i]}`);
+  }
+}
+
+printSubjects(student);
+
+// Challenge 3: Print Only Numbers Greater Than 10
+//  Given this array:
+//  const numbers = [3, 15, 7, 20, 9];
+//  Your Task:- Write a function printLargeNumbers() that:
+//   - loops through the array
+//   - prints only numbers greater than 10
+//   - uses continue to skip smaller numbers
+//  Expected output:
+//  15
+//  20
+
+const numbers = [3, 15, 7, 20, 9];
+
+function printLargeNumbers(numArray) {
+  for (let i = 0; i < numArray.length; i++) {
+    if (numArray[i] < 10) {
+      continue;
+    }
+    console.log(numArray[i]);
+  }
+}
+
+printLargeNumbers(numbers);
+
+//  Challenge 4: Stop on Fruit Found
+//  Given this array:
+// const fruits = ['apple', 'banana', 'cherry', 'mango'];
+//  Your Task:- Write a function findFruit(fruitName) that:
+//   - loops through the array
+//   - prints the fruit name if found
+//   - stops checking further using break
+//  Test:
+//  findFruit('cherry');
+//  // should print: cherry
+
+const fruitsData = ["apple", "banana", "cherry", "mango"];
+
+function findFruit(fruitName) {
+  for (let i = 0; i < fruitsData.length; i++) {
+    if (fruitsData[i] === fruitName) {
+      console.log(fruitsData[i]);
+      break;
+    }
+  }
+}
+
+findFruit("cherry");
+
+//  Challenge 7: Check Attendance
+//  Given this array:
+//  const students = ['Arjun', 'Neha', 'Sita', 'Ravi'];
+//  Your Task:
+// - Write a function checkStudent(name) that:
+//   - loops through the array
+//   - if the name exists, prints "Present"
+//   - else prints "Absent"
+//  Test:
+//  checkStudent('Sita');
+//  // should print: Present
+
+const students = ["Arjun", "Neha", "Sita", "Ravi"];
+
+function checkStudent(studentsArray, name) {
+  // for (let i = 0; i < students.length; i++) {
+  //   if (students[i] === name) {
+  //     console.log("Present");
+  //   } else {
+  //     console.log("Absent");
+  //   }
+  // }
+
+  if (studentsArray.includes(name)) {
+    console.log("Present");
+  } else {
+    console.log("Absent");
+  }
+}
+
+checkStudent(students, "Nivi");
+
+const newStudent = ["Nivi", "Anki"];
+
+checkStudent(newStudent, "Nivi");
+
+//  Challenge 5: Count Passing Marks
+//  Given this object:
+//  const exam = {
+//   name: 'Final Exam',
+//   marks: [45, 78, 32, 60, 80]
+//  };
+//  Your Task:- Write a function countPassingMarks(examObj) that:
+//   - loops through the marks array
+//   - counts how many marks are > 40
+//   - prints the count
+// Expected output:
+//  4
+
+const exam = {
+  name: "Final Exam",
+  marks: [45, 78, 32, 60, 80, 78],
+};
+
+function countPassingMarks(examObj) {
+  let count = 0;
+  for (let i = 0; i < examObj.marks.length; i++) {
+    if (examObj.marks[i] > 40) {
+      count++;
+      // console.log(examObj.marks[i]);
+    }
+  }
+  return count;
+}
+
+console.log(countPassingMarks(exam));
+
+// Challenge 6: Sum Prices
+//  Given this object:
+//  const cart = {
+//   items: [120, 250, 90, 40]
+//  };
+//  Your Task:- Write a function totalPrice(cartObj) that:
+//   - loops through items
+//   - adds all prices
+//   - prints the total price
+//  Expected output:
+//  500
+
+const cart = {
+  items: [120, 250, 90, 40],
+};
+
+function totalPrice(cartObj) {
+  let total = 0;
+  for (let i = 0; i < cartObj.items.length; i++) {
+    total = total + cartObj.items[i];
+  }
+  return total;
+}
+
+console.log(totalPrice(cart));
+
+// Challenge 8: Print Items with Price Above 100
+//  const shop = {
+//   items: [50, 120, 30, 200, 80]
+//  };
+//  Your Task:- Write a function printExpensiveItems(shopObj) that:
+//   - loops through the items array
+//   - prints only prices above 100
+//   - skips the rest using continue
+//  Expected:
+//  120
+//  200
+
+const shop = {
+  items: [50, 120, 30, 200, 80],
+};
+
+function printExpensiveItems(shopObj) {
+  for (let i = 0; i < shopObj.length; i++) {
+    if (shopObj[i] < 100) {
+      continue;
+    }
+    console.log(shopObj[i]);
+  }
+}
+
+printExpensiveItems(shop.items);
+
+//  Challenge 9: Print Students Who Play Cricket
+//  const students = [
+//   { name: 'Rohan', sport: 'cricket' },
+//   { name: 'Neha', sport: 'football' },
+//   { name: 'Amit', sport: 'cricket' }
+//  ];
+//  Your Task:
+// - Write a function printCricketPlayers() that:
+//   - loops through the array
+//   - prints the names of students who play cricket
+//  Expected:
+//  Rohan
+//  Amit
+
+const studentsData = [
+  { name: "Rohan", sport: "cricket" },
+  { name: "Neha", sport: "football" },
+  { name: "Amit", sport: "cricket" },
+];
+
+function printPlayers(studObj, sportToSkip) {
+  for (let i = 0; i < studObj.length; i++) {
+    // console.log(studObj[i]);
+    if (studObj[i].sport !== sportToSkip) {
+      continue;
+    }
+    console.log(studObj[i].name);
+  }
+}
+
+printPlayers(studentsData, "cricket");
+
+//  Challenge 10: Stop Checking Colors After Finding 'red'
+//  const colors = ['green', 'yellow', 'blue', 'red', 'purple'];
+//  Your Task:- Write a function stopAtRed() that:
+//   - loops through the array
+//   - prints each color
+//   - stops (breaks) when it finds 'red'
+//  Expected:
+//  green
+//  yellow
+//  blue
+//  red
+
+const colors = ["green", "yellow", "blue", "red", "purple"];
+
+function stopAtRed(color) {
+  for (let i = 0; i < color.length; i++) {
+    if (color[i] === "red") {
+      break;
+    }
+
+    console.log(color[i]);
+  }
+}
+
+stopAtRed(colors);
+
+//  Challenge 11: Print Students with More Than 3 Friends
+//  const students = [
+//   { name: 'Anjali', friends: ['Ria', 'Sona'] },
+//   { name: 'Deepak', friends: ['Raj', 'Simran', 'Pooja', 'Neha'] },
+//   { name: 'Vikram', friends: [] }
+//  ];
+//  Your Task:- Write a function printPopularStudents() that:
+//   - loops through the array
+//   - prints names of students who have more than 3 friends
+//  Expected:
+//  Deepak
+
+const studentsStat = [
+  { name: "Anjali", friends: ["Ria", "Sona"] },
+  { name: "Deepak", friends: ["Raj", "Simran", "Pooja", "Neha"] },
+  { name: "Vikram", friends: [] },
+];
+
+function printPopularStudents(studObject) {
+  for (let i = 0; i < studObject.length; i++) {
+    const studentObject = studObject[i];
+    if (studentObject.friends.length < 3) {
+      continue;
+    }
+    console.log(studentObject.name);
+  }
+}
+
+printPopularStudents(studentsStat);
+
+//  Challenge 12: Print All Items Except 'soap'
+//  const items = ['toothpaste', 'soap', 'shampoo', 'comb'];
+//  Your Task:- Write a function printItems() that:
+//   - loops through the array
+//   - prints each item
+//   - skips 'soap' using continue
+//  Expected:
+//  toothpaste
+//  shampoo
+//  comb
+
+const items = ["toothpaste", "soap", "shampoo", "comb"];
+
+function printItems(itemVal) {
+  for (i = 0; i < itemVal.length; i++) {
+    if (itemVal[i] === "soap") {
+      continue;
+    }
+    console.log(itemVal[i]);
+  }
+}
+
+printItems(items);
+
+//  Challenge 13: Count Words Starting With 'S'
+// const words = ['Sun', 'Ball', 'Sky', 'Tree', 'Sea'];
+//  Your Task:- Write a function countSWords() that:
+//   - loops through the array
+//   - counts words that start with the letter S
+//   - prints the count
+//  Expected:
+//  3
+
+const words = ["Sun", "Ball", "Sky", "Tree", "Sea"];
+
+function countSWords(wordTxt) {
+  for (let i = 0; i < wordTxt.length; i++) {
+    if (wordTxt[i] === "s") {
+      continue;
+    }
+  }
+  console.log(wordTxt[i].length);
+}
+
+countSWords(words);
+
+//  Challenge 14: Find First Number Greater Than 100
+//  const nums = [50, 90, 120, 30, 250];
+//  Your Task:- Write a function findFirstAbove100() that:
+//   - loops through the array
+//   - prints the first number greater than 100
+//   - stops using break
+//  Expected:
+//  120
+
+const nums = [50, 90, 120, 30, 250];
+
+function findFirstAbove100(number) {
+  for (let i = 0; i < number.length; i++) {
+    if (number[i] > 100) {
+      console.log(number[i]);
+      break;
+    }
+  }
+}
+
+findFirstAbove100(nums);
+
+//  Challenge 15: Print Even Numbers in Steps of 2
+//  const numbers = [2, 4, 6, 8, 10, 12];
+// Your Task:- Write a function printEverySecondEven() that:
+//   - loops through the array
+//   - prints every second even number only
+//  Expected:
+//  4
+//  8
+//  12
+
+// const numbersData = [11, 4, 13, 8, 17, 12];
+
+// function printEverySecondEven(numData) {
+//   for (let i = 0; i < numData.length; i++) {
+//     if (numData[i] / 2 == 0) {
+//       continue;
+//     }
+//     console.log(numData[i]);
+//   }
+// }
+
+// printEverySecondEven(numbersData);
