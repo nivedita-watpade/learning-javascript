@@ -319,3 +319,23 @@ for (let i = 0; i < niviData.length; i++) {
 if (typeof niviData[i] === "number") break; /// break the loop iteration after it find the type number
 console.log(niviData[i]);
 }
+
+<!-- ========================    Looping Backwards and Loops in Loops =========================== -->
+
+Looping backwards through an array:
+
+for (let i = inventory.items.length - 1; i >= 0; i--) {
+console.log(inventory.items[i]);
+}
+For this loop:
+. Start at the last element: i = array.length - 1
+. Continue while i >= 0
+. Decrease the counter: i--
+
+Nested loops (a loop inside another loop):
+for (let i = 0; i <= inventory.items.length - 1; i++) {
+console.log(inventory.items[i]);
+for (let rep = 1; rep <= 3; rep++) {
+console.log(`${inventory.items[i]} X ${rep}`);
+}
+}
