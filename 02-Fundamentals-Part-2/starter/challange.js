@@ -240,27 +240,23 @@
 
 // console.log(removeLast(["red", "blue", "green"]));
 
-
-
-function calcTip(billValue){
-if(billValue >=50 && billValue <= 300){
-  const tipAmt = 15/100* billValue;
-  return tipAmt;
-}else{
-  const tipAmt = 20/100* billValue;
-  return tipAmt;
-}
+function calcTip(billValue) {
+  if (billValue >= 50 && billValue <= 300) {
+    const tipAmt = (15 / 100) * billValue;
+    return tipAmt;
+  } else {
+    const tipAmt = (20 / 100) * billValue;
+    return tipAmt;
+  }
 }
 
 console.log(calcTip(125));
-
 
 const bills = [125, 555, 44];
 
 const tip1 = calcTip(bills[0]);
 const tip2 = calcTip(bills[1]);
 const tip3 = calcTip(bills[2]);
-
 
 const tips = [];
 tips.push(tip1);
@@ -280,8 +276,6 @@ total.push(total3);
 
 console.log(total);
 
-
-
 // Challenge 1: Book Reading Tracker
 // Context:
 // You want to track your reading progress across several books.
@@ -294,50 +288,50 @@ console.log(total);
 // Create a new array progressUpdates using the function to get reading status for each book.
 // Bonus: Add logic in the function to return "Book finished!" if pagesRead equals totalPages.
 
-
-function getReadingProgress(totalPages, pagesRead){
+function getReadingProgress(totalPages, pagesRead) {
   const completedPercentage = (pagesRead / totalPages) * 100;
-  if(totalPages === pagesRead){
+  if (totalPages === pagesRead) {
     return `Book finished!`;
   }
   return `You have completed ${completedPercentage}% of the book`;
-
 }
 
 console.log(getReadingProgress(150, 150));
 
-const totalPages = [300, 150, 500]
-const pagesRead = [120, 150, 240]
+const totalPages = [300, 150, 500];
+const pagesRead = [120, 150, 240];
 
- const progressUpdates = [getReadingProgress(totalPages[0], pagesRead[0]),getReadingProgress(totalPages[1], pagesRead[1]),getReadingProgress(totalPages[2], pagesRead[2])]
+const progressUpdates = [
+  getReadingProgress(totalPages[0], pagesRead[0]),
+  getReadingProgress(totalPages[1], pagesRead[1]),
+  getReadingProgress(totalPages[2], pagesRead[2]),
+];
 
- console.log(progressUpdates);
+console.log(progressUpdates);
 
- const nivi = {
-    firstName: 'Nivedita',
-    lastName: 'Watpade',
-    friends: ['anki', 'gangi'],
-    1: 29,
-    'first name': 'Rani'
+const nivi = {
+  firstName: "Nivedita",
+  lastName: "Watpade",
+  friends: ["anki", "gangi"],
+  1: 29,
+  "first name": "Rani",
 };
 
-nivi.friends.push('Kanchi');
+nivi.friends.push("Kanchi");
 nivi.friends.pop();
 console.log(nivi.friends[nivi.friends.length - 1]);
 
-nivi.friends.unshift('pranit');
+nivi.friends.unshift("pranit");
 
 console.log(nivi.friends);
 
-console.log(nivi.friends.indexOf('pranit'));
+console.log(nivi.friends.indexOf("pranit"));
 
-
-if(nivi.friends.includes('pranit')){
-  console.log('.............. !!!!!!!')
-}else{
-  console.log('Prantya is not there !!!!!!!')
+if (nivi.friends.includes("pranit")) {
+  console.log(".............. !!!!!!!");
+} else {
+  console.log("Prantya is not there !!!!!!!");
 }
-
 
 // Write a function toFahrenheit(celsius) that:
 // Takes a temperature in Celsius and returns the Fahrenheit value using the formula above.
@@ -345,13 +339,62 @@ if(nivi.friends.includes('pranit')){
 // Create an array celsiusTemps = [0, 20, 30].
 // Create a new array fahrenheitTemps using the function for each value in the Celsius array.
 
-
-function toFahrenheit(celsius){
-  return (celsius * 9 / 5) + 32;
+function toFahrenheit(celsius) {
+  return (celsius * 9) / 5 + 32;
 }
 console.log(toFahrenheit(25));
 const celsiusTemps = [0, 20, 30];
 
-const fahrenheitTemps = [toFahrenheit(celsiusTemps[0]), toFahrenheit(celsiusTemps[1]), toFahrenheit(celsiusTemps[2])];
+const fahrenheitTemps = [
+  toFahrenheit(celsiusTemps[0]),
+  toFahrenheit(celsiusTemps[1]),
+  toFahrenheit(celsiusTemps[2]),
+];
 
 console.log(fahrenheitTemps);
+
+const bills2 = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+
+function calcTip2(billValue) {
+  if (billValue >= 50 && billValue <= 300) {
+    const tipAmt = (15 / 100) * billValue;
+    return tipAmt;
+  } else {
+    const tipAmt = (20 / 100) * billValue;
+    return tipAmt;
+  }
+}
+
+const tips2 = [];
+const totals2 = [];
+
+for (let i = 0; i <= bills2.length - 1; i++) {
+  const tip = calcTip2(bills2[i]);
+  tips2.push(tip);
+  totals2.push(tip + bills2[i]);
+  // console.log("Bills Total are:", total);
+}
+
+console.log(totals2);
+
+function calcAverage(arr) {
+  let sum = 0;
+  for (let i = 0; i <= arr.length - 1; i++) {
+    sum = sum + arr[i];
+  }
+  const avgOfArrayNum = sum / arr.length;
+  return avgOfArrayNum;
+}
+console.log(calcAverage(totals2));
+
+function calcAverageWhile(arr) {
+  let i = 0;
+  let sum = 0;
+  while (i <= arr.length - 1) {
+    sum = sum + arr[i];
+    i++;
+  }
+  const avgOfArrayNum = sum / arr.length;
+  return avgOfArrayNum;
+}
+console.log(calcAverageWhile(totals2));

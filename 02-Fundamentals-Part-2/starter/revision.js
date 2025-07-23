@@ -799,10 +799,42 @@ const mix = ["apple", 5, true, "banana", 42];
 
 // Write a loop that logs only the string values, starting from the last element.
 
-for (let i = mix.length - 1; i >= 0; i--) {
-  if (typeof mix[i] !== "string") {
-    continue;
-  } else {
-    console.log(mix[i]);
-  }
+// for (let i = mix.length - 1; i >= 0; i--) {
+//   if (typeof mix[i] !== "string") {
+//     continue;
+//   } else {
+//     console.log(mix[i]);
+//   }
+// }
+
+// let rep = 1;
+// while (rep <= 10) {
+//   console.log(`Exercise repetition ${rep}`);
+//   rep++;
+// }
+
+// let i = 0;
+// while (i <= mix.length - 1) {
+//   console.log(mix[i]);
+//   i++;
+// }
+
+function generateRandomNum() {
+  const randomNum = Math.trunc(Math.random() * 6) + 1;
+  return randomNum;
 }
+
+// console.log(generateRandomNum());
+
+let dice = generateRandomNum();
+// console.log(dice);
+while (dice !== 6) {
+  console.log(`You rolled a ${dice}`);
+  dice = generateRandomNum();
+}
+
+// let j = mix.length - 1;
+// while (j >= 0) {
+//   console.log(mix[j]);
+//   j--;
+// }

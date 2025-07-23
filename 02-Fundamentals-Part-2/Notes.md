@@ -339,3 +339,26 @@ for (let rep = 1; rep <= 3; rep++) {
 console.log(`${inventory.items[i]} X ${rep}`);
 }
 }
+
+<!-- ===================================  The while Loop ================================ -->
+
+The while loop is more versatile than the for loop because it only requires a condition:
+let rep = 1;
+while (rep <= 10) {
+console.log(`Exercise repetition ${rep}`);
+rep++;
+}
+
+The while loop is particularly useful when you don't know in advance how many iterations you need:
+let dice = Math.trunc(Math.random() _ 6) + 1;
+while (dice !== 6) {
+console.log(`You rolled a ${dice}`);
+dice = Math.trunc(Math.random() _ 6) + 1;
+}
+
+we keep rolling a die until we get a 6. Since we can't predict when we'll roll a 6, a while loop is more appropriate than a for loop.
+
+Key differences between for and while loops:
+Use for when you know the exact number of iterations
+Use while when you don't know how many iterations will be needed
+The while loop is more flexible but requires manual setup of the counter (if needed)
