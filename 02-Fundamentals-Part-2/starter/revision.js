@@ -838,3 +838,10 @@ while (dice !== 6) {
 //   console.log(mix[j]);
 //   j--;
 // }
+
+// Create an Object
+
+// Create an object car with properties: brand, year, isElectric.
+
+// Then, add a method getInfo that returns:
+// "Brand: Tesla, Year: 2022, Electric: true"
