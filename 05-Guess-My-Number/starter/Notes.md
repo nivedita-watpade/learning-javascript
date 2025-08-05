@@ -7,3 +7,17 @@ We can select element using lass and ID
 const againBtn = document.querySelector('.btn.again');
 againBtn.textContent = 'Repeat';
 // console.log(againBtn);
+
+DOM: Document Object Model
+Structured represntation of HTML documents. Allows javascript to access HTML elements and styles to manipulate(change text, html attribute, css style ) them.
+
+DOM automatically created as soon as HTML document loads.
+
+DOM structure consist of tree structure of HTML elements. Elements have child and siblings.
+Document object is the entry point of DOM. Using this document object we can access and manipulate the DOM
+
+Everything present in the HTML page it becomes part of the DOM even comment
+
+DOM is not the part of Javascript langauge. DOM and DOM methods are the part of browser/web API's. We can access this api's with javascript
+
+Example of browser API's : Geolocation, timer, speech synthesis, bluetooth
