@@ -1,6 +1,6 @@
 // Section A – Theory (5 marks each)
 // 1. What does "use strict" do in JavaScript? Why is it useful?
-//Ans: use strict helps developer to avoid accidental error. Strict mode visible errors where javascript not able to do it.It also help to reserve keywords.
+//Ans: use strict helps developer to avoid accidental error. Strict mode showsvisible errors where javascript not able to do it.It also help to reserve keywords.
 
 // 2. Differentiate between a function declaration and a function expression.
 //Ans: function declaration can be called before it declare. It define with function name.

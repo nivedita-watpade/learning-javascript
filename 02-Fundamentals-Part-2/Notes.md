@@ -3,7 +3,7 @@
 JavaScript's strict mode is an important feature that helps developers avoid accidental errors. To
 activate it, you simply add
 'use strict';
-at the very beginning of your JavaScript file, before anyvother code (comments are allowed).
+at the very beginning of your JavaScript file, before anyother code (comments are allowed).
 
 'use strict';
 Strict mode creates visible errors where JavaScript would otherwise fail silently. For example:
