@@ -21,3 +21,17 @@ Everything present in the HTML page it becomes part of the DOM even comment
 DOM is not the part of Javascript langauge. DOM and DOM methods are the part of browser/web API's. We can access this api's with javascript
 
 Example of browser API's : Geolocation, timer, speech synthesis, bluetooth
+
+Selecting and Manipulating Elements:
+
+To change the text content:
+const betweenTxt = document.querySelector('.between');
+betweenTxt.textContent = 'Between 1 and 30';
+
+const inputNumber = document.querySelector('.guess');
+inputNumber.value = 69;
+
+To change the input value:
+For inputs value we used .value
+const inputNumber = document.querySelector('.guess');
+inputNumber.value = 69;
