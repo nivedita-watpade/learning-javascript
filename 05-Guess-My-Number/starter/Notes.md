@@ -35,3 +35,44 @@ To change the input value:
 For inputs value we used .value
 const inputNumber = document.querySelector('.guess');
 inputNumber.value = 69;
+
+Values received from html element is always in the string format.
+
+Handling Click Events
+
+addEventListener(): Is a method is used to access user events. For example, click, keyPress, mouseOver etc.
+It expect two mandatory arguments. First is event type and 2nd is function definition.
+When user performs that event the function definition is excuted.
+We do not manually called function in the addEventListener() method.
+
+const checkBtn = document.querySelector('.check');
+const inputNumber = document.querySelector('.guess');
+
+//Using function declaration
+function handleGuessBtnClick() {
+console.log(inputNumber.value);
+}
+checkBtn.addEventListener('click', handleGuessBtnClick);
+
+//Using Function Expression
+checkBtn.addEventListener('click', function () {
+console.log(inputNumber.value);
+});
+
+////Using Arrow Function
+checkBtn.addEventListener('click', () => {
+console.log(inputNumber.value);
+});
+
+//Using function declaration
+function handleGuessBtnClick() {
+const guess = Number(inputNumber.value);
+if (!guess) {
+statusMsg.textContent = 'No Number!!!';
+} else if (randomNum === guess) {
+statusMsg.textContent = 'You Win!!!';
+// body.style.backgroundColor = 'Green';
+body.classList.add('win');
+}
+}
+checkBtn.addEventListener('click', handleGuessBtnClick);

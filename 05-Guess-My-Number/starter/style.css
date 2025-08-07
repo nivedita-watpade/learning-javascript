@@ -117,3 +117,7 @@ h1 {
 .label-score {
   margin-bottom: 2rem;
 }
+
+.win {
+  background-color: rgb(7, 50, 7);
+}
