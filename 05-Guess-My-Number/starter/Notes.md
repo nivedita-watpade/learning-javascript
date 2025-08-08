@@ -1,7 +1,7 @@
 DOM & DOM Manipulation:
 
 How to select an element
-We can select element using lass and ID
+We can select element using class and ID
 -To select class elemt use dot(.)
 -To select id element use hash(#)
 const againBtn = document.querySelector('.btn.again');

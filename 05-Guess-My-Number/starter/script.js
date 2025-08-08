@@ -35,18 +35,27 @@ const checkBtn = document.querySelector('.check');
 const inputNumber = document.querySelector('.guess');
 const statusMsg = document.querySelector('.message');
 const body = document.querySelector('.gamepage-body');
+const scoreElement = document.querySelector('.score');
+const secretNumber = Math.trunc(Math.random() * 20) + 1;
+let score = 20;
 
-const randomNum = 20;
+console.log(secretNumber);
 
 //Using function declaration
 function handleGuessBtnClick() {
   const guess = Number(inputNumber.value);
+
   if (!guess) {
     statusMsg.textContent = 'No Number!!!';
-  } else if (randomNum === guess) {
-    statusMsg.textContent = 'You Win!!!';
-    // body.style.backgroundColor = 'Green';
-    body.classList.add('win');
+  } else if (secretNumber === guess) {
+    statusMsg.textContent = 'You Win !!!';
+  } else if (guess > secretNumber) {
+    statusMsg.textContent = 'Number is too high!!!';
+    score--;
+  } else if (guess < secretNumber) {
+    statusMsg.textContent = 'Number is too low!!!';
+    score--;
   }
+  scoreElement.textContent = score;
 }
 checkBtn.addEventListener('click', handleGuessBtnClick);
