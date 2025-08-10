@@ -37,24 +37,36 @@ const statusMsg = document.querySelector('.message');
 const body = document.querySelector('.gamepage-body');
 const scoreElement = document.querySelector('.score');
 const secretNumber = Math.trunc(Math.random() * 20) + 1;
-let score = 20;
+let score = 5;
 
 console.log(secretNumber);
 
 //Using function declaration
 function handleGuessBtnClick() {
   const guess = Number(inputNumber.value);
-
+  if (!score) {
+    return;
+  }
   if (!guess) {
     statusMsg.textContent = 'No Number!!!';
   } else if (secretNumber === guess) {
     statusMsg.textContent = 'You Win !!!';
   } else if (guess > secretNumber) {
-    statusMsg.textContent = 'Number is too high!!!';
-    score--;
+    if (score > 1) {
+      statusMsg.textContent = 'Number is too high!!!';
+      score--;
+    } else {
+      score--;
+      statusMsg.textContent = 'You lost the game!!!';
+    }
   } else if (guess < secretNumber) {
-    statusMsg.textContent = 'Number is too low!!!';
-    score--;
+    if (score > 1) {
+      statusMsg.textContent = 'Number is too low!!!';
+      score--;
+    } else {
+      score--;
+      statusMsg.textContent = 'You lost the game!!!';
+    }
   }
   scoreElement.textContent = score;
 }
