@@ -2,7 +2,7 @@ DOM & DOM Manipulation:
 
 How to select an element
 We can select element using class and ID
--To select class elemt use dot(.)
+-To select class element use dot(.)
 -To select id element use hash(#)
 const againBtn = document.querySelector('.btn.again');
 againBtn.textContent = 'Repeat';
@@ -76,3 +76,6 @@ body.classList.add('win');
 }
 }
 checkBtn.addEventListener('click', handleGuessBtnClick);
+
+We can directly select the html tag to manipulate like
+document.querySelector('body').style.backgroundColor = 'green';
