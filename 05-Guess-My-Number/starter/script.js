@@ -45,6 +45,22 @@ let highscore = 0;
 
 console.log(secretNumber);
 
+function handleWrongGuessScenario(statusTxt) {
+  if (score > 1) {
+    updateStatus(`Number is too ${statusTxt} !!!`);
+    // statusMsg.textContent = `Number is too ${statusTxt} !!!`;
+    score--;
+  } else {
+    score--;
+    updateStatus('You lost the game!!!');
+    // statusMsg.textContent = 'You lost the game!!!';
+  }
+}
+
+function updateStatus(message) {
+  statusMsg.textContent = message;
+}
+
 //Using function declaration
 function handleGuessBtnClick() {
   const guess = Number(inputNumber.value);
@@ -52,9 +68,9 @@ function handleGuessBtnClick() {
     return;
   }
   if (!guess) {
-    statusMsg.textContent = 'No Number!!!';
+    updateStatus('No Number!!!');
   } else if (secretNumber === guess) {
-    statusMsg.textContent = 'You Win !!!';
+    updateStatus('You Win !!!');
     body.style.backgroundColor = 'green';
     displaySecretNumber.style.width = '25rem';
     displaySecretNumber.textContent = secretNumber;
@@ -62,29 +78,18 @@ function handleGuessBtnClick() {
       highscoreElement.textContent = score;
       highscore = score;
     }
-  } else if (guess > secretNumber) {
-    if (score > 1) {
-      statusMsg.textContent = 'Number is too high!!!';
-      score--;
-    } else {
-      score--;
-      statusMsg.textContent = 'You lost the game!!!';
-    }
-  } else if (guess < secretNumber) {
-    if (score > 1) {
-      statusMsg.textContent = 'Number is too low!!!';
-      score--;
-    } else {
-      score--;
-      statusMsg.textContent = 'You lost the game!!!';
-    }
+  } else if (secretNumber !== guess) {
+    guess > secretNumber
+      ? handleWrongGuessScenario('High')
+      : handleWrongGuessScenario('Low');
   }
+
   scoreElement.textContent = score;
 }
 checkBtn.addEventListener('click', handleGuessBtnClick);
 
 function handleReset() {
-  statusMsg.textContent = 'Start guessing...';
+  updateStatus('Start guessing...');
   body.style.backgroundColor = '#222';
   displaySecretNumber.style.width = '15rem';
   displaySecretNumber.textContent = '?';
