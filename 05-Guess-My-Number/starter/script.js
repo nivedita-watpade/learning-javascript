@@ -79,9 +79,10 @@ function handleGuessBtnClick() {
       highscore = score;
     }
   } else if (secretNumber !== guess) {
-    guess > secretNumber
-      ? handleWrongGuessScenario('High')
-      : handleWrongGuessScenario('Low');
+    // guess > secretNumber
+    //   ? handleWrongGuessScenario('High')
+    //   : handleWrongGuessScenario('Low');
+    handleWrongGuessScenario(guess > secretNumber ? 'High' : 'Low');
   }
 
   scoreElement.textContent = score;

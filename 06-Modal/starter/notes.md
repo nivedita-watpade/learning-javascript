@@ -26,6 +26,7 @@ key events/ keyboards events:
 -Here, we set keydown event on the whole document.
 -Some of the keyboard events are keydown and keyup. Within these events, the keys that can be detected include Enter, Escape, Space, Arrow keys, and so on.
 -When we pass e (or event) as an argument to the function, it represents the event object created by JavaScript whenever the keydown event occurs. This object contains many properties, and one of them is key, which holds the value of the key that was pressed on the keyboard.
+-We always receive a event object
 
 document.addEventListener('keydown', function (e) {
 if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
