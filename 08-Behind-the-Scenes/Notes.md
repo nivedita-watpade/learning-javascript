@@ -99,8 +99,84 @@ sayMyName();
 After the above code compilation, one Global Execution Context is created that contains the code which is not inside the function.
 
 -Global Execution Context is created and pushed into the stack.(Global Execution Context contains firstName varibale, all functions definition)
+
 -After that sayMyName() function called a new execution context(Its contain local varibales, function body) is created and then it also pushed into the stack.
-sayMyName() is the arrow function therefore, its execution context will not contain arguments and this keyword
+
+-sayMyName() is the arrow function therefore, its execution context will not contain arguments and this keyword
+
 -After that in sayMyName() function body there is getName() called. So new execution context(Its contain local varibale, arguments) is created for getName() and its pushed into the call stack.
+
 -After the getName() return its popped from the stack and next execution of sayMyName() will be start. After sayMyName() returns it also popped from the stack and then Global Execution Context execute.
+
 -Once we closed the browser or browser window Global Execution Context popped and stack will be empty
+
+================= Scope ==========================
+
+Scope: Space or environment in which certain variable is declared.
+There is global scope, function scope, and block scope.
+
+Global Scope:
+-Outside of any function or block
+-Varibale declares in global scope are accessible everywhere
+Ex. const me = "Nivedita";
+
+Function Scope:
+
+- Varibale accessible only inside the function, Not outside
+  -Also called local scope
+  Ex.
+  function myFunction() {
+  const goodName = 'Nivedita';
+  let job = 'Developer';
+  var age = 24;
+  }
+  console.log(goodName); //ReferenceError: goodName is not defined
+  console.log(job); //ReferenceError: job is not defined
+  console.log(age); //ReferenceError: age is not defined
+
+Block Scope (ES6):
+
+-Variables are only accessible inside block(Block scoped)
+-However, this only applies let and const varibale
+-If we declared varibale in block scope with var is also accessible outside the block
+-Functions are also block scoped(only in strict mode)
+-Block scope are if, for loop etc
+
+const year = 1992;
+if (year >= 1981 && year <= 1996) {
+const millenial = true;
+var food = 'Pizza';
+let age = 24;
+}
+
+console.log(millenial); //ReferenceError: millenial is not defined
+console.log(food); // No error
+console.log(age); // ReferenceError: age is not defined
+
+================================ scope chain ===================================
+
+Scope Chain:
+Ex.
+
+const myName = 'Nivedita';
+
+function first() {
+const age = 24;
+if (age >= 30) {
+const decade = 3;
+var millenial = true;
+}
+function second() {
+const job = 'teacher';
+console.log(`${myName} is a ${age} old ${job}`);
+}
+second();
+}
+
+first();
+
+- myName is a global scope varibale. Its access everywhere.
+- child scope(second function scope) can access the parent scope(first function scope)
+- parent scope (global scope or first() function scope) can't access child scope(second() function scope and if()block scope)
+- var millenial is define in block scope but it accessible in first function. Coz it declared with var.
+- second() is a function scope and if() is a block scope and they both are siblings and we cant access their varibale but we can access first() varibale because first() is a parent of both.
