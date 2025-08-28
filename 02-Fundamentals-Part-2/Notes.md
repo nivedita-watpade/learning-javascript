@@ -202,7 +202,7 @@ includes() - it returns a true if element is in array and return a false if elem
 console.log(friends.includes('kanchi')); //true
 console.log(friends.includes('rutu')); //false
 
-=============================== objects =======================================
+<!-- =============================== objects ======================================= -->
 
 objects: objects are data structure like an array. Ojects contain a key pair values
 While arrays are great for ordered data, objects let us define key-value pairs:
@@ -222,7 +222,7 @@ Store unstructured and related data
 Access data by its name rather than position
 Unlike arrays, the order of properties in objects doesn't matter when retrieving data.
 
-========================= Dot vs. Bracket Notation ================================
+<!-- ========================= Dot vs. Bracket Notation ================================ -->
 
 There are two ways to access object properties:
 
@@ -253,7 +253,7 @@ jonas.location = 'Portugal';
 jonas['twitter'] = '@jonasschmedtman';
 console.log(jonas);
 
-============================ Object Methods =========================
+<!-- ============================ Object Methods ========================= -->
 
 functions are just values in JavaScript, we can add them as properties to objects.
 
@@ -289,7 +289,7 @@ return `${this.firstName} is ${age} years old`;
 
 console.log(nivi.calcAge());
 
-================================= for loop =======================================
+<!-- ================================= for loop ======================================= -->
 
 Loops allow us to automate repetitive tasks. The for loop is commonly used when you know exactly how many iterations you need
 
