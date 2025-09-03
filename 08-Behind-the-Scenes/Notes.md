@@ -22,7 +22,7 @@ Concurrency model - how the js engine handles a multiple tasks happening at the 
 Javascript runs in one single thread, so the can only do one thing at a time.
 Thread is a set of instructions
 
-8)Non-blocking event loop - Event loop: takes long running tasks, execute them in the background, and puts them back in the main thread once they are finished
+8)Non-blocking event loop - Event loop: takes long running tasks(asynchronus function/tasks), execute them in the background, and puts them back in the main thread once they are finished
 
 Ex. console.log("Start");
 setTimeout(() => {
@@ -180,3 +180,72 @@ first();
 - parent scope (global scope or first() function scope) can't access child scope(second() function scope and if()block scope)
 - var millenial is define in block scope but it accessible in first function. Coz it declared with var.
 - second() is a function scope and if() is a block scope and they both are siblings and we cant access their varibale but we can access first() varibale because first() is a parent of both.
+
+================================ Hoisting ===================================
+
+Hoisting: Makes some types of varibales accessible/usable in the code before they are actually declared.
+Examples: varibale declared with var: var myName = "Nivedita"
+function Declaration : function add(a,b){return a+b;}
+function expression declared with var: var addExpr = function (a, b) { return a + b;};
+arrow function declared with var: var addArrow = (a, b) => a + b;
+
+In JavaScript, hoisting is the behavior where variable and function declarations are moved (“hoisted”) to the top of their scope (global or function scope) during the compilation phase, before the code is executed.
+
+Behind the scene:
+Before execution, code is scanned for variable declarations, and for each varibalee, a new property is created in the varibale environment object.
+
+Function declared with var, function declaration, var varibles are hoisted.
+Initial value of varibales devlared with var is undefined
+
+let and const varibale, function expression, and arrow function declread with let and const are not hoisted.
+The intial value of let and const are uninitialized
+
+Temporal Dead Zone (TDZ): is the period between the time a variable is hoisted (memory allocated) and the time it is initialized with a value.
+During this time, trying to access the variable results in a ReferenceError.
+
+-TDZ is the area where let and const varibales are not initialized yet.
+
+if(myName === "Nivi"){
+console.log(`Nivi is a ${job}`); //ReferenceError: Can't access 'job' before initailization
+const age = 2037- 1989;
+console.log(age);
+const job = "teacher";
+console.log(x); //ReferenceError: x is not defined
+}
+
+For varibale job : line no 203, 204, 205 is temporal dead zone
+
+Each let and const varibale get their own TDZ that starts at the beginning of the scope until the line where it is defined.
+Varible only safe to use after TDZ
+
+=================================== hoisting in practice =================================
+
+console.log(me);
+// console.log(job); //ReferenceError: Cannot access 'job' before initialization
+// console.log(birthYear); //ReferenceError: Cannot access 'birthYear' before initialization
+
+var me = 'Nivedita';
+let job = 'Coder';
+const birthYear = 2001;
+
+console.log(addDeclr(5, 4));
+// console.log(addExpr(5, 4)); //ReferenceError: Cannot access 'addExpr' before initialization
+// console.log(addArrow(5, 4)); //ReferenceError: Cannot access 'addArrow' before initialization
+console.log(addExprVar);
+//console.log(addExprVar(5, 9)); // Uncaught TypeError: addExprVar is not a function (we called to undefined)
+
+function addDeclr(a, b) {
+return a + b;
+}
+
+const addExpr = function (a, b) {
+return a + b;
+};
+
+const addArrow = (a, b) => a + b;
+
+var addExprVar = function (a, b) {
+return a + b;
+};
+
+console.log(addExprVar(5, 9));

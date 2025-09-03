@@ -85,3 +85,57 @@ const firstName = 'Jonas';
 calcAge(1991);
 // console.log(age);
 // printAge();
+
+function add(a, b) {
+  return a + b;
+}
+
+function returnAdd() {
+  return add;
+}
+
+console.log(returnAdd()(5, 4));
+console.log(a);
+var a = 1;
+
+// test();
+// test1();
+// console.log(test);
+console.log(test1);
+const test = function () {
+  console.log('Test function called');
+};
+
+var test1 = function () {
+  console.log('Var function called');
+};
+
+console.log(me);
+// console.log(job); //ReferenceError: Cannot access 'job' before initialization
+// console.log(birthYear); //ReferenceError: Cannot access 'birthYear' before initialization
+
+var me = 'Nivedita';
+let job = 'Coder';
+const birthYear = 2001;
+
+console.log(addDeclr(5, 4));
+// console.log(addExpr(5, 4)); //ReferenceError: Cannot access 'addExpr' before initialization
+// console.log(addArrow(5, 4)); //ReferenceError: Cannot access 'addArrow' before initialization
+console.log(addExprVar);
+//console.log(addExprVar(5, 9)); // Uncaught TypeError: addExprVar is not a function (we called to undefined)
+
+function addDeclr(a, b) {
+  return a + b;
+}
+
+const addExpr = function (a, b) {
+  return a + b;
+};
+
+const addArrow = (a, b) => a + b;
+
+var addExprVar = function (a, b) {
+  return a + b;
+};
+
+console.log(addExprVar(5, 9));
