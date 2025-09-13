@@ -139,3 +139,23 @@ var addExprVar = function (a, b) {
 };
 
 console.log(addExprVar(5, 9));
+
+const nivi = {
+  year: 2001,
+  calcAge: function () {
+    console.log(this);
+    // console.log(2017 - this.year);
+  },
+};
+
+const pranit = {
+  year: 2000,
+};
+
+pranit.calcAge = nivi.calcAge;
+
+console.log(pranit);
+
+const f = nivi.calcAge;
+
+f();
