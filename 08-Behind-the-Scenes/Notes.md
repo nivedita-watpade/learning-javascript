@@ -264,3 +264,81 @@ Simple function call --> this = undefined
 Arrow functions --> this = <this of surrounding function>(Inherit or point to the parent)
 
 Event listener --> this = <DOM element that the handler is attched to>
+
+=========================================== Regular VS Arrow Function ===========================================
+
+Arrow functions doesn't have their own this keyword. They inherit this keyword from their surrounding(Parent Scope).
+
+const nivi = {
+year: 2001,
+calcAge: function () {
+// console.log(this);
+// console.log(2017 - this.year);
+},
+addArrow: () => {
+console.log(this);
+console.log(this.year);
+},
+};
+
+nivi.addArrow();
+
+In above example, addArrow() is a arrow function and object is not a block scoped its just a structure. So arrow function doesn't point to nivi object. and arrow function this value is windows object. So windows.year gives the undefined.
+
+//Example
+
+const dataTest = {
+firstName: 'Nivedita',
+year: 2037,
+isWorkingHard: true,
+printSummary: function () {
+console.log(`${this.firstName} is umemployed`);
+const willGetJob = function () {
+console.log(this.isWorkingHard ? 'Will get Job' : 'will not get job');
+};
+willGetJob();
+},
+};
+
+In above example, when willGetJob() is called then we will get error beacuse willGetJob is a simple function and as per this keyword rule this is undefined in simple function. Thats why its gives error.
+
+To fix the above problem we have the below solutions:
+
+const dataTest = {
+firstName: 'Nivedita',
+year: 2037,
+isWorkingHard: true,
+printSummary: function () {
+console.log(`${this.firstName} is umemployed`);
+//Gives Error:
+// const willGetJob = function () {
+// console.log(this.isWorkingHard ? 'Will get Job' : 'will not get job');
+// };
+// willGetJob();
+
+    //Solution 1
+    const self = this;
+    const willGetJob = function () {
+      console.log(self.isWorkingHard ? 'Will get Job' : 'will not get job');
+    };
+    willGetJob();
+
+    //Solution 2
+    const willGetJob1 = () => {
+      console.log(this.isWorkingHard ? 'Will get Job' : 'will not get job');
+    };
+    willGetJob1();
+
+},
+};
+
+dataTest.printSummary();
+
+Solution 1: We can stored the this reference in the new variable self in the printSummary method and used it in willGetJob() job funtion.
+
+Solution 2: willGetJob1() is a arrow function and arrow function inherites the its parent this reference. So here willGetJob1() access the printSummary() method's this reference.
+
+====================== arguments keyword ======================================
+
+The arguments keyword was used in older JavaScript, but in modern JavaScript it’s not commonly used.
+It works in function declarations and function expressions, but not in arrow functions.

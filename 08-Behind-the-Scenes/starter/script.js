@@ -132,8 +132,6 @@ const addExpr = function (a, b) {
   return a + b;
 };
 
-const addArrow = (a, b) => a + b;
-
 var addExprVar = function (a, b) {
   return a + b;
 };
@@ -144,9 +142,16 @@ const nivi = {
   year: 2001,
   calcAge: function () {
     console.log(this);
-    // console.log(2017 - this.year);
+    console.log(2017 - this.year);
+  },
+  addArrow: () => {
+    console.log(this);
+    // console.log(this.year);
   },
 };
+nivi.calcAge();
+nivi.addArrow();
+nivi.addArrow();
 
 const pranit = {
   year: 2000,
@@ -158,4 +163,33 @@ console.log(pranit);
 
 const f = nivi.calcAge;
 
-f();
+// f();
+
+const dataTest = {
+  firstName: 'Nivedita',
+  year: 2037,
+  isWorkingHard: true,
+  printSummary: function () {
+    console.log(`${this.firstName} is umemployed`);
+    //Gives Error:
+    // const willGetJob = function () {
+    //   console.log(this.isWorkingHard ? 'Will get Job' : 'will not get job');
+    // };
+    // willGetJob();
+
+    //Solution 1
+    const self = this;
+    const willGetJob = function () {
+      console.log(self.isWorkingHard ? 'Will get Job' : 'will not get job');
+    };
+    willGetJob();
+
+    //Solution 2
+    const willGetJob1 = () => {
+      console.log(this.isWorkingHard ? 'Will get Job' : 'will not get job');
+    };
+    willGetJob1();
+  },
+};
+
+dataTest.printSummary();
