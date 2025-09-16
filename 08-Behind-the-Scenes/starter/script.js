@@ -193,3 +193,38 @@ const dataTest = {
 };
 
 dataTest.printSummary();
+
+const nivedita = {
+  firstName: 'Nivedita',
+  lastName: 'Watpade',
+  age: 23,
+};
+
+console.log(nivedita);
+
+function changeMarriedStatus(person, status) {
+  person.marriedStatus = status;
+  return person;
+}
+
+changeMarriedStatus(nivedita, 'Single');
+
+console.log(nivedita);
+
+//Shallow Copy
+const ankita = {
+  firstName: 'Ankita',
+  lastName: 'Khapare',
+  age: 28,
+  familyMember: ['Ankita', 'Tushar'],
+};
+
+const ankitaCopy = { ...ankita };
+
+ankitaCopy.lastName = 'Patil';
+ankitaCopy.familyMember.push('kittu');
+
+//Deep Copy/Clone
+const ankitaClone = structuredClone(ankita);
+ankitaClone.familyMember.push('Nivi');
+console.log(ankita, ankitaClone);

@@ -283,7 +283,7 @@ console.log(this.year);
 
 nivi.addArrow();
 
-In above example, addArrow() is a arrow function and object is not a block scoped its just a structure. So arrow function doesn't point to nivi object. and arrow function this value is windows object. So windows.year gives the undefined.
+In above example, addArrow() is a arrow function and object is not a block scoped its just a structure. So arrow function doesn't point to nivi object. and arrow function's this value is windows object. So windows.year gives the undefined.
 
 //Example
 
@@ -342,3 +342,84 @@ Solution 2: willGetJob1() is a arrow function and arrow function inherites the i
 
 The arguments keyword was used in older JavaScript, but in modern JavaScript it’s not commonly used.
 It works in function declarations and function expressions, but not in arrow functions.
+
+=================================== Memory Management: Primitives vs. Objects =================================
+
+Primitives Values: All Primitives values are store into the call stack (in execution context).
+Primitives values are: number, string, boolean, null, undefined, bigInt, Symbol.
+
+Objects are stored into the Heap.
+Objects. i.e Array, functions, objects etc.
+
+let a = 10;
+let b = a; // copy the value
+b = 20;
+console.log(a); // 10 (not affected)
+
+let obj1 = { name: 'Alice' };
+
+let obj2 = obj1; // copy the reference, not the object
+
+obj2.name = 'Pranit';
+
+console.log(obj1);
+
+================================= Object References in Practice (Shallow vs. Deep Copies)=====================
+
+const nivedita = {
+firstName: 'Nivedita',
+lastName: 'Watpade',
+age: 23,
+};
+
+console.log(nivedita);
+
+function changeMarriedStatus(person, status) {
+person.marriedStatus = status;
+return person;
+}
+
+changeMarriedStatus(nivedita, 'Single');
+
+console.log(nivedita);
+
+In above example, we have added new marriedStatus property to the object. Here we refer a same memory address of object thats why marriedStatus property added before the function called as well.
+
+In below example:
+Spread Operator(...): Spread operator is used to create a new object from existing one.
+Here lastName property valu will be change in the copy but not in original one. Beacuse spread operator create a new copy of obect in the head to the new memory address.
+But if we change the array then changes reflect in both the objects. Because spread operator creates a shallow copy of the object. Internal objects i.e familyMember still holds old memeoryaddress or reference.
+
+//Shallow Copy
+const ankita = {
+firstName: 'Ankita',
+lastName: 'Khapare',
+age: 28,
+familyMember: ['Ankita', 'Tushar'],
+};
+
+const ankitaCopy = { ...ankita };
+
+ankitaCopy.lastName = 'Patil';
+ankitaCopy.familyMember.push('kittu');
+
+console.log(ankita, ankitaCopy);
+
+//Deep Copy/Clone
+Deep Copy/Clone: It makes nested objects copy to the new memory address of heap
+structuredClone() function we directly copy the existing object to the new object. It has different memory address in the heap. It also copy the nested object to the new address of heap
+
+const ankitaClone = structuredClone(ankita);
+ankitaClone.familyMember.push('Nivi');
+console.log(ankita, ankitaClone);
+
+========================= Memory Management: Garbage Collection ==========================
+
+Garbage Collector: Central memory management tool
+
+Stack:
+Variable environment is simply deleted and memory is freed when execution context pops off stack
+Global EC remains in stack until the window or browser closed.
+
+Heap:
+In heap, garbage collector used MARK-AND-SWEEP Algorithm
