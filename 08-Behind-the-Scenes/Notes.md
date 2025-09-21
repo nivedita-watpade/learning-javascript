@@ -220,7 +220,7 @@ Varible only safe to use after TDZ
 
 =================================== hoisting in practice =================================
 
-console.log(me);
+console.log(me); // Undefined
 // console.log(job); //ReferenceError: Cannot access 'job' before initialization
 // console.log(birthYear); //ReferenceError: Cannot access 'birthYear' before initialization
 
@@ -228,7 +228,7 @@ var me = 'Nivedita';
 let job = 'Coder';
 const birthYear = 2001;
 
-console.log(addDeclr(5, 4));
+console.log(addDeclr(5, 4)); // 9
 // console.log(addExpr(5, 4)); //ReferenceError: Cannot access 'addExpr' before initialization
 // console.log(addArrow(5, 4)); //ReferenceError: Cannot access 'addArrow' before initialization
 console.log(addExprVar);

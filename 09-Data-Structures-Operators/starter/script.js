@@ -29,6 +29,9 @@ const restaurant = {
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  orderFood: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
 
   openingHours: {
     thu: {
@@ -45,3 +48,61 @@ const restaurant = {
     },
   },
 };
+
+const [x, y, z] = restaurant.mainMenu;
+
+console.log(x, y, z);
+
+// If we want to skip elements:
+
+const colors = ['Red', 'Black', 'Blue', 'Purple'];
+
+const [a, , b] = colors;
+
+console.log(a, b);
+
+// Swicthing varibales
+const menu = ['Italian', 'SouthIndian', 'NorthIndian'];
+let [mainCourse, breakfast] = menu;
+console.log(mainCourse, breakfast);
+
+//using third varibale
+
+// const temp = breakfast;
+// breakfast = mainCourse;
+// mainCourse = temp;
+
+// console.log(mainCourse, breakfast);
+
+// without 3rd variable
+
+[mainCourse, breakfast] = [breakfast, mainCourse];
+console.log(mainCourse, breakfast);
+
+console.log(restaurant.orderFood(2, 1));
+
+//Received to values from a function
+const [starterItem, mainItem] = restaurant.orderFood(2, 1);
+
+console.log(starterItem, mainItem);
+
+// nested array
+
+const nested = [2, 4, [9, 7]];
+const [first, , second] = nested;
+
+console.log(first, second);
+
+const [nine, seven] = second;
+console.log(nine, seven);
+
+//another way
+
+const [i, , [j, k]] = nested;
+
+console.log(i, j, k);
+
+//Default Values
+
+const [p = 1, q = 1, r = 1] = [25, 29];
+console.log(p, q, r);
