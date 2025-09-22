@@ -33,6 +33,44 @@ const restaurant = {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
+  //without destrcturing
+  orderDelivery: function (obj) {
+    console.log(
+      `Order Delivered !! ${this.starterMenu[obj.starterIndex]} and ${
+        this.mainMenu[obj.mainIndex]
+      } will be delivered to the ${obj.address} at ${obj.time}`
+    );
+  },
+
+  // Destructuring object in method parameter
+
+  orderDelivery: function ({ starterIndex, mainIndex, time, address }) {
+    console.log(
+      `Order Delivered !! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to the ${address} at ${time}`
+    );
+  },
+
+  //Destructuring object with in method
+  orderDelivery: function (obj) {
+    const { starterIndex, mainIndex, time, address } = obj;
+    console.log(
+      `Order Delivered !! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to the ${address} at ${time}`
+    );
+  },
+
+  //to set default value
+
+  orderDeliveryWithDefault: function ({
+    starterIndex: starterNum = 0,
+    mainIndex = 0,
+    time = '5:00',
+    address,
+  }) {
+    console.log(
+      `Order Delivered !! ${this.starterMenu[starterNum]} and ${this.mainMenu[mainIndex]} will be delivered to the ${address} at ${time}`
+    );
+  },
+
   openingHours: {
     thu: {
       open: 12,
@@ -48,6 +86,17 @@ const restaurant = {
     },
   },
 };
+
+restaurant.orderDelivery({
+  time: '10:00',
+  address: 'Nashik, Maharashtra',
+  starterIndex: 2,
+  mainIndex: 1,
+});
+
+restaurant.orderDeliveryWithDefault({
+  address: 'Vani, Maharashtra',
+});
 
 const [x, y, z] = restaurant.mainMenu;
 
@@ -106,3 +155,29 @@ console.log(i, j, k);
 
 const [p = 1, q = 1, r = 1] = [25, 29];
 console.log(p, q, r);
+
+//object destructring
+const { name, openingHours, categories } = restaurant;
+console.log(name, openingHours, categories);
+
+//if you want a different varibale name than property name
+const { name: myName, openingHours: hours, categories: tags } = restaurant;
+console.log(myName, hours, tags);
+
+//setting a default value
+const { menuItem = [], starterMenu: starter = [] } = restaurant;
+console.log(menuItem, starter);
+
+//mutating variables/ switching variables
+let m = 111;
+let n = 999;
+const obj = { m: 25, n: 29, o: 20 };
+({ m, n } = obj);
+console.log(m, n);
+
+//Nested objects
+
+const {
+  fri: { open, close },
+} = openingHours;
+console.log(open, close);
