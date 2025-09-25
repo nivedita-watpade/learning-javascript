@@ -33,6 +33,12 @@ const restaurant = {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3} !!!`
+    );
+  },
+
   //without destrcturing
   orderDelivery: function (obj) {
     console.log(
@@ -181,3 +187,52 @@ const {
   fri: { open, close },
 } = openingHours;
 console.log(open, close);
+
+//manually
+const arr = [7, 8, 9];
+const badArr = [1, 2, arr[0], arr[1], arr[2]];
+console.log(badArr);
+
+//using spread operator
+const newArr = [1, 2, ...arr];
+console.log(newArr);
+
+//building new array with existing one
+const newMenu = ['Dosa', 'Idli', ...restaurant.mainMenu];
+console.log(newMenu);
+
+//Copy Array / Shallow copy
+
+const copyMainMenu = [...restaurant.mainMenu];
+
+//merge/join two or more array
+
+const allMenus = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(allMenus);
+
+//Iterables: are Array, string, maps, sets NOT OBJECT
+const str = 'Nivi';
+const letters = [...str];
+console.log(letters);
+
+//using spread operator as a parameter to pass multiple values
+
+const pastaIngredients = ['Macroni', 'Cheese', 'White Sause'];
+
+// old way
+restaurant.orderPasta(
+  pastaIngredients[0],
+  pastaIngredients[1],
+  pastaIngredients[2]
+);
+restaurant.orderPasta(...pastaIngredients);
+
+//spread operator in object
+
+const newRestaurant = {
+  ...restaurant,
+  founder: 'Pranit',
+  name: 'Nivi',
+};
+console.log(newRestaurant);
+console.log(restaurant);

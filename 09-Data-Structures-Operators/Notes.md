@@ -185,3 +185,63 @@ console.log(
 restaurant.orderDeliveryWithDefault({
 address: 'Vani, Maharashtra',
 });
+
+**\*\***\*\***\*\***\*\***\*\***\*\***\*\***--------------------------------\***\*\*\*\*\*\*\***\*\*\*\***\*\*\*\*\*\*\***
+
+spread operator(...): The spread operator (...) in JavaScript is used to "unpack" (spread out) elements from arrays, objects, or iterables into individual elements.
+
+It makes copying, merging, and passing data easier.
+
+//manually
+const arr = [7, 8, 9];
+const badArr = [1, 2, arr[0], arr[1], arr[2]];
+console.log(badArr);
+
+//using spread operator
+const newArr = [1, 2, ...arr];
+console.log(newArr); // (5) [1, 2, 7, 8, 9]
+
+//building new array with existing one
+Here original array does not manipulate
+const newMenu = ['Dosa', 'Idli', ...restaurant.mainMenu];
+console.log(newMenu);
+
+//Copy Array / Shallow copy
+
+const copyMainMenu = [...restaurant.mainMenu];
+
+//merge/join two or more array
+
+const allMenus = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(allMenus);
+
+//Iterables: are Array, string, maps, sets NOT OBJECT
+
+Spread operator only used on iterables
+
+Multiple comma seperated values are only used for building arrays passing values to the function
+
+const str = 'Nivi';
+const letters = [...str];
+console.log(letters);
+
+//using spread operator as a parameter to pass multiple values
+
+const pastaIngredients = ['Macroni', 'Cheese', 'White Sause'];
+
+// old way
+restaurant.orderPasta(
+pastaIngredients[0],
+pastaIngredients[1],
+pastaIngredients[2]
+);
+restaurant.orderPasta(...pastaIngredients);
+
+//spread operator in object
+
+In modern javascript(ES 2018) spread operator used in object as well.
+
+Here we have spread restaurant object in the newRestaurant object and added a new property founder. This will create a shallow copy
+
+const newRestaurant = { ...restaurant, founder: 'Pranit' };
+console.log(newRestaurant);
