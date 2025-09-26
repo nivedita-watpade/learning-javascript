@@ -281,3 +281,32 @@ add(...x1);
 
 restaurant.orderPizza('paneer', 'onion', 'tomato', 'olives'); //paneer // (3) ['onion', 'tomato', 'olives']
 restaurant.orderPizza('paneer'); //paneer // []
+
+//Short Circuiting (&& and ||)
+
+//use Any data type, return any datatype, short circuiting
+
+console.log(29 || 'Nivedita'); //29
+console.log(0 || 'Pranit'); //Pranit
+console.log(true || ' '); // true
+console.log(undefined || null); // null (If all values are falsy then it returns the last value)
+console.log(0 || undefined || '' || false || 'Hello' || 25); // Hello
+
+// const guest1 = restaurant.guestNum ? restaurant.guestNum : 10;
+// console.log(guest1);
+
+// restaurant.guestNum = 15;
+
+const guests = restaurant.guestNum || 29;
+console.log(guests);
+
+console.log('--------------- AND ----------------');
+
+console.log(0 && 'Nivi'); //0
+console.log(25 && 'Nivi'); //Nivi
+console.log(25 && undefined); //undefined
+console.log(25 && 'Nivi' && null && 'pranit' && true); // null
+
+//if first value is true then excute the next operand.
+
+restaurant.orderPizza && restaurant.orderPizza('Paneer', 'Cheese');
