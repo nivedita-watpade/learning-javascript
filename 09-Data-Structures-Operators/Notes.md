@@ -192,6 +192,14 @@ spread operator(...): The spread operator (...) in JavaScript is used to "unpack
 
 It makes copying, merging, and passing data easier.
 
+Spread operator is on right side of assignment(=) operator
+//SPREAD because on right side of assignemnt(=)
+const arr1 = [1, 2, ...[3, 4]];
+
+Two main use cases of spread operators are:
+1)Building new array
+2)Passing multiple values/paramaters to the function
+
 //manually
 const arr = [7, 8, 9];
 const badArr = [1, 2, arr[0], arr[1], arr[2]];
@@ -245,3 +253,53 @@ Here we have spread restaurant object in the newRestaurant object and added a ne
 
 const newRestaurant = { ...restaurant, founder: 'Pranit' };
 console.log(newRestaurant);
+
+\***\*\*\*\*\*\*\***\*\*\***\* Rest Pattern and Parameters \*\*\*\*\*\***\*\*\*\*\*\*\*
+
+REST Operator: Rest operator is used to pack the values in an array.
+The rest operator (...) is used to collect multiple elements into a single array/object variable.
+Rest operator collects all the elements after the last varibale.
+
+Rest operator is on left side of assignment(=) operator
+
+Rest operator must be the last element and only one rest operator in destructuring.
+
+//REST because on left side of assignemnt(=)
+const [a1, b1, ...others] = [1, 2, 3, 4, 5];
+console.log(a1, b1, others); //1 2 (3) [3, 4, 5]
+
+// three dots on both side of assignment operator
+
+const [pizza, pasta, ...otherMenu] = [
+...restaurant.mainMenu,
+...restaurant.starterMenu,
+];
+
+console.log(pizza, pasta, otherMenu); //Pizza Pasta (5) ['Risotto', 'Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad']
+
+//2.Functions
+
+const add = function (...numbers) {
+let sum = 0;
+for (let i = 0; i <= numbers.length - 1; i++) {
+sum = sum + numbers[i];
+}
+console.log(sum);
+};
+
+add(2, 3);
+add(1, 2, 3, 4, 5);
+add(9, 8, 7, 6, 5, 4, 10);
+
+In below example, array x1 is unpacked using spread operator and then this x1 is pass to the numbers. There we used rest operator and x1 array again packed into the array
+
+const x1 = [25, 29, 24, 20, 0];
+add(...x1);
+
+orderPizza: function (mainIng, ...optionalIng) {
+console.log(mainIng);
+console.log(optionalIng);
+},
+
+restaurant.orderPizza('paneer', 'onion', 'tomato', 'olives'); //paneer // (3) ['onion', 'tomato', 'olives']
+restaurant.orderPizza('paneer'); //paneer // []

@@ -39,6 +39,11 @@ const restaurant = {
     );
   },
 
+  orderPizza: function (mainIng, ...optionalIng) {
+    console.log(mainIng);
+    console.log(optionalIng);
+  },
+
   //without destrcturing
   orderDelivery: function (obj) {
     console.log(
@@ -236,3 +241,43 @@ const newRestaurant = {
 };
 console.log(newRestaurant);
 console.log(restaurant);
+
+//1. Destructuring
+//SPREAD because on right side of assignemnt(=)
+const arr1 = [1, 2, ...[3, 4]];
+
+//REST because on left side of assignemnt(=)
+const [a1, b1, ...others] = [1, 2, 3, 4, 5];
+console.log(a1, b1, others); //1 2 (3) [3, 4, 5]
+
+// three dots on both side of assignment operator
+
+const [pizza, pasta, ...otherMenu] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+
+console.log(pizza, pasta, otherMenu); //Pizza Pasta (5) ['Risotto', 'Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad']
+
+const { sat: weekend, ...otherDays } = restaurant.openingHours;
+console.log(weekend, otherDays);
+
+//2.Functions
+
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i <= numbers.length - 1; i++) {
+    sum = sum + numbers[i];
+  }
+  console.log(sum);
+};
+
+add(2, 3);
+add(1, 2, 3, 4, 5);
+add(9, 8, 7, 6, 5, 4, 10);
+
+const x1 = [25, 29, 24, 20, 0];
+add(...x1);
+
+restaurant.orderPizza('paneer', 'onion', 'tomato', 'olives'); //paneer // (3) ['onion', 'tomato', 'olives']
+restaurant.orderPizza('paneer'); //paneer // []
