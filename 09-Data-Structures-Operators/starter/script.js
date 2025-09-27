@@ -354,3 +354,15 @@ rest2.owner &&= 'Test';
 
 console.log(rest1);
 console.log(rest2);
+
+//only elements
+for (const item of restaurant.mainMenu) {
+  console.log(item);
+}
+
+//entries() method gives elements and index
+for (const [index, itemName] of restaurant.starterMenu.entries()) {
+  // const [index, itemName] = item;
+  // console.log(index, itemName);
+  console.log(`${index + 1} : ${itemName}`);
+}

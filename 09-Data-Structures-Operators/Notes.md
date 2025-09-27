@@ -352,7 +352,7 @@ restaurant.orderPizza && restaurant.orderPizza('Paneer', 'Cheese');
    Unlike ||, it does not treat 0 or "" as falsy.
    Ex.
    //Nullish: null and undefined (NOT 0 and ' ')
-   restaurant.guestNum = 0;
+   restaurant.guestNum = 0 ;
    const guestsCorrect = restaurant.guestNum ?? 29;
    console.log(guestsCorrect);
 
@@ -404,3 +404,33 @@ rest2.owner &&= 'Test';
 
 console.log(rest1);
 console.log(rest2);
+
+**\*\*\*\*** -------- Looping Arrays: The for-of Loop ------- **\*\***\*\***\*\***-------\*\*\*
+
+for of : The for...of loop in JavaScript is used to iterate over the values of an iterable object such as an array, string, Map, Set, or other objects that implement the iterable protocol. It gives the actual values of the elements, not their keys or indexes.
+Ex.
+for (const item of restaurant.mainMenu) {
+console.log(item);
+}
+//op Pizza
+Pasta
+Risotto
+
+entries() in JavaScript
+The entries() method returns an iterator object that contains key-value pairs (index and value) for each element in an array (or other iterable).
+Usually used with for...of to get both index and value together.
+Ex.
+for (const [index, itemName] of restaurant.starterMenu.entries()) {
+// const [index, itemName] = item;
+console.log(index, itemName);
+}
+//op
+0 'Focaccia'
+1 'Bruschetta'
+2 'Garlic Bread'
+3 'Caprese Salad'
+
+//using destructring
+for (const [index, itemName] of restaurant.starterMenu.entries()) {
+console.log(`${index + 1} : ${itemName}`);
+}
