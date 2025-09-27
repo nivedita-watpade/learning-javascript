@@ -315,16 +315,15 @@ Logical OR (||)
 Nullish Coalescing (??)
 
 1. OR (||)
-
-Returns the first truthy value it finds.
-If the first operand is truthy, it stops and returns that value.
-Otherwise, it evaluates the next one.
-Ex.
-console.log(29 || 'Nivedita'); //29
-console.log(0 || 'Pranit'); //Pranit
-console.log(true || ' '); // true
-console.log(undefined || null); // null (If all values are falsy then it returns the last value)
-console.log(0 || undefined || '' || false || 'Hello' || 25); // Hello
+   Returns the first truthy value it finds.
+   If the first operand is truthy, it stops and returns that value.
+   Otherwise, it evaluates the next one.
+   Ex.
+   console.log(29 || 'Nivedita'); //29
+   console.log(0 || 'Pranit'); //Pranit
+   console.log(true || ' '); // true
+   console.log(undefined || null); // null (If all values are falsy then it returns the last value)
+   console.log(0 || undefined || '' || false || 'Hello' || 25); // Hello
 
 // const guest1 = restaurant.guestNum ? restaurant.guestNum : 10;
 // console.log(guest1);
@@ -335,16 +334,73 @@ const guests = restaurant.guestNum || 29;
 console.log(guests);
 
 2. AND (&&)
-
-Returns the first falsy value.
-If the first operand is falsy, it stops immediately.
-Otherwise, it returns the last truthy value.
-Ex
-console.log(0 && 'Nivi'); //0
-console.log(25 && 'Nivi'); //Nivi (If all values are truty then it returns the last value)
-console.log(25 && undefined); //undefined
-console.log(25 && 'Nivi' && null && 'pranit' && true); // null
+   Returns the first falsy value.
+   If the first operand is falsy, it stops immediately.
+   Otherwise, it returns the last truthy value.
+   Ex
+   console.log(0 && 'Nivi'); //0
+   console.log(25 && 'Nivi'); //Nivi (If all values are truty then it returns the last value)
+   console.log(25 && undefined); //undefined
+   console.log(25 && 'Nivi' && null && 'pranit' && true); // null
 
 //if first value is true then excute the next operand. Second value is not just a value it can be a function also
 
 restaurant.orderPizza && restaurant.orderPizza('Paneer', 'Cheese');
+
+3. Nullish Coalescing (??)
+   Nullish Coalescing (??) operator is same as OR(||) operator it just consider null and undefined are the falsy values.
+   Unlike ||, it does not treat 0 or "" as falsy.
+   Ex.
+   //Nullish: null and undefined (NOT 0 and ' ')
+   restaurant.guestNum = 0;
+   const guestsCorrect = restaurant.guestNum ?? 29;
+   console.log(guestsCorrect);
+
+**\*-----------\***\*\*\*\*\*** Logical Assignment Operators \*\*\*\*\*\*\***----------------**\*\*\*\***
+
+const rest1 = {
+name: 'Nivi Rest',
+numGuests: 29,
+};
+
+const rest2 = {
+name: 'PC Rest',
+owner: 'Pranit',
+};
+
+//OR Assignment operator
+rest1.numGuests = rest1.numGuests || 25;
+rest2.numGuests = rest2.numGuests || 25;
+
+//Logical OR Assignment Operator
+It set the deafult value to the varibale.
+In below example rest1.numGuests is a property already in object so its return the truthy value and stop evaluating next code. rest2.numGuests is not in object 2 thats why here rest2.numGuests is false and 25 is assigned to the varibale
+rest1.numGuests ||= 25;
+rest2.numGuests ||= 25;
+
+console.log(rest1);
+console.log(rest2);
+
+// Logical Nullish Coelescing Assignment Operator
+
+Nullish Coelescing Assignment Operator does not consider 0 and empty string are the falsy value.
+rest1.numGuests has the 0 value and here its is truty value and it return immediately and other part is not evalaute.
+rest2.numGuests is a falsy value thats why it return the truthy value i.e 29
+
+rest1.numGuests ??= 25;
+rest2.numGuests ??= 29;
+
+//Logical AND Assignment Operator
+
+Logical AND Assignment Operator assigns the truthy value to the varibale
+
+Ex.
+// rest1.owner = rest1.owner && 'Test';
+// rest2.owner = rest2.owner && 'Test';
+
+In below Example, rest1.owner is a falsy value thats why it not assign or added in the object and rest2.owner is a truty value and it assign to the varibale.
+rest1.owner &&= 'Test';
+rest2.owner &&= 'Test';
+
+console.log(rest1);
+console.log(rest2);

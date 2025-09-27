@@ -310,3 +310,47 @@ console.log(25 && 'Nivi' && null && 'pranit' && true); // null
 //if first value is true then excute the next operand.
 
 restaurant.orderPizza && restaurant.orderPizza('Paneer', 'Cheese');
+
+console.log('--------------- Nullish Coelescing(??) ----------------');
+
+//Nullish: null and undefined (NOT 0 and ' ')
+restaurant.guestNum = 0;
+const guestsCorrect = restaurant.guestNum ?? 29;
+console.log(guestsCorrect);
+
+// ========================== Logical Assignment Operators ==============================
+
+const rest1 = {
+  name: 'Nivi Rest',
+  numGuests: 0,
+};
+
+const rest2 = {
+  name: 'PC Rest',
+  owner: 'Pranit',
+};
+
+//OR Assignment operator
+// rest1.numGuests = rest1.numGuests || 25;
+// rest2.numGuests = rest2.numGuests || 29;
+
+//OR Logical Assignment Operator
+// rest1.numGuests ||= 25;
+// rest2.numGuests ||= 29;
+
+rest1.numGuests ??= 25;
+rest2.numGuests ??= 29;
+
+console.log(rest1);
+console.log(rest2);
+
+console.log('--------------- Logical AND Assignment Operator ----------------');
+
+// rest1.owner = rest1.owner && 'Test';
+// rest2.owner = rest2.owner && 'Test';
+
+rest1.owner &&= 'Test';
+rest2.owner &&= 'Test';
+
+console.log(rest1);
+console.log(rest2);
