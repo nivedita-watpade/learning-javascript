@@ -434,3 +434,79 @@ console.log(index, itemName);
 for (const [index, itemName] of restaurant.starterMenu.entries()) {
 console.log(`${index + 1} : ${itemName}`);
 }
+
+\***\*\*\*\*\*\*\*** ------------- Enhanced Object Literals -------------------\***\*\*\*\*\***
+
+1. Property Shorthand
+   When the property name matches the variable name, you can omit the value:
+
+// ES5
+const name = 'Alice';
+const age = 25;
+const person = {
+name: name,
+age: age
+};
+
+// ES6
+const person = {
+name,
+age
+};
+
+2. Method Shorthand
+   You can define methods without the function keyword:
+
+// ES5
+const obj = {
+sayHello: function() {
+return 'Hello!';
+}
+};
+
+// ES6
+const obj = {
+sayHello() {
+return 'Hello!';
+}
+};
+
+3. Computed Property Names
+   You can use expressions as property names with square brackets:
+   const propName = 'score';
+   const i = 1;
+
+const obj = {
+['prop_' + i]: 'value',
+[propName]: 100,
+['calculate' + 'Sum']() {
+return this.score + 10;
+}
+};
+
+output: // obj = { prop_1: 'value', score: 100, calculateSum: [Function] }
+
+4. Combining All Features
+
+const field = 'email';
+const name = 'John';
+const age = 30;
+
+const user = {
+// Property shorthand
+name,
+age,
+
+// Computed property
+[field]: 'john@example.com',
+[is${name}]: true,
+
+// Method shorthand
+greet() {
+return Hi, I'm ${this.name};
+},
+
+getInfo() {
+return ${this.name} is ${this.age} years old;
+}
+};

@@ -23,13 +23,23 @@ const mexicanFoods = new Set([
 ]);
 
 // Data needed for first part of the section
+
+const info = {
+  name: 'Nivi',
+  age: 24,
+};
+
 const restaurant = {
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-  orderFood: function (starterIndex, mainIndex) {
+  // using property shorthand
+  info,
+
+  //using method shorthand (just removed colon(:) and function keyword)
+  orderFood(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
@@ -366,3 +376,16 @@ for (const [index, itemName] of restaurant.starterMenu.entries()) {
   // console.log(index, itemName);
   console.log(`${index + 1} : ${itemName}`);
 }
+
+const propName = 'score';
+const s = 1;
+
+const obj11 = {
+  ['prop_' + s]: 'value',
+  [propName]: 100,
+  ['calculate' + 'Sum']() {
+    return this.score + 10;
+  },
+};
+
+console.log(obj11);
