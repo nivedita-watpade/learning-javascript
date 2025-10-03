@@ -510,3 +510,58 @@ getInfo() {
 return ${this.name} is ${this.age} years old;
 }
 };
+
+**\*\*\***-----Optional Chaining(.?) ------------------ **\*\***\*\*\***\*\***
+
+Optional chaining (?.) in JavaScript is a safe way to access deeply nested properties of an object without having to check if each property exists.
+
+If the value before ?. is null or undefined, the whole expression short-circuits and returns undefined instead of throwing an error.
+
+//Without optional chaining
+console.log(
+restaurant &&
+restaurant.openingHours &&
+restaurant.openingHours.mon &&
+restaurant.openingHours.mon.open
+);
+
+if (restaurant && restaurant.openingHours && restaurant.openingHours.mon) {
+console.log(restaurant.openingHours.mon.open);
+}
+
+//with optional chaining(?.)
+console.log(restaurant?.openingHours?.mon?.open);
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for (const day of days) {
+// console.log(day);
+const open = restaurant.openingHours?.[day]?.open ?? 'Closed';
+console.log(`On ${day}, We open at ${open}`);
+}
+
+In above example, We does not know which days exist in object thats why we looped the days array.
+Day varibale is not in object so we compute the value[day].
+restaurant.openingHours is exist then it reads the [day] property.And if [day] exist it read the open otherwise it reurn the undefined using optional chaining(?.)
+Here we set default value 'Closed' if restaurant.openingHours?.[day]?.open result false.
+But here is the one problem that open value is zero then it return closed to prevent this we used nullish coelescing(??) operator. It works exactly same as OR Assignment operator. But it deos not caonsider 0 and '' as a falsy value.
+
+//Method
+console.log(restaurant.orderFood?.(0, 1) ?? 'Method does not exist');
+console.log(restaurant.orderFood1?.(0, 1) ?? 'Method does not exist');
+
+In above example, restaurant.orderFood is exist then call the method otherwise simply show a 'Method does not exist' msg.
+
+restaurant.orderFood? if its not exist then it will give undefined.
+
+//Array
+const user = [
+{
+name: 'Nivi',
+email: 'nivi@yomail.com',
+},
+];
+
+console.log(user[0]?.name ?? 'User array is empty');
+
+Here we check the name property is exist on first element of array. If not then simply return a msg.

@@ -377,6 +377,7 @@ for (const [index, itemName] of restaurant.starterMenu.entries()) {
   console.log(`${index + 1} : ${itemName}`);
 }
 
+//Enhanced Object Literals
 const propName = 'score';
 const s = 1;
 
@@ -389,3 +390,49 @@ const obj11 = {
 };
 
 console.log(obj11);
+
+//Without optional chaining
+console.log(
+  restaurant &&
+    restaurant.openingHours &&
+    restaurant.openingHours.mon &&
+    restaurant.openingHours.mon.open
+);
+
+if (restaurant && restaurant.openingHours && restaurant.openingHours.mon) {
+  console.log(restaurant.openingHours.mon.open);
+}
+
+//with optional chaining
+console.log(restaurant?.openingHours?.mon?.open);
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for (const day of days) {
+  // console.log(day);
+  const open = restaurant.openingHours?.[day]?.open ?? 'Closed';
+  console.log(`On ${day}, We open at ${open}`);
+}
+
+// const preferences = {
+//   color: 'blue',
+//   fontSize: 14,
+//   layout: 'grid',
+// };
+
+// let userChoice = 'color';
+// console.log(preferences[userChoice]); // blue
+
+//Method
+console.log(restaurant.orderFood?.(0, 1) ?? 'Method does not exist');
+console.log(restaurant.orderFood1?.(0, 1) ?? 'Method does not exist');
+
+//Array
+const user = [
+  {
+    name: 'Nivi',
+    email: 'nivi@yomail.com',
+  },
+];
+
+console.log(user[0]?.name ?? 'User array is empty');
