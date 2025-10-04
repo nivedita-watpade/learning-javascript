@@ -565,3 +565,43 @@ email: 'nivi@yomail.com',
 console.log(user[0]?.name ?? 'User array is empty');
 
 Here we check the name property is exist on first element of array. If not then simply return a msg.
+
+**\***-----------Looping Objects: Object Keys, Values, and Entries ----------**\*\*\*\***
+
+//Property NAME
+
+Object.keys - Gives the array of object's key
+
+const properties = Object.keys(openingHours);
+console.log(properties); //['thu', 'fri', 'sat']
+
+let openStr = `We are open at ${properties.length} days:`;
+
+for (const day of properties) {
+openStr = openStr + ` ${day}`;
+}
+
+console.log(openStr);
+
+//Property VALUE
+Object.values - Gives the array of object's value
+const value = Object.values(openingHours);
+console.log(value);
+
+Object.entries :
+In JavaScript, Object.entries() is a built-in method that returns an array of a given object's own enumerable string-keyed property [key, value] pairs.
+Ex. Object.entries(obj);
+
+Gives the array with in array
+//Entire Object
+
+const entries = Object.entries(openingHours);
+console.log(entries);
+
+for (const property of entries) {
+// console.log(property);
+const [day, value] = property;
+console.log(
+`Property Name: ${day}, Value: Open at ${value?.open ?? 'Closed'} `
+);
+}

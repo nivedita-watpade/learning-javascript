@@ -23,8 +23,13 @@ function toggleModal() {
   overlay.classList.toggle('hidden');
 }
 
-for (let i = 0; i <= allModalBtns.length - 1; i++) {
-  allModalBtns[i].addEventListener('click', toggleModal);
+// for (let i = 0; i <= allModalBtns.length - 1; i++) {
+//   allModalBtns[i].addEventListener('click', toggleModal);
+// }
+
+for (const i of allModalBtns) {
+  console.log(i);
+  i.addEventListener('click', toggleModal);
 }
 
 closeBtn.addEventListener('click', toggleModal);
