@@ -605,3 +605,54 @@ console.log(
 `Property Name: ${day}, Value: Open at ${value?.open ?? 'Closed'} `
 );
 }
+
+\***\*\*\*\*\*\*\***------------- Sets -------------------- **\*\***\*\***\*\***
+Set: Set is data structure and its just a collection of unique values
+Sets are iterable
+
+Ex.
+const orderSet = new Set([
+'Pizza',
+'Burger',
+'Coffee',
+'Pizza',
+'Coffee',
+'Pizza',
+]);
+
+console.log(orderSet);
+Set(3) {'Pizza', 'Burger', 'Coffee'} // It removes duplicate values
+
+// Size: Gives the count of element in the sets
+console.log(orderSet.size); //3
+
+//has(): To check element present in sets or not.
+console.log(orderSet.has('Pizza')); // true
+console.log(orderSet.has('Bread')); // false
+
+//add(): method is used to add new elemt in the set
+In below example only one element is added in the set bcoz set is unique
+orderSet.add('Biryani');
+orderSet.add('Biryani');
+
+// delete(): to delete element from the set
+orderSet.delete('Burger')
+
+// clear(): to delete all elements of set
+orderSet.clear();
+
+// sets are iterable(Looping through the set)
+
+for (const order of orderSet) {
+console.log(order);
+}
+//Pizza
+//Coffee
+//Biryani
+
+//UseCase 1: Removing duplicte elements of an array using set:
+
+const staff = ['Waiter', 'Chef', 'Manager', 'Waiter', 'Chef', 'Waiter'];
+const staffUniqueSet = new Set(staff);
+const staffUniqueArray = [...staffUniqueSet];
+console.log(staffUniqueArray);

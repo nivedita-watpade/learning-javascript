@@ -467,3 +467,53 @@ for (const property of entries) {
     `Property Name: ${day}, Value: Open at ${value?.open ?? 'Closed'} `
   );
 }
+
+const user1 = { name: 'Alice', age: 25 };
+const key = 'age';
+console.log(user1[key]);
+
+const car = {
+  'car brand': 'Toyota',
+  'model-year': 2022,
+};
+
+console.log(car['model-year']);
+
+console.log('----------------------- Sets ------------------------');
+
+const orderSet = new Set([
+  'Pizza',
+  'Burger',
+  'Coffee',
+  'Pizza',
+  'Coffee',
+  'Pizza',
+]);
+
+console.log(orderSet);
+
+console.log(orderSet.size); //3
+
+console.log(orderSet.has('Pizza')); // true
+console.log(orderSet.has('Bread')); // false
+
+orderSet.add('Biryani');
+orderSet.add('Biryani');
+
+orderSet.delete('Burger');
+
+console.log(orderSet);
+
+for (const order of orderSet) {
+  console.log(order);
+}
+
+//console.log(new Set('Nivedita'));
+
+const staff = ['Waiter', 'Chef', 'Manager', 'Waiter', 'Chef', 'Waiter'];
+
+const staffUniqueSet = new Set(staff);
+
+const staffUniqueArray = [...staffUniqueSet];
+
+console.log(staffUniqueArray);

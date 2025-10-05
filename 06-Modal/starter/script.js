@@ -45,4 +45,5 @@ document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') {
     toggleModal();
   }
+  // e.key === 'Escape' && toggleModal();
 });
