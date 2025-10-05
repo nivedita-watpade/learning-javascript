@@ -656,3 +656,43 @@ const staff = ['Waiter', 'Chef', 'Manager', 'Waiter', 'Chef', 'Waiter'];
 const staffUniqueSet = new Set(staff);
 const staffUniqueArray = [...staffUniqueSet];
 console.log(staffUniqueArray);
+
+//intersection():
+-In JavaScript’s Set data structure, the intersection() method (introduced in ES2025 proposal – "Set Methods") creates a new Set containing only the values that exist in both sets.
+Ex.
+const commonFoods = italianFoods.intersection(mexicanFoods);
+console.log(commonFoods);
+
+//Union():
+-In the Set data structure, the union() method (part of the new ES2025 "Set Methods" proposal) returns a new Set that contains all unique values from two sets (or iterables).
+-This is the mathematical union: combining elements of both sets without duplicates.
+Ex.
+set1.union(set2)
+const commonFoodsFusion = italianFoods.union(mexicanFoods);
+console.log('Union:', commonFoods);
+
+//differnce():
+In the Set data structure, the difference() method (part of the new ES2025 Set methods proposal) returns a new Set containing all elements from the first set that are not in the second set (or iterable).
+Ex.
+set1.difference(set2);
+
+const uniqueItalainFood = italianFoods.difference(mexicanFoods);
+console.log('Italian Difference:', uniqueItalainFood);
+
+const uniqueMexicanFood = mexicanFoods.difference(italianFoods);
+console.log('Mexican Difference:', uniqueMexicanFood);
+
+//symmetricDifference():
+In the Set data structure, the symmetricDifference() method (part of the ES2025 Set methods proposal) returns a new Set containing values that are in either of the two sets, but not in both.
+Ex.
+
+const italainMexicanUniqueFood = italianFoods.symmetricDifference(mexicanFoods);
+console.log('SymmetricDifference:', italainMexicanUniqueFood);
+
+//isDisjointFrom():
+The isDisjointFrom() method checks whether two sets (or a set and an iterable) have no elements in common.
+It returns a boolean:
+true → if the sets are disjoint (no overlap).
+false → if they share at least one element.
+
+console.log(italianFoods.isDisjointFrom(mexicanFoods)); // false

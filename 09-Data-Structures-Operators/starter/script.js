@@ -4,23 +4,23 @@
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
-const italianFoods = new Set([
-  'pasta',
-  'gnocchi',
-  'tomatoes',
-  'olive oil',
-  'garlic',
-  'basil',
-]);
+// const italianFoods = new Set([
+//   'pasta',
+//   'gnocchi',
+//   'tomatoes',
+//   'olive oil',
+//   'garlic',
+//   'basil',
+// ]);
 
-const mexicanFoods = new Set([
-  'tortillas',
-  'beans',
-  'rice',
-  'tomatoes',
-  'avocado',
-  'garlic',
-]);
+// const mexicanFoods = new Set([
+//   'tortillas',
+//   'beans',
+//   'rice',
+//   'tomatoes',
+//   'avocado',
+//   'garlic',
+// ]);
 
 // Data needed for first part of the section
 
@@ -517,3 +517,51 @@ const staffUniqueSet = new Set(staff);
 const staffUniqueArray = [...staffUniqueSet];
 
 console.log(staffUniqueArray);
+
+// New Operations to Make Sets Useful!
+
+console.log('New Operations to Make Sets Useful!');
+
+const italianFoods = new Set([
+  'pasta',
+  'gnocchi',
+  'tomatoes',
+  'olive oil',
+  'garlic',
+  'basil',
+]);
+
+const mexicanFoods = new Set([
+  'tortillas',
+  'beans',
+  'rice',
+  'tomatoes',
+  'avocado',
+  'garlic',
+]);
+
+//intersection()
+const commonFoods = italianFoods.intersection(mexicanFoods);
+console.log('Intersection:', commonFoods);
+
+//union()
+const commonFoodsFusion = italianFoods.union(mexicanFoods);
+console.log('Union:', commonFoods);
+
+console.log([...new Set([...mexicanFoods, ...italianFoods])]);
+
+//differnce
+
+const uniqueItalainFood = italianFoods.difference(mexicanFoods);
+console.log('Italian Difference:', uniqueItalainFood);
+
+const uniqueMexicanFood = mexicanFoods.difference(italianFoods);
+console.log('Mexican Difference:', uniqueMexicanFood);
+
+//symmetricDifference()
+
+const italainMexicanUniqueFood = italianFoods.symmetricDifference(mexicanFoods);
+console.log('SymmetricDifference:', italainMexicanUniqueFood);
+
+//isDisjointFrom
+console.log(italianFoods.isDisjointFrom(mexicanFoods)); // false
