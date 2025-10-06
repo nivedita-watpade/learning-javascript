@@ -565,3 +565,50 @@ console.log('SymmetricDifference:', italainMexicanUniqueFood);
 
 //isDisjointFrom
 console.log(italianFoods.isDisjointFrom(mexicanFoods)); // false
+
+console.log('--------------- Maps -----------------------');
+
+const rest = new Map();
+
+rest.set('name', 'Test Resto');
+rest.set(1, 'address 1');
+rest.set(2, 'address 2');
+rest
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 12)
+  .set('close', 23)
+  .set(true, 'We are open')
+  .set(false, 'We are closed')
+  .set('testing', new Map([[12345, 'oneTowThree']]));
+
+const testAraay = [1, 2];
+rest.set(testAraay, 'Array Testing');
+
+const testObj = document.querySelector('h1');
+// rest.set(document.querySelector('h1'), 'Heading Tag');
+rest.set(testObj, 'Heading Tag');
+
+//
+console.log(rest.get('name'));
+console.log(rest.get(1));
+console.log(rest.get(true));
+console.log(rest.get('testing').get(12345));
+
+// To check key present in the map
+console.log(rest.has('categories')); //true
+
+//To delete element from the map
+rest.delete(2);
+
+// To get the length of map
+console.log(rest.size);
+
+// To delete all the elements of map
+
+// rest.clear();
+// console.log(rest);
+
+console.log(rest);
+
+console.log(rest.get(testAraay));
+console.log(rest.get(testObj));

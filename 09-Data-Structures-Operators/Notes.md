@@ -696,3 +696,63 @@ true → if the sets are disjoint (no overlap).
 false → if they share at least one element.
 
 console.log(italianFoods.isDisjointFrom(mexicanFoods)); // false
+
+**\*\***\*\*\*\***\*\*** ---------------- Maps ----------- \***\*\*\*\*\*\*\***
+
+-A Map is a built-in data structure in JavaScript introduced in ES6.
+-It stores data in key–value pairs, similar to an object, but with some differences:
+-Keys can be of any data type (object, function, primitive).
+-Maintains the insertion order of keys.
+-Provides built-in methods to easily get the size, iterate, and manage key-value pairs.
+
+set() Method in Map
+The set() method adds or updates an element in a Map.
+-set() returns the updated map.
+Syntax: map.set(key, value);
+
+Example:
+const rest = new Map();
+
+rest.set('name', 'Test Resto');
+rest.set(1, 'address 1');
+rest.set(2, 'address 2');
+rest
+.set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+.set('open', 12)
+.set('close', 23)
+.set(true, 'We are open')
+.set(false, 'We are closed')
+.set('testing', new Map([[12345, 'oneTowThree']]));
+
+get(): Methods returns the value of the key present in the map
+Ex.
+console.log(rest.get('name'));
+console.log(rest.get(1));
+console.log(rest.get(true));
+console.log(rest.get('testing').get(12345));
+
+has(): check the key present in the map or not and returns the boolean value.
+console.log(rest.has('categories')); //true
+
+delete(): delete property/element from the map
+rest.delete(2);
+console.log(rest);
+
+size: To get the length of map
+console.log(rest.size);
+
+clear(): To delete all the elements of the map
+rest.clear();
+console.log(rest);
+
+// Set array as a key
+
+const testAraay = [1, 2];
+rest.set(testAraay, 'Array Testing');
+console.log(rest.get(testAraay));
+
+// Set object as a key
+const testObj = document.querySelector('h1');
+// rest.set(document.querySelector('h1'), 'Heading Tag');
+rest.set(testObj, 'Heading Tag');
+console.log(rest.get(testObj));
