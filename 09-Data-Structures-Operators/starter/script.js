@@ -612,3 +612,32 @@ console.log(rest);
 
 console.log(rest.get(testAraay));
 console.log(rest.get(testObj));
+
+console.log('----------- Map Iteration --------------');
+
+const question = new Map([
+  ['question', 'Which is the bes programming langauge in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'Javascript'],
+  ['correct', 3],
+  [true, 'Correct'],
+  [false, 'Try Again'],
+]);
+
+console.log(question);
+
+// console.log(userInput);
+// console.log(question.get('correct'));
+
+const btn = document.querySelector('.openBtn');
+
+btn.addEventListener('click', () => {
+  const userInput = prompt(question.get('question'));
+  const quizResult =
+    Number(userInput) === question.get('correct')
+      ? question.get(true)
+      : question.get(false);
+
+  console.log(quizResult);
+});
