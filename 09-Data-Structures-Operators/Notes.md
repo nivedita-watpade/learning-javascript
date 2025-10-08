@@ -756,3 +756,31 @@ const testObj = document.querySelector('h1');
 // rest.set(document.querySelector('h1'), 'Heading Tag');
 rest.set(testObj, 'Heading Tag');
 console.log(rest.get(testObj));
+
+//Convert Object to the map
+const hoursMap = new Map(Object.entries(openingHours));
+
+//Convert map to array
+console.log([...question]);
+console.log([...question.keys()]);
+console.log([...question.values()]);
+
+======================== Map iteration =============================
+
+const userInfo = new Map([
+['name', 'Nivedita Watpade'],
+['age', 24],
+['email', 'nivi@test.com'],
+]);
+
+for (const [key, value] of userInfo) {
+console.log(`Key is ${key} and value is ${value} `);
+}
+
+for (const key of [...userInfo.keys()]) {
+console.log(`Key is ${key}`);
+}
+
+for (const value of [...userInfo.values()]) {
+console.log(`Value is ${value}`);
+}

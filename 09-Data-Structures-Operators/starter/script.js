@@ -641,3 +641,55 @@ btn.addEventListener('click', () => {
 
   console.log(quizResult);
 });
+
+//Convert Object to the map
+console.log(Object.entries(openingHours));
+
+const hoursMap = new Map(Object.entries(openingHours));
+console.log('Hours Map:', hoursMap);
+
+// Quiz app
+console.log('------- Quiz app --------');
+
+console.log(question.get('question'));
+
+for (const [key, value] of question) {
+  if (typeof key === 'number') {
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
+
+// const answer = Number(prompt('Your Answer'));
+// console.log(answer);
+
+// const CorrectAns =
+//   answer === question.get('correct') ? question.get(true) : question.get(false);
+// console.log(CorrectAns);
+
+//Here answer === question.get('correct') of result true so question.get(true)
+//console.log(question.get(answer === question.get('correct')));
+
+//Convert map to array
+console.log([...question]);
+console.log([...question.keys()]);
+console.log([...question.values()]);
+
+const userInfo = new Map([
+  ['name', 'Nivedita Watpade'],
+  ['age', 24],
+  ['email', 'nivi@test.com'],
+]);
+
+for (const [key, value] of userInfo) {
+  console.log(`Key is ${key} and value is ${value} `);
+}
+
+for (const key of [...userInfo.keys()]) {
+  console.log(`Key is ${key}`);
+}
+
+for (const value of [...userInfo.values()]) {
+  console.log(`Value is ${value}`);
+}
+
+console.log([...userInfo.keys()]);
