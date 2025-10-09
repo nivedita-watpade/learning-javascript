@@ -630,7 +630,7 @@ console.log(orderSet.size); //3
 console.log(orderSet.has('Pizza')); // true
 console.log(orderSet.has('Bread')); // false
 
-//add(): method is used to add new elemt in the set
+//add(): method is used to add new element in the set
 In below example only one element is added in the set bcoz set is unique
 orderSet.add('Biryani');
 orderSet.add('Biryani');
@@ -735,6 +735,8 @@ has(): check the key present in the map or not and returns the boolean value.
 console.log(rest.has('categories')); //true
 
 delete(): delete property/element from the map
+Syntax: rest.delete(key);
+Ex.
 rest.delete(2);
 console.log(rest);
 
