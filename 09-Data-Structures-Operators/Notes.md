@@ -786,3 +786,72 @@ console.log(`Key is ${key}`);
 for (const value of [...userInfo.values()]) {
 console.log(`Value is ${value}`);
 }
+
+------------------------ string -----------------------
+
+const airline = 'TAP air India';
+const plane = 'A320';
+
+//Accessing the character from the string of a specific index
+console.log(airline[0]);
+
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[3]);
+
+console.log('B7B8'[0]);
+
+//length of string
+console.log('B7B8'.length);
+console.log(airline.length);
+
+// to find the index of first occuring charcter
+console.log(airline.indexOf('i'));
+
+// to find the index of last occuring charcter
+console.log(airline.lastIndexOf('i'));
+
+// to find the index of word
+console.log(airline.indexOf('India'));
+
+//its case sensitive
+console.log(airline.indexOf('india')); //-1
+
+// to extract string
+console.log(airline.slice(4)); //air India
+
+console.log(airline.slice(4, 7)); //air
+
+Here (4, 7) is the parameter. 4 is the first parameter and 7 is the second parameter
+Extraction starts from 1st parameter index and ends with second parameter index.
+Last index will not be considered here.(Means extraction stop till the index(6) and 7 will ot be considered)
+
+The slice() method in JavaScript is used to extract a portion of a string and return it as a new string, without changing the original string.
+Syntax:
+string.slice(startIndex, endIndex)
+
+Parameters:
+startIndex → The position (0-based) where extraction begins.
+endIndex (optional) → The position before which extraction ends (not included).
+If omitted, it extracts till the end of the string.
+
+Ex.
+
+function checkMiddleSeat1(seat) {
+const s = seat.slice(-1);
+if (s === 'B' || s === 'E') {
+console.log('Its a middle seat');
+} else {
+console.log('Its not a middle seat');
+}
+}
+
+checkMiddleSeat1('11E');
+
+Here we check the occurence of letter of string. If seat contains letters "B" or "E" then it will true otherwise it will false
+
+-String is a premitive value. But methods are called on strings javascript interannly converts string premitive value to the string object and called methods on it. After the methods operation done it converted back to the premitive value
+
+Ex.
+console.log(new String('Nivi'));
+console.log(typeof new String('Nivi'));

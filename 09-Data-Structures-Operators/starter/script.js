@@ -693,3 +693,70 @@ for (const value of [...userInfo.values()]) {
 }
 
 console.log([...userInfo.keys()]);
+
+console.log('======================= String =====================');
+
+const airline = 'TAP air India';
+const plane = 'A320';
+
+//Accessing the character from the string of a specific index
+console.log(airline[0]);
+
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[3]);
+
+console.log('B7B8'[0]);
+
+//length of string
+console.log('B7B8'.length);
+console.log(airline.length);
+
+// to find the index of first occuring charcter
+console.log(airline.indexOf('i'));
+
+// to find the index of last occuring charcter
+console.log(airline.lastIndexOf('i'));
+
+// to find the index of word
+console.log(airline.indexOf('India'));
+
+//its case sensitive
+console.log(airline.indexOf('india')); //-1
+
+// to extract string
+console.log(airline.slice(4));
+
+console.log(airline.slice(4, 7));
+
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+
+console.log(airline.slice(-2)); // extract element till the last 2 element === ia
+console.log(airline.slice(1, -1)); // start from the 1 position and end till the last 1 element == "AP air Indi"
+
+function checkMiddleSeat(seat) {
+  if (seat.indexOf('B') !== -1 || seat.indexOf('E') !== -1) {
+    console.log('Its a middle seat');
+  } else {
+    console.log('Its not a middle seat');
+  }
+}
+
+checkMiddleSeat('11B');
+
+function checkMiddleSeat1(seat) {
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') {
+    console.log('Its a middle seat');
+  } else {
+    console.log('Its not a middle seat');
+  }
+}
+
+checkMiddleSeat1('11E');
+
+// console.log('11C'.indexOf('B'));
+
+console.log(new String('Nivi'));
+console.log(typeof new String('Nivi'));
