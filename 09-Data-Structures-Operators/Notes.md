@@ -855,3 +855,55 @@ Here we check the occurence of letter of string. If seat contains letters "B" or
 Ex.
 console.log(new String('Nivi'));
 console.log(typeof new String('Nivi'));
+
+======================== String Operation ==========================
+
+1. toLowerCase() : Converts all the characters in a string to lowercase letters.
+   Syntax: string.toLowerCase()
+
+2. toUpperCase() : Converts all the characters in a string to uppercase letters.
+   Syntax: string.toUpperCase()
+
+3. trim() : Removes whitespace (spaces, tabs, newlines) from both ends of a string.
+   Syntax: string.trim()
+
+4. replace() : The replace() method returns a new string with the first occurrence of a specified value (string or regular expression) replaced by another value.
+   Syntax: string.replace(searchValue, newValue)
+
+5. replaceAll() : The replaceAll() method returns a new string with all occurrences of a specified value replaced by another value.
+   Syntax: string.replaceAll(searchValue, newValue)
+
+//Boolean
+
+includes(): The includes() method checks whether a specified substring exists within a string.
+It returns a boolean value — true if found, otherwise false.
+
+startsWith(): The startsWith() method checks whether a string begins with a specified substring.
+It returns true if the string starts with the given characters, otherwise false.
+
+endsWith(): The endsWith() method checks whether a string ends with a specified substring.
+It returns true if the string ends with the given characters, otherwise false.
+
+const plane1 = 'Airbus A320neo';
+
+console.log(plane1.includes('A32')); // true
+console.log(plane1.includes('Boeing')); // false
+console.log(plane1.startsWith('Airbus')); //true
+console.log(plane1.endsWith('NEO')); // false
+
+if (plane1.startsWith('Airbus') && plane1.endsWith('neo')) {
+console.log('Part of the NEW Airbus family');
+}
+
+function checkBaggage(item) {
+const baggage = item.toLowerCase();
+if (baggage.includes('knife') || baggage.includes('gun')) {
+console.log('You are not allowed in a plane');
+} else {
+console.log('You are allowed in a plane');
+}
+}
+
+checkBaggage('I have laptop, some food and a pocket knife');
+checkBaggage('I have gun for protection');
+checkBaggage('Socks and camera');

@@ -760,3 +760,50 @@ checkMiddleSeat1('11E');
 
 console.log(new String('Nivi'));
 console.log(typeof new String('Nivi'));
+
+const passenger = 'niVEDita';
+
+console.log(passenger.toLowerCase());
+console.log(passenger[0].toUpperCase() + passenger.slice(1).toLowerCase());
+
+//Comparing Emails
+
+const email = 'hello@jonas.io';
+const loginEmail = ' Hello@Jonas.Io \n';
+
+const loginEmailLower = loginEmail.toLowerCase().trim();
+console.log(loginEmailLower);
+
+const price = '500,00$';
+const updatedPrice = price.replace('$', '#').replace(',', '.');
+console.log(updatedPrice);
+
+const announcement =
+  'All passengers come to boarding door 23. Baording door 23!';
+
+console.log(announcement.replaceAll('door', 'gate'));
+
+//Boolean
+const plane1 = 'Airbus A320neo';
+
+console.log(plane1.includes('A32')); // true
+console.log(plane1.includes('Boeing')); // false
+console.log(plane1.startsWith('Airbus')); //true
+console.log(plane1.endsWith('NEO')); // false
+
+if (plane1.startsWith('Airbus') && plane1.endsWith('neo')) {
+  console.log('Part of the NEW Airbus family');
+}
+
+function checkBaggage(item) {
+  const baggage = item.toLowerCase();
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You are not allowed in a plane');
+  } else {
+    console.log('You are allowed in a plane');
+  }
+}
+
+checkBaggage('I have laptop, some food and a pocket knife');
+checkBaggage('I have gun for protection');
+checkBaggage('Socks and camera');
