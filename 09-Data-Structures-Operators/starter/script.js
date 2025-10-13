@@ -807,3 +807,53 @@ function checkBaggage(item) {
 checkBaggage('I have laptop, some food and a pocket knife');
 checkBaggage('I have gun for protection');
 checkBaggage('Socks and camera');
+
+console.log('My+name+is+Nivedita'.split('+')); //(4) ['My', 'name', 'is', 'Nivedita']
+
+const [firstName, lastName] = 'Nivedita Watpade'.split(' ');
+console.log(firstName, lastName);
+
+const newName = ['Miss', firstName, lastName.toUpperCase()].join();
+console.log(newName); //Miss Nivedita WATPADE
+
+function capitalizedName(names) {
+  const capitalizePassengersName = names.split(' ');
+  const nameArr = [];
+  for (const name of capitalizePassengersName) {
+    // const updatedName = name[0].toUpperCase() + name.slice(1);
+    const updatedName = name.replace(name[0], name[0].toUpperCase());
+    nameArr.push(updatedName);
+  }
+  const newNames = nameArr.join(' ');
+  console.log(newNames);
+}
+capitalizedName('nivedita pranit ankita');
+const passengersName = 'nivedita pranit ankita';
+
+//padding
+
+const message = 'Go to get 23!';
+console.log(message.padStart(25, '+'));
+console.log('Nivedita'.padStart(25, '+').padEnd(35, '+'));
+
+function maskCreditCard(number) {
+  const creditCardNum = String(number);
+  console.log(creditCardNum.slice(-4).padStart(creditCardNum.length, '*'));
+  // const maskNumber = creditCardNum.padStart(10, '*');
+  // console.log(maskNumber);
+}
+console.log('NiveditaRani'.padStart(13, '#'));
+maskCreditCard(321122444656); // **************4656
+maskCreditCard(88886666333322);
+
+//Repeat
+
+const msg = 'Bad Whether ........';
+console.log(msg.repeat(4));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in a line ${'plane '.repeat(n)}`);
+};
+
+planesInLine(2);
+planesInLine(5);

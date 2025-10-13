@@ -907,3 +907,24 @@ console.log('You are allowed in a plane');
 checkBaggage('I have laptop, some food and a pocket knife');
 checkBaggage('I have gun for protection');
 checkBaggage('Socks and camera');
+
+1. split() : The split() method splits a string into an array of substrings based on a specified separator.
+   It returns a new array and does not change the original string.
+   Syntax:
+   string.split(separator, limit)
+
+2. join(): The join() method joins all elements of an array into a single string, using a specified separator between each element.
+   It returns a new string and does not modify the original array.
+   Syntax:
+   array.join(separator)
+
+//padding
+
+1. padStart(): The padStart() method pads the beginning of a string with another string (or characters) until it reaches the specified length.
+   Syntax: string.padStart(targetLength, padString)
+
+2. padEnd(): The padEnd() method pads the end of a string with another string until it reaches the specified length.
+   Syntax: string.padEnd(targetLength, padString)
+
+repeat(): The repeat() method creates and returns a new string by repeating the original string a specified number of times.
+Syntax: string.repeat(count)
