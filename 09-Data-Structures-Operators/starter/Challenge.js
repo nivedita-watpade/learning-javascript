@@ -290,3 +290,44 @@ clickBtn.addEventListener('click', camelCase);
 // Some_Variable
 //   calculate_AGE
 // delayed_departure
+
+console.log('--------------- Last Challenge ----------------');
+
+// 🔴 Delayed Departure from FAO to TXL (11h25)
+//              Arrival from BRU to FAO (11h45)
+//   🔴 Delayed Arrival from HEL to FAO (12h05)
+//            Departure from FAO to LIS (12h30)
+
+// Data needed for a later exercise
+const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+const flightsArr = flights.split('+');
+
+function extractFlightCode(code) {
+  return code.slice(0, 3).toUpperCase();
+}
+
+// console.log(extractFlightCode('txl2133758440'));
+
+for (const str of flightsArr) {
+  const [flightStatus, from, to, flightTime] = str.split(';');
+
+  const updatedFlightStatus = flightStatus.replaceAll('_', ' ').trim();
+
+  const updatedStr = `${
+    updatedFlightStatus.startsWith('Delayed') ? '🔴 ' : ''
+  } ${updatedFlightStatus} from ${extractFlightCode(
+    from
+  )} to ${extractFlightCode(to)} (${flightTime.replace(':', 'h')})`.padStart(
+    35
+  );
+
+  console.log(updatedStr);
+
+  // if (updatedStr.includes('Delayed')) {
+  //   console.log('🔴 ' + updatedStr);
+  // } else {
+  //   console.log(updatedStr);
+  // }
+}
