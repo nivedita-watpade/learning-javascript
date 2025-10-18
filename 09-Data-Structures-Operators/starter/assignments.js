@@ -624,7 +624,7 @@ const booksMainArray = [
     publisher: 'Grand Central Publishing',
     publicationDate: '2016-01-05',
     edition: 1,
-    keywords: ['work', 'focus', 'personal development', 'business'],
+    //keywords: ['work', 'focus', 'personal development', 'business'],
     pages: 296,
     format: 'hardcover',
     ISBN: '9781455586691',
@@ -737,6 +737,24 @@ for (let i = 0; i <= booksMainArray.length; i++) {
     );
 }
 
+// 7.1 Some of the book objects from the books array are missing the edition property. Loop over the books array, and assign this property with a number 1 (if it doesn't already exist). Use logical assignment operators.
+
+for (let i = 0; i <= booksMainArray.length - 1; i++) {
+  const editionProp = booksMainArray[i].edition || 1;
+  console.log(editionProp);
+}
+
+// 7.2 Some of the book objects from the books array have the highlighted property, which by default is set to true. Iterate over the books array, and if the thirdParty.goodreads.rating property is less than 4.2, reassign it with false.
+
+// Use the &&= operator (tip: you may also need the ! operator)
+
+for (let i = 0; i <= booksMainArray.length - 1; i++) {
+  console.log(booksMainArray[i].thirdParty.goodreads.rating < 4.2);
+
+  // if(booksMainArray[i].thirdParty.goodreads.rating < 4.2){
+  // }
+}
+
 // 8.1 Use the for-of loop to loop over the books array and sum the pages of all books. Use the pageSum variable below, and the pages property of the book objects.
 
 let sum = 0;
@@ -767,3 +785,37 @@ console.log(allAuthors);
 for (const [key, value] of allAuthors.entries()) {
   console.log(`${key + 1}. ${value}`);
 }
+
+// 10.1 Write a function called getFirstKeyword that takes the book object as an argument. This function should return the first keyword from the book's keywords property (array) or undefined (if the keywords property doesn't exist). It shouldn't throw an error. Use optional chaining for that.
+
+function getFirstKeyword(book) {
+  return book.keywords?.[0] ?? 'No keywords';
+}
+
+console.log(getFirstKeyword(booksMainArray[7]));
+
+// 11.1 Below is the entries variable that stores an empty array. Use the for-of loop together with the Object.keys() method to loop over the thirdParty.goodreads property (array) of the first book object from the books array. For each key, push a new array that contains that key to the entries array.
+
+const entries = [];
+for (const key of Object.keys(booksMainArray[0].thirdParty.goodreads)) {
+  entries.push(key);
+}
+console.log(entries);
+//11.2 Use the for-of loop together with the Object.values() method and Array's entries() method to loop over thirdParty.goodreads property of the first book from the books array.
+
+//Push each value to the appropriate inner array in the entries array (use index from entries()).
+
+for (const values of Object.values(booksMainArray[0].thirdParty.goodreads)) {
+  entries.push(values);
+}
+
+console.log(entries);
+
+for (const [key, values] of Object.entries(
+  booksMainArray[0].thirdParty.goodreads
+)) {
+  entries.push(key);
+  entries.push(values);
+}
+
+console.log(entries);
