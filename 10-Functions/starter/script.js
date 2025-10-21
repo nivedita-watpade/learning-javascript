@@ -22,3 +22,20 @@ const createBookings = function (
 createBookings('LH298');
 createBookings('LH298', 2, 2010);
 createBookings('LH2510', undefined, 6000);
+
+const flight = 'LH2925';
+const nivi = {
+  name: 'Nivedita Watpade',
+  passportNum: '23456789',
+};
+
+function checkIn(flightNum, passengerName) {
+  flightNum = 'LH1234';
+  passengerName.name = 'Miss ' + passengerName.name;
+}
+
+checkIn(flight, nivi);
+
+//checkIn(flight, { ...nivi });
+console.log(flight);
+console.log(nivi);

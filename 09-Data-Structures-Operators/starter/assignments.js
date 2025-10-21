@@ -850,3 +850,76 @@ console.log(uniqueKeywords);
 // 12.3 Add two more keywords to the uniqueKeywords set, for example, 'coding' and 'science'.
 
 console.log(uniqueKeywords.add('coding').add('science'));
+
+// 12.4 Delete 'business' from the uniqueKeywords set.
+console.log(uniqueKeywords.delete('business'));
+
+//12.5 Create an array out of the uniqueKeywords set, and assign it to the uniqueKeywordsArr variable.
+
+const uniqueKeywordsArr = [...uniqueKeywords];
+console.log(uniqueKeywordsArr);
+
+// 12.6 Delete all items from the uniqueKeywords set.
+console.log(uniqueKeywords.clear());
+
+//13.1 Create a new book, but this time, as a Map. Assign it to the bookMap variable. Use this array as initial data:
+
+// /[['title', 'Clean Code'], ['author', 'Robert C. Martin']]
+
+const bookMap = new Map([
+  ['title', 'Clean Code'],
+  ['author', 'Robert C. Martin'],
+]);
+
+console.log(bookMap);
+
+//13.2 Set a new key in bookMap called pages, and assign it with a number 464.
+console.log(bookMap.set('pages', 464));
+
+// 13.3 Get the title and author values from bookMap, and log to the console a string formatted like that: "${title} by ${author}".
+console.log(bookMap.get('title'));
+
+console.log(`${bookMap.get('title')} by ${bookMap.get('author')}`);
+
+// 13.4 Get the size of bookMap, and log it to the console.
+console.log(bookMap.size);
+
+// 13.5 Check if bookMap has the author key. and if so, log "The author of the book is known" to the console.
+
+if (bookMap.has('author')) console.log('The author of the book is known');
+
+// 14.1 Convert the first book object from the books array into a Map, and assign it to a firstBookMap variable.
+
+const firstBookMap = new Map(Object.entries(booksMainArray[0]));
+console.log(firstBookMap);
+
+//14.2 Use the for-of loop to iterate over firstBookMap, and log to the console keys that have numbers as values.
+
+for (const [key, value] of firstBookMap) {
+  if (typeof value === 'number') console.log(key);
+}
+
+// 15.1 Take the ISBN property of the first book from the books array, and log to the console characters at index 6, 4, 9 and 8. Use bracket notation to access individual characters.
+console.log(
+  booksMainArray[0].ISBN['6'],
+  booksMainArray[0].ISBN['4'],
+  booksMainArray[0].ISBN['9'],
+  booksMainArray[0].ISBN['8']
+);
+
+// 15.2 Below is the quote variable that stores a string. Find the index of the word 'chess', and log it to the console.
+const quote =
+  'A computer once beat me at chess, but it was no match for me at kick boxing';
+console.log(quote.indexOf('chess'));
+
+// 15.3 Extract the word "boxing" from the same quote string, and log it to the console.
+console.log(quote.slice(quote.lastIndexOf(' ') + 1));
+
+// 15.4 Some authors are noted as "(Contributor)", for example "Julie Sussman (Contributor)". Create a function called isContributor that takes an author's name as an argument, and returns either true (if he's a contributor) of false (if he's not a contributor). The string "(Contributor)" is always the last part of the author's name string.
+
+function isContributor(authorName) {
+  console.log(authorName.lastIndexOf('(Contributor)') !== -1);
+}
+
+isContributor('Julie Sussman (Contributor)');
+isContributor('Robert Sedgewick');
