@@ -39,3 +39,13 @@ checkIn(flight, nivi);
 //checkIn(flight, { ...nivi });
 console.log(flight);
 console.log(nivi);
+
+function count() {
+  let counter = 0;
+  return function () {
+    return counter++;
+  };
+}
+
+const counterValue = count();
+console.log(counterValue());

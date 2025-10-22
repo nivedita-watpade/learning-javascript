@@ -923,3 +923,66 @@ function isContributor(authorName) {
 
 isContributor('Julie Sussman (Contributor)');
 isContributor('Robert Sedgewick');
+
+// 16.1 Write a function called normalizeAuthorName that takes an author's name (string) as an argument, and returns the same string, but the first name and last name are capitalized, and the "(Contributor)" part is removed (if exists).
+
+// You can be sure that the author's name always consists of two words separated by a space, and possibly ends with "(Contributor)". The string may also contain trailing spaces.
+
+function normalizeAuthorName(authorsName) {
+  const normalizeAuthorNameStr = authorsName
+    .replace('(Contributor)', '')
+    .toLowerCase()
+    .trim();
+  //console.log(normalizeAuthorNameStr.split(' '));
+  const [firstName, lastName] = normalizeAuthorNameStr.split(' ');
+  console.log(firstName, lastName);
+
+  const updatedNameArr = [];
+
+  updatedNameArr.push(
+    firstName.replace(firstName[0], firstName[0].toUpperCase())
+  );
+  updatedNameArr.push(lastName.replace(lastName[0], lastName[0].toUpperCase()));
+  console.log(updatedNameArr);
+  console.log(updatedNameArr.join(' '));
+}
+
+normalizeAuthorName('  JuliE sussMan (Contributor)');
+
+// 16.2 Take the title of the second book (books[1]) from the books array, and replace the word "Programs" with "Software". Assign the new string to the newBookTitle variable.
+
+console.log(booksMainArray[1].title.replace('Programs', 'Software'));
+
+// 16.3 Write a function called logBookTheme that takes book's title (string), and logs to the console:
+// "This book is about computers" if the title starts with the word "computer",
+// "This book is about algorithms and data structures" if the title includes both the "algorithms" and "structures" words,
+// and, "This book is about some systems, but definitely not about operating systems" if the title ends with the word "system" or "systems", but doesn't include the word "operating".
+
+function logBookTheme(bookTitle) {
+  bookTitle = bookTitle.toLowerCase();
+  //console.log(bookTitle.startsWith('computer'));
+  if (bookTitle.startsWith('computer')) {
+    console.log('This book is about computers');
+  } else if (
+    bookTitle.includes('algorithms') &&
+    bookTitle.includes('structures')
+  ) {
+    console.log('This book is about algorithms and data structures');
+  } else if (
+    bookTitle.endsWith('system') ||
+    (bookTitle.endsWith('systems') && !bookTitle.includes('operating'))
+  ) {
+    console.log(
+      'This book is about some systems, but definitely not about operating systems'
+    );
+  }
+}
+
+logBookTheme(booksMainArray[1].title);
+
+//17.1 Below is the bookCategories variable that stores a string of categories. Each category is separated with a semicolon, for example, in a string "science;computing", 'science' and 'computing' are separate categories.
+//Write a function called logBookCategories that takes a string of categories separated with semicolons, and logs each category to the console (as separate strings).
+
+// const bookCategories =
+//   'science;computing;computer science;algorithms;business;operating systems;networking;electronics';
+// logBookCategories(bookCategories);
