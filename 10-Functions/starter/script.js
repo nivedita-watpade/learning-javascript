@@ -49,3 +49,24 @@ function count() {
 
 const counterValue = count();
 console.log(counterValue());
+
+function oneWord(str) {
+  return str.replaceAll(' ', '');
+}
+
+function upperFirstWord(str) {
+  const [firstWord, ...other] = str.split(' ');
+  const finalArr = [firstWord.toUpperCase(), ...other];
+  return finalArr.join(' ');
+}
+
+//console.log(upperFirstWord('Nivedita Watpade'));
+
+//Higher Order Function
+function transformer(str, fn) {
+  return fn(str);
+}
+
+// upperFirstWord & oneWord are the callback functions
+console.log(transformer('My name is Nivi', upperFirstWord));
+console.log(transformer('My name is Nivi', oneWord));

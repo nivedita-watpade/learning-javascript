@@ -786,6 +786,31 @@ for (const [key, value] of allAuthors.entries()) {
   console.log(`${key + 1}. ${value}`);
 }
 
+// 9.1 Below is the bookData array that contains other arrays. Each inner array consists of the property name (first element), and the value (second element). For example, in ['title', 'Computer Networking: A Top-Down Approach'], 'title' is the property name, and 'Computer Networking: A Top-Down Approach' is meant to be the value assigned to that property name.
+
+// Using computed properties, fill the newBook object with the properties and values from the bookData array. The first one is done already.
+
+const bookData = [
+  ['title', 'Computer Networking: A Top-Down Approach'],
+  ['author', ['James F. Kurose', 'Keith W. Ross']],
+  ['publisher', 'Addison Wesley'],
+];
+const newBook = {
+  [bookData[0][0]]: bookData[0][1],
+  [bookData[1][0]]: bookData[1][1],
+  [bookData[2][0]]: bookData[2][1],
+};
+console.log(newBook);
+
+// 9.2 Below is the pages variable. Add it as a property of the newBook2 object. Use the shorter way.
+const pages1 = 880;
+const newBook2 = {
+  title: 'The C Programming Language',
+  author: ['Brian W. Kernighan', 'Dennis M. Ritchie'],
+  pages1,
+};
+console.log(newBook2);
+
 // 10.1 Write a function called getFirstKeyword that takes the book object as an argument. This function should return the first keyword from the book's keywords property (array) or undefined (if the keywords property doesn't exist). It shouldn't throw an error. Use optional chaining for that.
 
 function getFirstKeyword(book) {
@@ -983,6 +1008,52 @@ logBookTheme(booksMainArray[1].title);
 //17.1 Below is the bookCategories variable that stores a string of categories. Each category is separated with a semicolon, for example, in a string "science;computing", 'science' and 'computing' are separate categories.
 //Write a function called logBookCategories that takes a string of categories separated with semicolons, and logs each category to the console (as separate strings).
 
-// const bookCategories =
-//   'science;computing;computer science;algorithms;business;operating systems;networking;electronics';
+const bookCategories =
+  'science;computing;computer science;algorithms;business;operating systems;networking;electronics';
 // logBookCategories(bookCategories);
+
+function logBookCategories(bookCategoriesStr) {
+  const bookCategoriesStrArr = bookCategoriesStr.split(';');
+  for (const bookCat of bookCategoriesStrArr) {
+    console.log(bookCat);
+  }
+}
+logBookCategories(bookCategories);
+
+// 17.2 Now, the opposite. Each book from the books array has the keywords property.
+
+// Write a function called getKeywordsAsString that takes the books array as an argument, collects keywords from each book, removes duplicates, and then joins them to create a single string where keywords are separated by a semicolon.
+
+function getKeywordsAsString(books) {
+  const allBooksKeywords = [];
+  for (const book of books) {
+    allBooksKeywords.push(...book.keywords);
+  }
+  const uniqueKeywords = new Set(allBooksKeywords);
+  console.log([...uniqueKeywords].join(';'));
+}
+
+getKeywordsAsString(booksMainArray);
+
+//17.3 Below is the bookChapters array that contains inner arrays. Each inner array consists of a chapter's title, and the number of a page, for example, in ['The Basics', 14], 'The Basics' is the chapter's title, and 14 is the number of a page.
+
+// Write a function called logBookChapters that takes an array of arrays (like bookChapters) as an argument, and logs each chapter's name to the console together with the page number. The page number should be separated from the chapter's name with underscores (take a look at the example below).
+
+// Use the padEnd method.
+
+const bookChapters = [
+  ['The Basics', 14],
+  ['Sorting', 254],
+  ['Searching', 372],
+  ['Graphs', 526],
+  ['Strings', 706],
+];
+// logBookChapters(bookChapters);
+
+function logBookChapters(chapters) {
+  for (const [chapter, pages] of bookChapters) {
+    console.log(chapter.padEnd(13, '___') + pages);
+  }
+}
+
+logBookChapters(bookChapters);

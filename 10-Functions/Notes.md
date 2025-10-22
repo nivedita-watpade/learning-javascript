@@ -82,3 +82,31 @@ counter++;
 
 count → Higher-order function
 returned function → Inner function
+
+======================== function accepting callback functions ====================
+
+In below example, transformer is a higher order function which is receives a upperFirstWord() oroneWord() function as a parameter. so upperFirstWord() & oneWord functions are callback function
+Ex
+function oneWord(str) {
+return str.replaceAll(' ', '');
+}
+
+function upperFirstWord(str) {
+const [firstWord, ...other] = str.split(' ');
+const finalArr = [firstWord.toUpperCase(), ...other];
+return finalArr.join(' ');
+}
+
+//console.log(upperFirstWord('Nivedita Watpade'));
+
+//Higher Order Function
+function transformer(str, fn) {
+return fn(str);
+}
+
+// upperFirstWord & oneWord are the callback functions
+console.log(transformer('My name is Nivi', upperFirstWord));
+console.log(transformer('My name is Nivi', oneWord));
+
+Abstraction:
+Abstraction in programming means showing only the essential details of an object or function while hiding the complex implementation.
