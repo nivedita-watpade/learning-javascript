@@ -110,3 +110,29 @@ console.log(transformer('My name is Nivi', oneWord));
 
 Abstraction:
 Abstraction in programming means showing only the essential details of an object or function while hiding the complex implementation.
+
+============================ Function returning function ==============================
+
+In JavaScript, a function returning another function means one function outputs (returns) another function as its result.
+This concept is often used in closures, higher-order functions, and function factories.
+
+function greet(greetings) {
+return function (name) {
+console.log(`${greetings} ${name}`);
+};
+}
+
+const greeter = greet('Hello');
+greeter('Nivedita');
+
+//or
+greet('Hello')?.('Nivi');
+
+const greetArrow = greetings => {
+return name => console.log(`${greetings} ${name}`);
+};
+
+const greetArrow1 = greetings => name => console.log(`${greetings} ${name}`);
+
+greetArrow('Shutup')('Pranit');
+greetArrow1('Shut your mouth')('PC');

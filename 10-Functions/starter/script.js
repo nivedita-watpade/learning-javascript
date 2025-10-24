@@ -70,3 +70,24 @@ function transformer(str, fn) {
 // upperFirstWord & oneWord are the callback functions
 console.log(transformer('My name is Nivi', upperFirstWord));
 console.log(transformer('My name is Nivi', oneWord));
+
+function greet(greetings) {
+  return function (name) {
+    console.log(`${greetings} ${name}`);
+  };
+}
+
+const greeter = greet('Hello');
+greeter('Nivedita');
+
+//or
+greet('Hello')?.('Nivi');
+
+const greetArrow = greetings => {
+  return name => console.log(`${greetings} ${name}`);
+};
+
+const greetArrow1 = greetings => name => console.log(`${greetings} ${name}`);
+
+greetArrow('Shutup')('Pranit');
+greetArrow1('Shut your mouth')('PC');

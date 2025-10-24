@@ -13,7 +13,7 @@ Highlevel overview of javascript:
 
 5)First-class function - In a language with first-class function, functions are simply treated as variables. We can pass them into other functions, and return them from functions.
 Ex. closeBtn.addEventListener('click', toggleModal);
-Here, toggleModal is a First-class function.
+Here, toggleModal is a callback-class function. and addEventListener is a higher order function
 
 6)Dynamic - Javascript is dynamically typed lagnauge which means we dont have to assign data type to varibale manually. Javascript engine assigns a datatypes at the run time. We can also reassign value to the varibale with different datatype.
 
@@ -387,7 +387,7 @@ In above example, we have added new marriedStatus property to the object. Here w
 
 In below example:
 Spread Operator(...): Spread operator is used to create a new object from existing one.
-Here lastName property valu will be change in the copy but not in original one. Beacuse spread operator create a new copy of obect in the head to the new memory address.
+Here lastName property valu will be change in the copy but not in original one. Beacuse spread operator create a new copy of obejct in the heap to the new memory address.
 But if we change the array then changes reflect in both the objects. Because spread operator creates a shallow copy of the object. Internal objects i.e familyMember still holds old memeoryaddress or reference.
 
 //Shallow Copy
