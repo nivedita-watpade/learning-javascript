@@ -91,3 +91,47 @@ const greetArrow1 = greetings => name => console.log(`${greetings} ${name}`);
 
 greetArrow('Shutup')('Pranit');
 greetArrow1('Shut your mouth')('PC');
+
+const luftansa = {
+  airline: 'Luftansa',
+  iataCode: 'LH',
+  bookings: [],
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode} ${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+  },
+};
+
+luftansa.book(239, 'Nivi Watpade');
+
+const euroWing = {
+  airline: 'Eurowings',
+  iataCode: 'EU',
+  bookings: [],
+};
+
+const book = luftansa.book;
+
+//This will NOT work
+//book(239, 'Nivi Watpade');
+
+//call Method
+book.call(euroWing, 2529, 'Pranit');
+console.log(euroWing);
+
+//apply meyhod
+const flightData = [2908, 'Gabuli'];
+book.apply(euroWing, flightData);
+console.log(euroWing);
+
+//Using spread operator
+book.call(euroWing, ...flightData);
+console.log(euroWing);
+
+const bookLF = book.bind(luftansa);
+const bookEW = book.bind(euroWing);
+//console.log(bookLF);
+bookLF(298, 'Nivedita Watpade');
+bookEW(1111, 'Testing');

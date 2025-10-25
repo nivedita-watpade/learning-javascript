@@ -136,3 +136,33 @@ const greetArrow1 = greetings => name => console.log(`${greetings} ${name}`);
 
 greetArrow('Shutup')('Pranit');
 greetArrow1('Shut your mouth')('PC');
+
+======================================== The call and apply method ==============================
+
+In JavaScript, call() and apply() are methods that allow you to invoke a function with a specific this value (context) and pass arguments to it.
+They are both part of Function.prototype, meaning every function in JS can
+
+1. call() Method
+   Syntax:
+   functionName.call(thisArg, arg1, arg2, ...)
+   thisArg: The value to use as this inside the function.
+   arg1, arg2, ...: Arguments passed individually.
+   Ex. //call Method
+   const book = luftansa.book;
+
+   boko.call(euroiWng, 2529, 'Pranit');
+   console.log(euroWing);
+
+2. apply() Method
+   Syntax:
+   functionName.apply(thisArg, [argArray])
+   thisArg: The value to use as this.
+   [argArray]: Arguments passed as an array.
+   Ex. //apply meyhod
+   const book = luftansa.book;
+   const flightData = [2908, 'Gabuli'];
+   book.apply(euroWing, flightData);
+   console.log(euroWing);
+
+Difference between call() and apply() :
+apply() takes arguments as an array, while call() takes them individually.

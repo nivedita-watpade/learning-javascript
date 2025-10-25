@@ -19,8 +19,7 @@
 //     Ans: 3
 
 // 7.  Which statement about the ?? operator is correct?
-//     Ans: It behaves exactly like ||
-//     It throws an error on undefined
+//     Ans: IIt returns the first non-nullish value
 
 // 8.  What does "hello".padStart(8, "\*") return?
 //     Ans: "\*\*\*hello"
