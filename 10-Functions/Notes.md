@@ -166,3 +166,36 @@ They are both part of Function.prototype, meaning every function in JS can
 
 Difference between call() and apply() :
 apply() takes arguments as an array, while call() takes them individually.
+
+==================== bind method in javascript ============================
+
+The bind() method in JavaScript is used to create a new function that, when called, has its this keyword set to a specific value. It also allows you to preset arguments for that function.
+
+Syntax: function.bind(thisArg, arg1, arg2, ...)
+
+Preset arguments: You can set default arguments. Here 29 is a default parameter.
+//for preset argument
+const bookeEW29 = book.bind(euroWing, 29);
+bookeEW29('Niviiiiiiiiiii');
+
+bind(): Returns new function. Does not immediately call the function
+
+Use case of bind():
+//With Event Listeners
+luftansa.planes = 300;
+luftansa.buyPlane = function () {
+//console.log(this);
+this.planes++;
+//console.log(this.planes);
+};
+
+const buyBtn = document.querySelector('.buy');
+buyBtn.addEventListener('click', luftansa.buyPlane.bind(luftansa));
+
+//partial application
+const addTax = (rate, value) => value + value \* rate;
+console.log(addTax(0.23, 100));
+
+//set default value to rate argument
+const addGST = addTax.bind(null, 0.18);
+console.log(addGST(20000));

@@ -135,3 +135,37 @@ const bookEW = book.bind(euroWing);
 //console.log(bookLF);
 bookLF(298, 'Nivedita Watpade');
 bookEW(1111, 'Testing');
+
+//for preset argument
+const bookeEW29 = book.bind(euroWing, 29);
+bookeEW29('Niviiiiiiiiiii');
+
+//With Event Listeners
+luftansa.planes = 300;
+luftansa.buyPlane = function () {
+  //console.log(this);
+  this.planes++;
+  //console.log(this.planes);
+};
+
+const buyBtn = document.querySelector('.buy');
+buyBtn.addEventListener('click', luftansa.buyPlane.bind(luftansa));
+
+//partial application
+
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.23, 100));
+
+//set default value to rate argument
+const addGST = addTax.bind(null, 0.18);
+console.log(addGST(20000));
+
+//Function returning function
+function addTaxRate(rate) {
+  return function (value) {
+    console.log(value + value * rate);
+  };
+}
+
+const addTax1 = addTaxRate(0.18);
+addTax1(20000);
