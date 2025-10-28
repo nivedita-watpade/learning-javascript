@@ -7,6 +7,47 @@
 // Ans: Spread operator is used to unpack from array and its on the right side of the assignment(=).
 // Rest operator is used to collect multiple values into the single array and its on the left side of the assignment(=).And its the last element.
 
+// 4. How does the ?? (nullish coalescing) operator differ from the || operator?
+// Ans: ?? (nullish coalescing) is ame as || operator but ?? (nullish coalescing) does not consider empty string " " and 0 falsy value.
+
+// 5. Describe the purpose of logical assignment operators and give one real-world use case.
+// Ans: Logical OR Assignment Operator
+// It set the deafult value to the varibale.
+// rest1.numGuests ||= 25;
+// rest2.numGuests ||= 25;
+
+// Logical AND Assignment Operator assigns the truthy value to the varibale
+// rest1.owner = rest1.owner && 'Test';
+// rest2.owner = rest2.owner && 'Test';
+
+//6. What are enhanced object literals, and how do they simplify object creation?
+// Ans: Property Shorthand
+//    When the property name matches the variable name, you can omit the value:
+//    const person = {
+//       name,
+//       age
+//       };
+
+//    Method Shorthand
+//    You can define methods without the function keyword:
+//    const obj = {
+// sayHello() {
+// return 'Hello!';
+// }
+// };
+
+// 8. How is a Set different from an array in JavaScript?
+// Ans: Set is data structure and its just a collection of unique values.
+
+//9. Describe two advantages of using a Map over a plain object.
+// Ans: A Map is a built-in data structure it stores data in key–value pairs, similar to an object, but with some differences:
+// -Keys can be of any data type (object, function, primitive).
+// -Provides built-in methods to easily get the size, iterate, and manage key-value pairs.
+
+//10. Explain how the optional chaining operator (?.) prevents runtime errors when accessing nested properties.
+// Ans: Optional chaining (?.) in JavaScript is a safe way to access deeply nested properties of an object without having to check if each property exists.
+// If the value before ?. is null or undefined, the whole expression short-circuits and returns undefined instead of throwing an error.
+
 // Section B: Quiz (20%)
 
 // 1.  What will console.log(0 || 'Code') output?
@@ -88,7 +129,7 @@ const managerObj = {
   fri: { open: 10, close: 17 },
 };
 
-console.log(managerObj.mon.close);
+console.log(managerObj?.son?.close || "it doesn't exist");
 
 // Write a program that takes two arrays of employees and prints all unique employee names.
 // Sample data: ['Mia', 'Noah', 'Liam'] and ['Liam', 'Emma', 'Olivia']
@@ -125,3 +166,42 @@ vowelCount('Innovation Lab');
 
 // Given two strings, check if they are anagrams of each other (contain the same characters in any order).
 // Sample data: "listen" and "silent"
+
+//  ================ Section D: Scenario-Based Problem Solving (30%) ===========================
+// 1. E-commerce Inventory
+// You have multiple supplier objects containing lists of items they sell.
+
+// Some suppliers don't include a discounts property.
+// Merge all item lists into one.
+// Ensure duplicate items appear only once.
+// Print a message for suppliers missing the discounts property.
+// Sample data:
+
+const supplierA = { items: ['Keyboard', 'Mouse'], discounts: true };
+const supplierB = { items: ['Mouse', 'Monitor'] };
+const supplierC = { items: ['Printer', 'Monitor'], discounts: false };
+
+const allData = [...supplierA.items, ...supplierB.items, ...supplierC.items];
+const uniqueItems = new Set(allData);
+console.log(uniqueItems);
+
+const suppliers = [supplierA, supplierB, supplierC];
+console.log(suppliers);
+
+for (const supplier of suppliers) {
+  supplier.discounts ??
+    console.log(supplier, 'Suppliers missing the discounts');
+}
+
+// 2. Company Attendance Tracker
+// A company stores daily attendance times for each employee in a nested object.
+
+// Print which employees checked in before 9 AM.
+// Safely skip missing data without causing errors.
+// Sample data:
+
+const attendance = {
+  emp1: { monday: 8.45, tuesday: 9.1 },
+  emp2: { monday: null },
+  emp3: { tuesday: 8.55 },
+};
