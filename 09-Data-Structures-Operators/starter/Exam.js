@@ -205,3 +205,20 @@ const attendance = {
   emp2: { monday: null },
   emp3: { tuesday: 8.55 },
 };
+
+for (const [emp, data] of Object.entries(attendance)) {
+  data?.monday < 9 && console.log(emp);
+}
+
+// 3. Student Portal
+// Each course object contains details like course name, instructor, and optional lab sessions.
+
+// Print all course names with instructors.
+// For missing lab sessions, print "No lab scheduled."
+// Sample data:
+
+const courses = [
+  { name: 'Physics', instructor: 'Dr. Singh', lab: 'Room 12' },
+  { name: 'Maths', instructor: 'Dr. Lee' },
+  { name: 'Chemistry', instructor: 'Dr. Patel', lab: 'Room 9' },
+];

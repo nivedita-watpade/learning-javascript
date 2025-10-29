@@ -199,3 +199,14 @@ console.log(addTax(0.23, 100));
 //set default value to rate argument
 const addGST = addTax.bind(null, 0.18);
 console.log(addGST(20000));
+
+================================ Immediately Invovked Function Expression (IIFE) ===============================
+
+Immediately Invovked Function Expression (IIFE) : An IIFE is a function expression that is immediately executed after it is created.
+
+Ex.
+(function () {
+console.log('This function will run once');
+})();
+
+(() => console.log('This function will Also run once'))();

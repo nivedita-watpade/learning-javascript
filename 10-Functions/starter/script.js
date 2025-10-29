@@ -169,3 +169,11 @@ function addTaxRate(rate) {
 
 const addTax1 = addTaxRate(0.18);
 addTax1(20000);
+
+//IIFE - Imediately Invovked Function Expression
+
+(function () {
+  console.log('This function will run once');
+})();
+
+(() => console.log('This function will Also run once'))();
