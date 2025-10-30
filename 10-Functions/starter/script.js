@@ -177,3 +177,45 @@ addTax1(20000);
 })();
 
 (() => console.log('This function will Also run once'))();
+
+// closures
+
+function secureFunction() {
+  let passengers = 0;
+  return function () {
+    passengers++;
+    console.log(`Passengers: ${passengers}`);
+  };
+}
+
+const booker = secureFunction();
+booker();
+booker();
+booker();
+
+function createBankAccount(initialBalance) {
+  let balance = initialBalance; // private variable
+
+  return {
+    deposit(amount) {
+      balance += amount;
+      console.log(`Deposited ${amount}, balance: ${balance}`);
+    },
+    withdraw(amount) {
+      if (amount <= balance) {
+        balance -= amount;
+        console.log(`Withdrew ${amount}, balance: ${balance}`);
+      } else {
+        console.log('Insufficient funds');
+      }
+    },
+    getBalance() {
+      return balance;
+    },
+  };
+}
+
+const account = createBankAccount(100);
+account.deposit(50); // Deposited 50, balance: 150
+account.withdraw(30); // Withdrew 30, balance: 120
+console.log(account.getBalance()); // 120

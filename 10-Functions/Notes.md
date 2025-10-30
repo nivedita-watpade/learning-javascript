@@ -210,3 +210,45 @@ console.log('This function will run once');
 })();
 
 (() => console.log('This function will Also run once'))();
+
+============================= Closures =================================
+
+👉 A closure is the closed-over variable environment of the execution context in which a function was created, even after that execution context is gone;
+⬇️
+
+Less formal
+👉 A closure gives a function access to all the variables of its parent function, even after that parent function has returned. The function keeps a reference to its outer scope, which preserves the scope chain throughout time.
+⬇️
+
+Less formal
+👉 A closure makes sure that a function doesn’t lose connection to variables that existed at the function’s birth place;
+⬇️
+Less formal
+🧍‍♂️➡️🔗➡️🏡➡️📄
+(Function → Connection → Parent scope → Variables)
+
+👉 A closure is like a backpack that a function carries around wherever it goes. This backpack has all the variables that were present in the environment where the function was created.
+🧍‍♂️➡️🎒➡️📄
+(Function → Closure → Variables)
+
+☝️ We do NOT have to manually create closures, this is a JavaScript feature that happens automatically. We can’t even access closed-over variables explicitly. A closure is NOT a tangible JavaScript object.
+
+Closures in JavaScript
+A closure is created when a function remembers and accesses variables from its outer scope, even after that outer function has finished executing.
+
+// closures
+
+function secureFunction() {
+let passengers = 0;
+return function () {
+passengers++;
+console.log(`Passengers: ${passengers}`);
+};
+}
+
+const booker = secureFunction();
+booker();
+booker();
+booker();
+
+Here, secureFunction finished its excution still return function i.e booker access it execution context(i.e its varibales or code) because of closure.
