@@ -219,3 +219,42 @@ const account = createBankAccount(100);
 account.deposit(50); // Deposited 50, balance: 150
 account.withdraw(30); // Withdrew 30, balance: 120
 console.log(account.getBalance()); // 120
+
+let n;
+
+// n varivale has the access of a beacuse of closure even if p() exexuted completely.
+function p() {
+  const a = 25;
+  n = function () {
+    console.log(a + 4);
+  };
+}
+
+p();
+n(); //29
+
+//closure change to x function
+function x() {
+  const a = 7;
+  n = function () {
+    console.log(a + 4);
+  };
+}
+
+x();
+n(); //11
+
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+  const test = 'In closure/parent function';
+  setTimeout(function () {
+    const test = 'In call back function';
+    console.log(test);
+    console.log(`We are now borading all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000);
+  console.log(`Will start boarding in ${wait} seconds`);
+};
+
+const test = 'In global scope';
+boardPassengers(180, 3);
