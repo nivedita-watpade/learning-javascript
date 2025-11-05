@@ -258,3 +258,48 @@ const boardPassengers = function (n, wait) {
 
 const test = 'In global scope';
 boardPassengers(180, 3);
+
+// const colorChange = (function () {
+//   const header = document.querySelector('h1');
+//   header.style.color = 'red';
+//   return function () {
+//     header.style.color = 'blue';
+//   };
+// })();
+
+//document.querySelector('body').addEventListener('click', colorChange);
+
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+  document.querySelector('body').addEventListener('click', () => {
+    header.style.color = 'blue';
+  });
+})();
+
+const testObj = {
+  firstName: 'Nivedita',
+  lastName: 'Watpade',
+};
+
+const testObj1 = {
+  firstName: 'Pranit',
+  lastName: 'Chavan',
+  counter: 0,
+  increaseCounter: function () {
+    console.log(this);
+    console.log(`${this.counter++}`);
+  },
+};
+
+function greetTest() {
+  console.log(`Welcome ${this.firstName} ${this.lastName}`);
+}
+
+greetTest.call(testObj1);
+const a = greetTest.bind(testObj);
+a();
+
+const testButton = document.querySelector('.testBtn');
+
+testButton.addEventListener('click', testObj1.increaseCounter.bind(testObj1));

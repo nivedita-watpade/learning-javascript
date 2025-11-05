@@ -129,7 +129,7 @@ const managerObj = {
   fri: { open: 10, close: 17 },
 };
 
-console.log(managerObj?.son?.close || "it doesn't exist");
+console.log(managerObj?.sun?.close ?? "it doesn't exist");
 
 // Write a program that takes two arrays of employees and prints all unique employee names.
 // Sample data: ['Mia', 'Noah', 'Liam'] and ['Liam', 'Emma', 'Olivia']
@@ -159,13 +159,27 @@ for (const [key, value] of Object.entries(deptData)) {
 // Write a function that counts how many vowels appear in a string. Ignore case and spaces.
 // Sample data: 'Innovation Lab'
 function vowelCount(str) {
-  console.log(str.length);
+  let counter = 0;
+  const vowelsArr = ['a', 'e', 'i', 'o', 'u'];
+  for (const letter of str.toLowerCase()) {
+    // if (
+    //   letter === 'a' ||
+    //   letter === 'e' ||
+    //   letter === 'i' ||
+    //   letter === 'o' ||
+    //   letter === 'u'
+    // ) {
+    //   counter++;
+    // }
+
+    if (vowelsArr.includes(letter)) {
+      counter++;
+    }
+  }
+  console.log(`Vowels: ${counter}`);
 }
 
 vowelCount('Innovation Lab');
-
-// Given two strings, check if they are anagrams of each other (contain the same characters in any order).
-// Sample data: "listen" and "silent"
 
 //  ================ Section D: Scenario-Based Problem Solving (30%) ===========================
 // 1. E-commerce Inventory
@@ -222,3 +236,95 @@ const courses = [
   { name: 'Maths', instructor: 'Dr. Lee' },
   { name: 'Chemistry', instructor: 'Dr. Patel', lab: 'Room 9' },
 ];
+
+for (const course of courses) {
+  console.log(`Course: ${course.name} with instructor ${course.instructor}`);
+  if (!course.lab) {
+    console.log('No lab scheduled.');
+  } else {
+    console.log(`${course.lab}`);
+  }
+}
+
+// 4. Gadget Store Management
+// You store product categories in two Sets — one for electronics and one for accessories.
+
+// Find items common to both Sets.
+// Find items only in electronics.
+// Find all unique items across both.
+// Sample data:
+
+const electronics = new Set(['Phone', 'Laptop', 'Earphones']);
+const accessories = new Set(['Case', 'Earphones', 'Charger']);
+
+const commonItems = electronics.intersection(accessories);
+console.log(commonItems);
+
+// Find items only in electronics.
+const uniqueItems0 = electronics.difference(accessories);
+console.log(uniqueItems0);
+
+// Find all unique items across both.
+const uniqueItems1 = electronics.symmetricDifference(accessories);
+console.log(uniqueItems1);
+
+// 5. Customer Data Cleanup
+// You receive a list of customer names with inconsistent formatting.
+// Clean each name so the first letter is uppercase and the rest lowercase.
+// Remove duplicates automatically.
+// Sample data: [' alice', 'BOB ', 'Alice', ' cHaRlEs ']
+
+// const dataSet = new Set([' alice', 'BOB ', 'Alice', ' cHaRlEs ']);
+
+function dataCleanup(data) {
+  const names = data.join(' ').toLowerCase().split();
+  const updatedName = [];
+  for (const name of names) {
+    updatedName.push(name.replace(name[0], name[0].toUpperCase().trim()));
+  }
+  console.log(updatedName);
+  const dataSet = new Set(updatedName);
+  console.log(dataSet);
+}
+
+dataCleanup([' alice', 'BOB ', 'Alice', ' cHaRlEs ']);
+
+// 6. Digital Library (Map-based)
+// The library uses a Map with bookID → bookTitle.
+
+// Add new books.
+// Delete one specific book.
+// Print all books in the format "<id>: <title>".
+// Sample data:
+
+const books = new Map([
+  [101, 'The Explorer'],
+  [102, 'Future World'],
+  [103, 'Deep Mind'],
+]);
+
+books.set(104, 'Testing Book');
+
+books.delete(102);
+console.log(books);
+
+for (const [id, title] of books) {
+  console.log(`Id: ${id}, Title: ${title}`);
+}
+
+// 7. Chat Application
+// Some users have status information nested inside objects (user.details.status).
+
+// Print "Active" if status is "online".
+// If missing, print "Status unknown" safely using modern syntax.
+// Sample data:
+
+const users = [
+  { name: 'Sara', details: { status: 'online' } },
+  { name: 'Tom' },
+  { name: 'Leo', details: { status: 'offline' } },
+];
+
+for (const user of users) {
+  user?.details?.status ? console.log('Online') : console.log('Status unknown');
+}

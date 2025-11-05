@@ -150,7 +150,7 @@ They are both part of Function.prototype, meaning every function in JS can
    Ex. //call Method
    const book = luftansa.book;
 
-   boko.call(euroiWng, 2529, 'Pranit');
+   book.call(euroiWng, 2529, 'Pranit');
    console.log(euroWing);
 
 2. apply() Method
