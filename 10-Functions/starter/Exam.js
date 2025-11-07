@@ -230,21 +230,23 @@ counterBtn.addEventListener('click', updateCounter.bind(counterObj));
 
 function createLogger(prefix) {
   return function (msg) {
-    console.log(`${[prefix.toUpperCase()]} ${msg}`);
+    console.log(
+      `[${prefix.toUpperCase()}]: ${new Date().toLocaleTimeString()} ${msg}`
+    );
   };
 }
 
-const prefix = createLogger('info');
-prefix('Server started');
+const infoLogger = createLogger('info');
+infoLogger('Server started');
 
-const prefix1 = createLogger('error');
-prefix1('Invalid input');
+const errorLogger = createLogger('error');
+errorLogger('Invalid input');
 
 // 5. Auto-Cleanup Function
 // Create a function that runs only once during initialization and cannot be called again, without using flags or globals.
 const numbers = [1, 2, 3, 4, 5];
 (function () {
-  return numbers.pop();
+  numbers.length = 0;
 })();
 
 console.log(numbers);
