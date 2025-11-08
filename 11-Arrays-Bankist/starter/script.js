@@ -74,3 +74,33 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+//slice() method
+console.log(arr.slice(2)); //['c', 'd', 'e']
+console.log(arr.slice(2, 4)); // ['c', 'd']
+console.log(arr.slice(-2)); // ['d', 'e']
+console.log(arr.slice(-1)); // ['e']
+console.log(arr.slice()); // ['a', 'b', 'c', 'd', 'e'] --- Creates a shallow copy
+
+//splice() method
+// arr.splice(-1); //  ['a', 'b', 'c', 'd']
+// arr.splice(2); //(2) ['a', 'b']
+arr.splice(1, 2); //['a', 'd', 'e']
+console.log(arr);
+
+//reverse
+let arr2 = ['j', 'i', 'h', 'g', 'f'];
+console.log(arr2.reverse());
+console.log(arr2);
+
+//concat
+let first = [1, 2, 3, 4, 5];
+let second = [6, 7, 8, 9, 10];
+const numbers = first.concat(second);
+console.log(numbers);
+console.log([...first, ...second]);
+
+//join
+console.log(numbers.join('*'));
