@@ -28,3 +28,30 @@
 
 5. join(): The join() method in JavaScript is used to combine all elements of an array into a single string — with an optional separator between them.
    Ex. console.log(numbers.join('\*'));
+
+6. at(): The at() method in JavaScript is used to access an element from an array by its index, and it supports negative indexing (counting from the end of the array).
+   Ex.console.log(first.at(0)); //1
+   console.log(first.at(-1)); //5
+
+we can also apply at method on string
+console.log('Nivi'.at(0)); //N
+console.log('Nivi'.at(-1)); //i
+
+================================ forEach ====================
+
+The forEach() method in JavaScript is used to iterate over arrays and execute a provided function once for each array element.
+
+-forEach() does not return a new array (unlike map()).
+-It cannot be stopped or broken using break or return.
+
+Ex.
+const fruits = ["apple", "banana", "mango"];
+
+fruits.forEach((fruit, index) => {
+console.log(`${index}: ${fruit}`);
+});
+
+output:
+0: apple
+1: banana
+2: mango
