@@ -55,3 +55,28 @@ output:
 0: apple
 1: banana
 2: mango
+
+==================================== forEach on Map and Set =============================================
+
+Map(): The callback takes three arguments: value, key, and the map itself.
+
+Ex.
+const currencies = new Map([
+['USD', 'United States dollar'],
+['EUR', 'Euro'],
+['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach((value, key, map) => {
+console.log(`${key}: ${value}`);
+});
+
+Set(): A Set only stores unique values — no keys.
+The second argument (valueAgain) is redundant; it’s just there to match the Map API format.
+
+Ex.
+const uniqueCurrencies = new Set(['USD', 'EUR', 'GBP', 'EUR', 'USD']);
+
+uniqueCurrencies.forEach((value, \_, set) => {
+console.log(`${value}`);
+});
