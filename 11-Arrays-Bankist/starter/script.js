@@ -194,3 +194,49 @@ function checkDogs(juliasDogData, katesDogData) {
 }
 
 checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+
+// =============================== map and filter method =============================
+
+const numbers1 = [1, 2, 3, 4, 5];
+
+const squares = numbers1.map(num => {
+  return num * num;
+});
+console.log(squares);
+
+const greaterthanThree = numbers1.filter(num => {
+  return num > 3;
+});
+console.log(greaterthanThree);
+
+const users = [
+  { name: 'Tushar', age: 25 },
+  { name: 'Meera', age: 22 },
+  { name: 'Raj', age: 28 },
+];
+
+const usersName = users.map(user => {
+  return user.name.toUpperCase();
+});
+
+console.log(usersName);
+
+const users1 = [
+  { name: 'Tushar', active: true },
+  { name: 'Meera', active: false },
+  { name: 'Raj', active: true },
+];
+
+const activeUsers = users1.filter(user => {
+  return user.active;
+});
+
+console.log(activeUsers);
+
+const movementsEuros = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const euroToUsd = 1.1;
+
+const movementsUSD = movementsEuros.map(mov => mov * euroToUsd);
+
+console.log(movementsUSD);

@@ -77,3 +77,29 @@ function displayMovements(movements) {
 }
 
 displayMovements(account1.movements);
+
+function getUserName(userName) {
+  return userName
+    .toLowerCase()
+    .split(' ')
+    .map(word => word[0])
+    .join('');
+
+  // const usersInitials = user.map(word => {
+  //   return word[0];
+  // });
+
+  // const loginUserName = usersInitials.join('');
+  // return loginUserName;
+}
+
+// console.log(getUserName(account2.owner));
+
+function computeUserName(usersArr) {
+  usersArr.forEach(userObj => {
+    userObj.userName = getUserName(userObj.owner);
+  });
+}
+
+computeUserName(accounts);
+console.log(account4);
