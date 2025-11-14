@@ -7,7 +7,6 @@
    arr.slice(-2); // ['d', 'e']
    arr.slice(-1); // ['e']
    arr.slice(); // ['a', 'b', 'c', 'd', 'e'] --- Creates a shallow copy
-
 2. splice() : The splice() method in JavaScript is used to add, remove, or replace elements in an array — and it modifies the original array.
    Ex. // arr.splice(-1); //  ['a', 'b', 'c', 'd']
    // arr.splice(2); //(2) ['a', 'b']
@@ -80,3 +79,33 @@ const uniqueCurrencies = new Set(['USD', 'EUR', 'GBP', 'EUR', 'USD']);
 uniqueCurrencies.forEach((value, \_, set) => {
 console.log(`${value}`);
 });
+
+==================================Map, Filter and Reduce ====================
+
+1. MAP
+
+- map() applies the function to every element
+- and returns a new array of the transformed values.
+- Map does NOT change the original array.
+- Always returns a new array of the same length.
+
+Original array:
+[3, 1, 4, 3, 2]
+Operation:
+current \* 2
+
+Result:
+[6, 2, 8, 6, 4]
+
+2. FILTER
+   -filter() keeps only the elements that pass the test condition.
+   -Result is a new array of the selected elements.
+   -Filter returns only elements that match the condition.
+   -Output array may be smaller.
+
+Original array:
+[3, 1, 4, 3, 2]
+Condition:
+current > 2
+Result:
+[3, 4, 3]
