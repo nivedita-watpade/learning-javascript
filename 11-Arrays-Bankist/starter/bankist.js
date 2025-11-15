@@ -102,4 +102,13 @@ function computeUserName(usersArr) {
 }
 
 computeUserName(accounts);
-console.log(account4);
+
+function calculateAndDisplayTotalBalance(movArr) {
+  const balance = movArr.reduce((acc, curr) => {
+    const sum = acc + curr;
+    return sum;
+  }, 0);
+  labelBalance.textContent = `${balance} €`;
+}
+
+calculateAndDisplayTotalBalance(account1.movements);

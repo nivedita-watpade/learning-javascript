@@ -109,3 +109,16 @@ Condition:
 current > 2
 Result:
 [3, 4, 3]
+
+=================================== reduce () ========================
+
+reduce() Method: The reduce() method is used to reduce an array to a single value — like a number, string, object, or another array.
+It works by applying a callback function to each element in the array, while carrying an accumulator.
+
+array.reduce((accumulator, currentValue) => {
+// return updated accumulator
+}, initialValue);
+
+Ex. const balance = movements.reduce((acc, curr, i, arr) => {
+return acc + curr;
+}, 0);
