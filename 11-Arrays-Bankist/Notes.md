@@ -80,7 +80,7 @@ uniqueCurrencies.forEach((value, \_, set) => {
 console.log(`${value}`);
 });
 
-==================================Map, Filter and Reduce ====================
+================================== Map, Filter and Reduce ====================
 
 1. MAP
 
@@ -122,3 +122,17 @@ array.reduce((accumulator, currentValue) => {
 Ex. const balance = movements.reduce((acc, curr, i, arr) => {
 return acc + curr;
 }, 0);
+
+================================== chaining methods =========================
+
+Chaining methods in JavaScript means calling multiple methods one after another on the same value or object—in a single line.
+
+Ex.
+function getTotalDepositsInDollars(movements) {
+return movements
+.filter(mov => mov > 0)
+.map(mov => mov \* 1.1)
+.reduce((acc, curr) => {
+return acc + curr;
+}, 0);
+}

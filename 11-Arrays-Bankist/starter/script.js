@@ -314,3 +314,15 @@ function calcAverageHumanAge(...ages) {
 }
 
 calcAverageHumanAge(5, 2, 4, 1, 15, 8, 3);
+
+function getTotalDepositsInDollars(movements) {
+  return movements
+    .filter(mov => mov > 0)
+    .map(mov => mov * 1.1)
+    .reduce((acc, curr) => {
+      return acc + curr;
+    }, 0)
+    .toFixed();
+}
+
+console.log(getTotalDepositsInDollars(movementsEuros));

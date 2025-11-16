@@ -70,7 +70,7 @@ function displayMovements(movements) {
           <div class="movements__type movements__type--${movementsType}">${
       i + 1
     } ${movementsType}</div>
-          <div class="movements__value">${mov}</div>
+          <div class="movements__value">${mov}€</div>
         </div>`;
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
@@ -112,3 +112,27 @@ function calculateAndDisplayTotalBalance(movArr) {
 }
 
 calculateAndDisplayTotalBalance(account1.movements);
+
+function calcDisplaySummary(movements) {
+  const totalDeposits =
+    movements?.filter(mov => mov > 0)?.reduce((acc, curr) => acc + curr, 0) ??
+    '0';
+  labelSumIn.textContent = `${totalDeposits}€`;
+
+  const totalWithdrawls =
+    movements?.filter(mov => mov < 0)?.reduce((acc, curr) => acc + curr, 0) ??
+    '0';
+  labelSumOut.textContent = `${Math.abs(totalWithdrawls)}€`;
+
+  const interest = movements
+    ?.filter(mov => mov > 0)
+    .map(mov => (1.2 / 100) * mov)
+    .filter(interest => interest >= 1)
+    .reduce((acc, mov, i, arr) => {
+      console.log(arr);
+      return acc + mov;
+    }, 0);
+  labelSumInterest.textContent = `${interest}€`;
+}
+
+calcDisplaySummary(account1.movements);
