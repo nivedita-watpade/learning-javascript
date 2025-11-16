@@ -136,3 +136,14 @@ return movements
 return acc + curr;
 }, 0);
 }
+
+========================== find method ====================
+
+find(): The find() method is used to search an array and return the first element that matches a condition
+
+Syntax:
+array.find(callback)
+
+Ex. const interestRateOneAccount = accounts.find(account => {
+return account.interestRate === 1;
+});
