@@ -105,6 +105,7 @@ function calculateAndDisplayTotalBalance(movArr) {
     return sum;
   }, 0);
   labelBalance.textContent = `${balance} €`;
+  return balance;
 }
 
 function calcDisplaySummary(movements) {
@@ -126,6 +127,12 @@ function calcDisplaySummary(movements) {
       return acc + mov;
     }, 0);
   labelSumInterest.textContent = `${interest}€`;
+}
+
+function updateUI(acc) {
+  displayMovements(acc.movements);
+  calculateAndDisplayTotalBalance(acc.movements);
+  calcDisplaySummary(acc.movements);
 }
 
 let currentLoggedInAccount;
@@ -154,9 +161,55 @@ function loginUser(e) {
   inputLoginPin.value = null;
   inputLoginPin.blur();
   labelWelcome.textContent = `Welcome, ${currentLoggedInAccount.owner}!`;
-  displayMovements(currentLoggedInAccount.movements);
-  calculateAndDisplayTotalBalance(currentLoggedInAccount.movements);
-  calcDisplaySummary(currentLoggedInAccount.movements);
+  updateUI(currentLoggedInAccount);
 }
 
 btnLogin.addEventListener('click', loginUser);
+
+function transferMoney(e) {
+  e.preventDefault();
+  if (!currentLoggedInAccount) {
+    return;
+  }
+
+  const transferTo = inputTransferTo.value;
+  const transferAmt = inputTransferAmount.value;
+
+  if (!transferTo || !transferAmt) {
+    alert('Enter transfer details!');
+    return;
+  }
+
+  const currAccountValance = calculateAndDisplayTotalBalance(
+    currentLoggedInAccount.movements
+  );
+
+  if (Number(transferAmt) > currAccountValance) {
+    alert('Insufficient Balance!');
+    return;
+  }
+
+  const amtTransferAccount = accounts.find(account => {
+    return transferTo === account.userName;
+  });
+
+  if (!amtTransferAccount) {
+    alert('User not found !');
+    return;
+  }
+
+  if (currentLoggedInAccount.userName === amtTransferAccount.userName) {
+    alert("You can't transfer money to yourself");
+    return;
+  }
+
+  amtTransferAccount.movements.push(Number(transferAmt));
+  currentLoggedInAccount.movements.push(Number(-transferAmt));
+
+  updateUI(currentLoggedInAccount);
+
+  inputTransferTo.value = null;
+  inputTransferAmount.value = null;
+}
+
+btnTransfer.addEventListener('click', transferMoney);
