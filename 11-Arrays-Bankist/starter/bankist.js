@@ -76,8 +76,6 @@ function displayMovements(movements) {
   });
 }
 
-displayMovements(account1.movements);
-
 function getUserName(userName) {
   return userName
     .toLowerCase()
@@ -92,8 +90,6 @@ function getUserName(userName) {
   // const loginUserName = usersInitials.join('');
   // return loginUserName;
 }
-
-// console.log(getUserName(account2.owner));
 
 function computeUserName(usersArr) {
   usersArr.forEach(userObj => {
@@ -111,8 +107,6 @@ function calculateAndDisplayTotalBalance(movArr) {
   labelBalance.textContent = `${balance} €`;
 }
 
-calculateAndDisplayTotalBalance(account1.movements);
-
 function calcDisplaySummary(movements) {
   const totalDeposits =
     movements?.filter(mov => mov > 0)?.reduce((acc, curr) => acc + curr, 0) ??
@@ -126,13 +120,43 @@ function calcDisplaySummary(movements) {
 
   const interest = movements
     ?.filter(mov => mov > 0)
-    .map(mov => (1.2 / 100) * mov)
+    .map(mov => (currentLoggedInAccount.interestRate / 100) * mov)
     .filter(interest => interest >= 1)
     .reduce((acc, mov, i, arr) => {
-      console.log(arr);
       return acc + mov;
     }, 0);
   labelSumInterest.textContent = `${interest}€`;
 }
 
-calcDisplaySummary(account1.movements);
+let currentLoggedInAccount;
+
+function loginUser(e) {
+  e.preventDefault();
+  const userName = inputLoginUsername.value;
+  const pin = Number(inputLoginPin.value);
+
+  if (!userName || !pin) {
+    alert('Please Enter the details');
+    return;
+  }
+
+  currentLoggedInAccount = accounts.find(account => {
+    return userName === account.userName && pin === account.pin;
+  });
+
+  if (!currentLoggedInAccount) {
+    alert('Inavlid Login');
+    return;
+  }
+
+  containerApp.style.opacity = 1;
+  inputLoginUsername.value = null;
+  inputLoginPin.value = null;
+  inputLoginPin.blur();
+  labelWelcome.textContent = `Welcome, ${currentLoggedInAccount.owner}!`;
+  displayMovements(currentLoggedInAccount.movements);
+  calculateAndDisplayTotalBalance(currentLoggedInAccount.movements);
+  calcDisplaySummary(currentLoggedInAccount.movements);
+}
+
+btnLogin.addEventListener('click', loginUser);
