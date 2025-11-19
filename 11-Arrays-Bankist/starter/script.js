@@ -369,3 +369,26 @@ for (const account of accounts) {
 }
 
 console.log(interestRateSccount);
+
+//findLast and findLastIndex
+
+console.log(movements);
+
+const lastWithdrawals = movements.findLast(mov => {
+  return mov < 0;
+});
+
+console.log(lastWithdrawals);
+
+const lastWithdrawalIndex = movements.findLastIndex(mov => {
+  return mov < 0;
+});
+
+console.log(lastWithdrawalIndex);
+
+const recentLargeAmt = movements.findLast(mov => mov > 2000);
+const largeAmtIndex = movements.findLastIndex(mov => mov > 2000);
+const lastOccrence = movements.length - 1 - largeAmtIndex;
+console.log(
+  `Your latest large ${recentLargeAmt} movement was ${lastOccrence} movements ago`
+);

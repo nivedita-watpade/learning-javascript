@@ -213,3 +213,40 @@ function transferMoney(e) {
 }
 
 btnTransfer.addEventListener('click', transferMoney);
+
+function closeAccount(e) {
+  e.preventDefault();
+
+  if (!currentLoggedInAccount) {
+    return;
+  }
+
+  const userName = inputCloseUsername.value;
+  const userPin = inputClosePin.value;
+  if (!userName || !userPin) {
+    alert('Enter the account details !');
+    return;
+  }
+
+  if (userName !== currentLoggedInAccount.userName) {
+    alert('You cant close other user account !');
+    return;
+  }
+
+  const currAccountIndex = accounts.findIndex((account, index) => {
+    return userName === account.userName && Number(userPin) === account.pin;
+  });
+
+  if (currAccountIndex < 0) {
+    alert('Account is not exist!');
+    return;
+  }
+
+  accounts.splice(currAccountIndex, 1);
+  alert(`This account is closed!`);
+  inputCloseUsername.value = null;
+  inputClosePin.value = null;
+  containerApp.style.opacity = 0;
+}
+
+btnClose.addEventListener('click', closeAccount);

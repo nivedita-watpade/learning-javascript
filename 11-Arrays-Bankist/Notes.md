@@ -147,3 +147,30 @@ array.find(callback)
 Ex. const interestRateOneAccount = accounts.find(account => {
 return account.interestRate === 1;
 });
+
+=================================== findIndex method =========================
+
+findIndex(): findIndex() in JavaScript is an array method that returns the index of the first element that satisfies a given condition.
+If no element matches, it returns -1.
+
+Syntax:
+array.findIndex(callback(element, index, array))
+
+Example:
+const currAccountIndex = accounts.findIndex((account, index) => {
+return userName === account.userName && Number(userPin) === account.pin;
+});
+
+========================================== findLast and findLastIndex ============================
+
+findLast(): Returns the value of the last element in the array that matches the condition.
+Ex.
+const numbers = [10, 20, 30, 40, 30];
+const result = numbers.findLast(num => num === 30);
+console.log(result); // 30 (the last 30)
+
+findLastIndex(): Returns the index of the last element that satisfies the condition.
+Ex.
+const numbers = [10, 20, 30, 40, 30];
+const index = numbers.findLastIndex(num => num === 30);
+console.log(index); // 4 (index of last 30)
