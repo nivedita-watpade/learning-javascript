@@ -214,6 +214,41 @@ function transferMoney(e) {
 
 btnTransfer.addEventListener('click', transferMoney);
 
+function requestLoan(e) {
+  e.preventDefault();
+
+  if (!currentLoggedInAccount) {
+    return;
+  }
+  const loanAmt = inputLoanAmount.value;
+
+  if (!loanAmt) {
+    alert('Please enter the amount!');
+    return;
+  }
+
+  if (Number(loanAmt) < 0) {
+    alert('Please enter a valid amount !');
+    return;
+  }
+
+  const isEligibleForLoan = currentLoggedInAccount.movements.some(mov => {
+    return mov >= Number(loanAmt) * 0.1;
+  });
+
+  if (isEligibleForLoan) {
+    currentLoggedInAccount.movements.push(Number(loanAmt));
+  } else {
+    alert('You are not eligible for the loan');
+  }
+
+  updateUI(currentLoggedInAccount);
+
+  inputLoanAmount.value = null;
+}
+
+btnLoan.addEventListener('click', requestLoan);
+
 function closeAccount(e) {
   e.preventDefault();
 

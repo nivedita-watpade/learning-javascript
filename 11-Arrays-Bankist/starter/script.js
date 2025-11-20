@@ -392,3 +392,25 @@ const lastOccrence = movements.length - 1 - largeAmtIndex;
 console.log(
   `Your latest large ${recentLargeAmt} movement was ${lastOccrence} movements ago`
 );
+
+console.log(movements);
+
+// =================== some & every method =====================================
+
+//EQUALITY
+console.log(movements.includes(-130));
+
+//CONDITION
+const anyWithdrawl = movements.some(mov => mov < 0);
+console.log(anyWithdrawl);
+
+//EVERY
+const allDeposits = movements.every(mov => mov < 0);
+console.log(allDeposits);
+
+//separate
+const depositVal = mov => mov > 0;
+
+console.log(movements.some(depositVal));
+console.log(movements.every(depositVal));
+console.log(movements.filter(depositVal));

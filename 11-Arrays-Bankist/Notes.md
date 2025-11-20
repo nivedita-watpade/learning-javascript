@@ -174,3 +174,23 @@ Ex.
 const numbers = [10, 20, 30, 40, 30];
 const index = numbers.findLastIndex(num => num === 30);
 console.log(index); // 4 (index of last 30)
+
+=========================================== some amd every method ======================================
+
+1. some(): Checks if at least one element in the array satisfies the condition.
+   It returns true if any element matches; otherwise false.
+
+Syntax
+array.some(callback);
+
+Ex.const anyWithdrawl = movements.some(mov => mov < 0);
+console.log(anyWithdrawl);
+
+2. every(): Checks if all elements in the array satisfy the condition.
+   It returns true only if every element matches.
+
+Syntax
+array.every(callback);
+
+Ex.const allDeposits = movements.every(mov => mov < 0);
+console.log(allDeposits);
