@@ -194,3 +194,30 @@ array.every(callback);
 
 Ex.const allDeposits = movements.every(mov => mov < 0);
 console.log(allDeposits);
+
+=================================== flat and flatMap =================================
+
+flat(): flat() is used to flatten nested arrays, meaning it removes inner array levels and returns a new array with all elements at the specified depth.
+
+flat() does NOT modify the original array → returns a new array.
+
+syntax:
+array.flat(depth)
+
+depth → How many levels deep you want to flatten.
+Default is 1.
+
+Ex.
+const arr = [1, 2, [3, 4]];
+console.log(arr.flat());
+// Output: [1, 2, 3, 4]
+
+flatMap(): flatMap() combines map() + flat() (depth = 1) in one step.
+Syntax:
+array.flatMap(callback)
+
+Ex.
+const overAllBalance = accounts
+.flatMap(account => account.movements)
+.reduce((acc, mov) => acc + mov);
+console.log(overAllBalance);

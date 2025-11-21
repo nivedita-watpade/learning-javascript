@@ -414,3 +414,29 @@ const depositVal = mov => mov > 0;
 console.log(movements.some(depositVal));
 console.log(movements.every(depositVal));
 console.log(movements.filter(depositVal));
+
+// ====================================== flat & flatMap ==================================
+
+const numArr = [[1, 2, 3], [5, 6, 7], 8, 9];
+console.log(numArr.flat());
+
+const numDeepArr = [[[1, [2, 0]], 3], [[5, 6], 7], 8, 9];
+console.log(numDeepArr.flat(3));
+
+const allAccountsMovementsArr = accounts.map(account => {
+  return account.movements;
+});
+
+const allAccMovements = allAccountsMovementsArr.flat();
+console.log(allAccMovements);
+
+const allAccBalance = allAccMovements.reduce((acc, mov) => {
+  return acc + mov;
+}, 0);
+
+console.log(allAccBalance);
+
+const overAllBalance = accounts
+  .flatMap(account => account.movements)
+  .reduce((acc, mov) => acc + mov);
+console.log(overAllBalance);
