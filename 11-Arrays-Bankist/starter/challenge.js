@@ -112,5 +112,6 @@ const highestAvgWt = breeds
     return breed.activities.includes('fetch');
   })
   .map(obj => obj.averageWeight);
+
 console.log(highestAvgWt);
 console.log(Math.max(...highestAvgWt));

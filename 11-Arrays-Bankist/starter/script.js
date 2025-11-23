@@ -10,6 +10,7 @@ const account1 = {
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
+  type: 'Premium',
 };
 
 const account2 = {
@@ -17,6 +18,7 @@ const account2 = {
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 2222,
+  type: 'Basic',
 };
 
 const account3 = {
@@ -24,6 +26,7 @@ const account3 = {
   movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 0.7,
   pin: 3333,
+  type: 'Premium',
 };
 
 const account4 = {
@@ -31,6 +34,7 @@ const account4 = {
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
   pin: 4444,
+  type: 'Standard',
 };
 
 const accounts = [account1, account2, account3, account4];
@@ -440,3 +444,87 @@ const overAllBalance = accounts
   .flatMap(account => account.movements)
   .reduce((acc, mov) => acc + mov);
 console.log(overAllBalance);
+
+// Sorting
+
+const friends = ['Nivedita', 'Ankita', 'Rani', 'Kittu', 'Yashvi'];
+console.log(friends.sort());
+
+const randomNumbers = [1, 2, 4, 7, -8, -10, -1, -6, 5, 8];
+
+//Note : a > b  RETURN 1 (KEEP ELEMENT AS IT IS)
+// a < b RETURN -1  (SWICTH THE ELEMENT)
+
+randomNumbers.sort((a, b) => {
+  if (a > b) {
+    return 1;
+  }
+
+  if (a < b) {
+    return -1;
+  }
+});
+
+//ASCENDING
+// randomNumbers.sort((a, b) => a - b);
+// console.log(randomNumbers);
+
+//DESCENDING
+// randomNumbers.sort((a, b) => b - a);
+// console.log(randomNumbers);
+
+console.log(movements);
+
+const groupMovements = Object.groupBy(movements, mov =>
+  mov > 0 ? 'deposit' : 'withdrawls'
+);
+
+console.log(groupMovements);
+
+const numberOfMovements = Object.groupBy(accounts, account => {
+  if (account.movements.length > 5) return 'Very Active';
+  if (account.movements.length <= 5) return 'Active';
+  return 'Inactive';
+});
+
+console.log(numberOfMovements);
+
+const accountTypes = Object.groupBy(accounts, account => {
+  return account.type;
+});
+
+console.log(accountTypes);
+
+// Creating and fills the array
+
+const arrNum = [1, 2, 3, 4, 5, 6];
+console.log(arrNum);
+
+console.log(new Array(10, 9, 8, 7, 6, 5, 4, 3));
+
+// Empty Array + fill method
+const x = new Array(7);
+x.fill(1);
+console.log(x);
+
+arrNum.fill(23, 2, 6);
+console.log(arrNum);
+
+//Array.from
+const y = Array.from({ length: 5 }, () => 29);
+console.log(y);
+
+const z = Array.from({ length: 6 }, (_, i) => i + 1);
+console.log(z);
+
+const randomDiceRoll = Array.from({ length: 100 }, () => {
+  return Math.random();
+});
+
+console.log(randomDiceRoll);
+
+const movementsUI = document.querySelectorAll('.login__input');
+console.log(Array.from(movementsUI));
+console.log(movementsUI);
+
+console.log([...document.querySelectorAll('.login__input')]);

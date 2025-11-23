@@ -221,3 +221,66 @@ const overAllBalance = accounts
 .flatMap(account => account.movements)
 .reduce((acc, mov) => acc + mov);
 console.log(overAllBalance);
+
+============================== sort method ==========================
+
+sort() is an array method used to arrange elements in an array.
+👉 By default, it sorts elements as strings (lexicographically).
+
+//Note : a > b RETURN 1 (KEEP ELEMENT AS IT IS)
+// a < b RETURN -1 (SWICTH THE ELEMENT)
+
+randomNumbers.sort((a, b) => {
+if (a > b) {
+return 1;
+}
+
+if (a < b) {
+return -1;
+}
+});
+
+//ASCENDING
+// randomNumbers.sort((a, b) => a - b);
+// console.log(randomNumbers);
+
+//DESCENDING
+// randomNumbers.sort((a, b) => b - a);
+// console.log(randomNumbers);
+
+==================================== Array Grouping ====================================
+
+1. Object.groupBy(): Groups array items into an object based on a grouping function.
+   Syntax:
+   Object.groupBy(array, callback);
+
+   Ex. //using object key
+   const accountTypes = Object.groupBy(accounts, account => {
+   return account.type;
+   });
+
+   const groupMovements = Object.groupBy(movements, mov =>
+   mov > 0 ? 'deposit' : 'withdrawls'
+   );
+
+const numberOfMovements = Object.groupBy(accounts, account => {
+if (account.movements.length > 5) return 'Very Active';
+if (account.movements.length <= 5) return 'Active';
+return 'Inactive';
+});
+
+=============================== Multiple Ways of creating and filling array ===========================
+
+fill(): fills all or a part of an array with a given value.
+Ex. const arr = [1, 2, 3, 4];
+arr.fill(0);
+console.log(arr); // [0, 0, 0, 0]
+
+Array.from() creates a new array from:
+
+Ex. const arr = Array.from({ length: 5 }, (\_, i) => i + 1);
+console.log(arr);
+// [1, 2, 3, 4, 5]
+
+const arr = Array.from({ length: 4 }, () => "x");
+console.log(arr); // ["x", "x", "x", "x"]
