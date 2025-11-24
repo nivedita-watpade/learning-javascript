@@ -528,3 +528,15 @@ console.log(Array.from(movementsUI));
 console.log(movementsUI);
 
 console.log([...document.querySelectorAll('.login__input')]);
+
+//toReversed
+
+console.log(movements);
+
+const reversedArr = movements.toReversed();
+console.log(reversedArr);
+
+//with() -  To changed the element of the array of specified index
+
+const changedArr = movements.with(2, 2900);
+console.log(changedArr);

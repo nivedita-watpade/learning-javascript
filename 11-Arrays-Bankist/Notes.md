@@ -284,3 +284,37 @@ console.log(arr);
 
 const arr = Array.from({ length: 4 }, () => "x");
 console.log(arr); // ["x", "x", "x", "x"]
+
+================================ toReversed(), toSorted(), toSpliced() and with()================
+
+toReversed(), toSorted(), toSpliced() and with().
+
+-These methods do NOT mutate (change) the original array.
+-They create a new array with the required changes.
+
+1. toReversed(): Creates a new array with elements reversed.
+   Ex. const nums = [1, 2, 3, 4];
+   const newArr = nums.toReversed();
+   console.log(newArr); // [4, 3, 2, 1]
+   console.log(nums); // [1, 2, 3, 4] (original not changed)
+
+2. toSorted(): Creates a new array sorted in ascending order by default.
+   Ex.const names = ['Rani', 'Ankita', 'Yashvi', 'Kittu'];
+   const sortedNames = names.toSorted();
+   console.log(sortedNames); // ["Ankita", "Kittu", "Rani", "Yashvi"]
+   console.log(names); // original unchanged
+
+3. toSpliced(): Works like splice() but does not change the original array.
+   Instead, it returns a new updated array.
+   Syntax: array.toSpliced(start, deleteCount, ...items)
+   Ex.
+   const arr = [1, 2, 3, 4];
+   const newArr = arr.toSpliced(1, 2, 20, 30);
+   console.log(newArr); // [1, 20, 30, 4]
+   console.log(arr); // [1, 2, 3, 4] original safe
+
+4. with(): Replaces the item at a specific index and returns a new array.
+   Ex.const nums = [10, 20, 30, 40];
+   const newArr = nums.with(2, 300);
+   console.log(newArr); // [10, 20, 300, 40]
+   console.log(nums); // [10, 20, 30, 40] original unchanged
