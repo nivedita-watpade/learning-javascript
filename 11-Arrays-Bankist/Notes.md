@@ -318,3 +318,92 @@ toReversed(), toSorted(), toSpliced() and with().
    const newArr = nums.with(2, 300);
    console.log(newArr); // [10, 20, 300, 40]
    console.log(nums); // [10, 20, 30, 40] original unchanged
+
+============================= Array Summary ===================================
+
+📌 To Mutate Original
+➖ Add to original
+push (end)
+unshift (start)
+
+➖Remove from original
+pop (end)
+shift (start)
+splice (any)
+
+➖Others
+reverse
+sort
+fill
+
+👉 These should usually be avoided (because they change the original array).
+
+📌 A New Array Based on Original
+Same length as original
+-map (loop)
+
+Filtered using condition
+-filter
+
+Taking portion of original
+-slice
+
+With one item replaced
+-with
+
+Flattened
+-flat
+-flatMap
+
+Reversed
+-toReversed
+
+Sorted
+-toSorted
+
+With deleted items
+-toSpliced
+
+Joining two arrays
+-concat
+
+📌 An Array Index
+Based on value
+-indexOf
+
+Based on test condition
+-findIndex
+-findLastIndex
+
+📌 An Array Element
+Based on test condition
+-find
+-findLast
+
+Based on position
+-at
+
+📌 Know if Array Includes
+All methods return a true or false/ Boolean Value
+
+Based on value
+-includes
+
+Based on test condition
+-some
+-every
+
+📌 To Transform to Value
+Based on accumulator
+-reduce
+(Boils down array to a single value: number, string, boolean, array, or object)
+
+📌 A New String
+Based on separator
+-join
+
+📌 To Just Loop Array
+Based on callback
+-forEach
+(Does not create a new array, just loops)
+foreach returns nothing
