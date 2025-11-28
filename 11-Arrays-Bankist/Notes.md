@@ -227,8 +227,8 @@ console.log(overAllBalance);
 sort() is an array method used to arrange elements in an array.
 👉 By default, it sorts elements as strings (lexicographically).
 
-//Note : a > b RETURN 1 (KEEP ELEMENT AS IT IS)
-// a < b RETURN -1 (SWICTH THE ELEMENT)
+//Note : a > b RETURN 1(Positive Value) (KEEP ELEMENT AS IT IS)
+// a < b RETURN -1(Negative Value) (SWICTH THE ELEMENT)
 
 randomNumbers.sort((a, b) => {
 if (a > b) {
@@ -407,3 +407,28 @@ Based on callback
 -forEach
 (Does not create a new array, just loops)
 foreach returns nothing
+
+================================== Array method practice ======================================
+
+Increment Operators
+
+1. count++ → Post-increment
+
+Returns the current value first, then increments the variable.
+Order:
+Use value
+Increase by 1
+Example:
+let count = 5;
+let x = count++;  
+// x = 5, count becomes 6
+
+2. ++count → Pre-increment
+   Increments the variable first, then returns the updated value.
+   Order:
+   Increase by 1
+   Use value
+   Example:
+   let count = 5;
+   let x = ++count;  
+   // count becomes 6, x = 6

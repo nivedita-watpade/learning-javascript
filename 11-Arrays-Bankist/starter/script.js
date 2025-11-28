@@ -540,3 +540,75 @@ console.log(reversedArr);
 
 const changedArr = movements.with(2, 2900);
 console.log(changedArr);
+
+//Exercise
+console.log(accounts);
+
+const allBankMovements = accounts.flatMap(account => {
+  return account.movements;
+});
+
+//1.
+const totalDeposit = allBankMovements
+  .filter(mov => mov > 0)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log('Total Deposit:', totalDeposit);
+
+//2. Count how many deposit in bank with at least 1000
+const depositCount = allBankMovements.filter(
+  mov => mov > 0 && mov >= 1000
+).length;
+
+//using reduce
+const depositCount1000 = allBankMovements.reduce((count, curr) => {
+  if (curr >= 1000) {
+    return count + 1;
+  } else {
+    return count;
+  }
+}, 0);
+console.log(depositCount1000);
+
+console.log('Deposit count that is more than 1000', depositCount);
+
+//3. Create a object of sum of withdrawls and deposits
+const movementSummary = allBankMovements.reduce(
+  (acc, curr) => {
+    if (curr > 0) {
+      acc.deposits = acc.deposits + curr;
+      return acc;
+    } else {
+      acc.withdrawls = acc.withdrawls + curr;
+      return acc;
+    }
+  },
+  {
+    withdrawls: 0,
+    deposits: 0,
+  }
+);
+
+console.log(movementSummary);
+
+//4  this is a nice title - This Is a Nice Title
+
+const excludeCharacter = ['a', 'the', 'an', 'on'];
+
+const convertTitle = function (title) {
+  const capitalization = str => str[0].toUpperCase() + str.slice(1);
+  const words = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => {
+      if (excludeCharacter.includes(word)) {
+        return word;
+      } else {
+        return capitalization(word);
+      }
+    })
+    .join(' ');
+  console.log(capitalization(words));
+};
+
+convertTitle('the this is a nice title');
