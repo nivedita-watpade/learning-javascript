@@ -251,3 +251,40 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+console.log(29 === 29.0); // true
+
+// string to number
+console.log(Number('29'));
+console.log(+'29');
+
+//Parsing
+console.log(Number.parseInt('29px', 10)); //29  10 means decimal (0-9)
+console.log(Number.parseInt('29.5')); // 29
+console.log(Number.parseInt('29px', 2)); //NaN   2 means binary (0 & 1)
+
+console.log(Number.parseFloat('29px')); //29
+console.log(Number.parseFloat('29.5px')); //29.5
+console.log(parseFloat(' 2.5rem ')); //2.5
+
+// Checking if value is NaN
+console.log(Number.isNaN(20)); //false
+console.log(Number.isNaN('20')); //false
+console.log(Number.isNaN(+'20X')); //true
+console.log(Number.isNaN(23 / 0)); //false
+
+// Checking if value is number
+console.log(Number.isFinite(20)); //true
+console.log(Number.isFinite('20')); //false
+console.log(Number.isFinite(+'20X')); //false
+console.log(Number.isFinite(23 / 0)); //false
+
+// Checking the number is an integer or not
+console.log(Number.isInteger(10)); // true
+console.log(Number.isInteger(-5)); // true
+console.log(Number.isInteger(0)); // true
+console.log(Number.isInteger(20.0)); // true
+console.log(Number.isInteger(10.5)); // false (not an integer)
+console.log(Number.isInteger('10')); // false (string)
+console.log(Number.isInteger(NaN)); // false
+console.log(Number.isInteger(Infinity)); // false
