@@ -97,6 +97,7 @@ Math.floor(-4.9); // -5
 Math.floor(-4.0); // -4
 
 ========================================================================================
+
 Math.ceil: rounds a number UP to the nearest integer.
 
 Syntax:
@@ -151,7 +152,8 @@ Math.round(-4.5); // -4 (because -4 is closer to -4.5 than -5)
 Math.round(-4.6); // -5
 
 ====================================================================================
-Rouding decimals(floating point number)
+
+Rounding decimals(floating point number)
 
 toFixed(): formats a number to a fixed number of decimal places.
 
@@ -178,3 +180,16 @@ What is Boxing in JavaScript?
 Boxing means JavaScript automatically converts a primitive value (string, number, boolean) into a wrapper object (String, Number, Boolean) so you can use methods on them. Once the operation is done it coverted back to the premitives.
 Primitive values don't have methods.
 It happens behind the scenes.
+
+==================================================================================
+
+Remainder (%) Operator in JavaScript
+
+Definition
+The remainder operator (%) in JavaScript returns the remainder left over when one number is divided by another.
+It does NOT give the percentage — it gives the leftover value after division.
+
+Even / Odd Check
+Ex.
+console.log(6 % 2); // 0 → even
+console.log(7 % 2); // 1 → odd

@@ -154,6 +154,7 @@ function updateUI(acc) {
   displayMovements(acc.movements);
   calculateAndDisplayTotalBalance(acc.movements);
   calcDisplaySummary(acc.movements);
+  changeColorRow();
 }
 
 let currentLoggedInAccount;
@@ -413,3 +414,24 @@ console.log((2.7).toFixed(0)); //3
 console.log((2.7).toFixed(3)); //2.700
 console.log((2.345).toFixed(2)); // 2.35
 console.log(+(2.343).toFixed(2)); //2.34
+
+//Remainder operator
+
+console.log(5 % 2); // 1
+console.log(5 / 2); // 2*2+1
+
+console.log(4 % 2); //0 // Even
+console.log(99 % 2); //1 //Odd
+
+const isEven = num => num % 2 === 0;
+console.log(isEven(24));
+console.log(isEven(57));
+console.log(isEven(324));
+
+function changeColorRow() {
+  [...document.querySelectorAll('.movements__row')].forEach((row, i) => {
+    if (i % 2 === 0) {
+      row.style.backgroundColor = '#dddddd';
+    }
+  });
+}
