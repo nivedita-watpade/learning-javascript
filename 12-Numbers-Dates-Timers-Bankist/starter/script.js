@@ -52,6 +52,7 @@ const account2 = {
 const accounts = [account1, account2];
 
 /////////////////////////////////////////////////
+
 // Elements
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
@@ -78,175 +79,242 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-/////////////////////////////////////////////////
-// Functions
-
-const displayMovements = function (movements, sort = false) {
+function displayMovements(movements, sort = false) {
   containerMovements.innerHTML = '';
 
   const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
 
-  movs.forEach(function (mov, i) {
-    const type = mov > 0 ? 'deposit' : 'withdrawal';
+  movs.forEach((mov, i) => {
+    const movementsType = mov > 0 ? 'deposit' : 'withdrawal';
 
-    const html = `
-      <div class="movements__row">
-        <div class="movements__type movements__type--${type}">${
+    const html = ` <div class="movements__row">
+          <div class="movements__type movements__type--${movementsType}">${
       i + 1
-    } ${type}</div>
-        <div class="movements__value">${mov}€</div>
-      </div>
-    `;
-
+    } ${movementsType}</div>
+          <div class="movements__value">${mov.toFixed(2)}€</div>
+        </div>`;
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
-};
+}
 
-const calcDisplayBalance = function (acc) {
-  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance}€`;
-};
+function getUserName(userName) {
+  return userName
+    .toLowerCase()
+    .split(' ')
+    .map(word => word[0])
+    .join('');
 
-const calcDisplaySummary = function (acc) {
-  const incomes = acc.movements
-    .filter(mov => mov > 0)
-    .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes}€`;
+  // const usersInitials = user.map(word => {
+  //   return word[0];
+  // });
 
-  const out = acc.movements
-    .filter(mov => mov < 0)
-    .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out)}€`;
+  // const loginUserName = usersInitials.join('');
+  // return loginUserName;
+}
 
-  const interest = acc.movements
-    .filter(mov => mov > 0)
-    .map(deposit => (deposit * acc.interestRate) / 100)
-    .filter((int, i, arr) => {
-      // console.log(arr);
-      return int >= 1;
-    })
-    .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest}€`;
-};
-
-const createUsernames = function (accs) {
-  accs.forEach(function (acc) {
-    acc.username = acc.owner
-      .toLowerCase()
-      .split(' ')
-      .map(name => name[0])
-      .join('');
+function computeUserName(usersArr) {
+  usersArr.forEach(userObj => {
+    userObj.userName = getUserName(userObj.owner);
   });
-};
-createUsernames(accounts);
+}
 
-const updateUI = function (acc) {
-  // Display movements
+computeUserName(accounts);
+
+function calculateAndDisplayTotalBalance(movArr) {
+  const balance = movArr.reduce((acc, curr) => {
+    const sum = acc + curr;
+    return sum;
+  }, 0);
+  labelBalance.textContent = `${balance.toFixed(2)} €`;
+  return balance;
+}
+
+function calcDisplaySummary(movements) {
+  const totalDeposits =
+    movements?.filter(mov => mov > 0)?.reduce((acc, curr) => acc + curr, 0) ??
+    '0';
+  labelSumIn.textContent = `${totalDeposits.toFixed(2)}€`;
+
+  const totalWithdrawls =
+    movements?.filter(mov => mov < 0)?.reduce((acc, curr) => acc + curr, 0) ??
+    '0';
+  labelSumOut.textContent = `${Math.abs(totalWithdrawls).toFixed(2)}€`;
+
+  const interest = movements
+    ?.filter(mov => mov > 0)
+    .map(mov => (currentLoggedInAccount.interestRate / 100) * mov)
+    .filter(interest => interest >= 1)
+    .reduce((acc, mov, i, arr) => {
+      return acc + mov;
+    }, 0);
+  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+}
+
+function updateUI(acc) {
   displayMovements(acc.movements);
+  calculateAndDisplayTotalBalance(acc.movements);
+  calcDisplaySummary(acc.movements);
+}
 
-  // Display balance
-  calcDisplayBalance(acc);
+let currentLoggedInAccount;
 
-  // Display summary
-  calcDisplaySummary(acc);
-};
-
-///////////////////////////////////////
-// Event handlers
-let currentAccount;
-
-btnLogin.addEventListener('click', function (e) {
-  // Prevent form from submitting
+function loginUser(e) {
   e.preventDefault();
+  const userName = inputLoginUsername.value;
+  const pin = Number(inputLoginPin.value);
 
-  currentAccount = accounts.find(
-    acc => acc.username === inputLoginUsername.value
+  if (!userName || !pin) {
+    alert('Please Enter the details');
+    return;
+  }
+
+  currentLoggedInAccount = accounts.find(account => {
+    return userName === account.userName && pin === account.pin;
+  });
+
+  if (!currentLoggedInAccount) {
+    alert('Inavlid Login');
+    return;
+  }
+
+  containerApp.style.opacity = 1;
+  inputLoginUsername.value = null;
+  inputLoginPin.value = null;
+  inputLoginPin.blur();
+  labelWelcome.textContent = `Welcome, ${currentLoggedInAccount.owner}!`;
+  updateUI(currentLoggedInAccount);
+}
+
+btnLogin.addEventListener('click', loginUser);
+
+function transferMoney(e) {
+  e.preventDefault();
+  if (!currentLoggedInAccount) {
+    return;
+  }
+
+  const transferTo = inputTransferTo.value;
+  const transferAmt = inputTransferAmount.value;
+
+  if (!transferTo || !transferAmt) {
+    alert('Enter transfer details!');
+    return;
+  }
+
+  const currAccountValance = calculateAndDisplayTotalBalance(
+    currentLoggedInAccount.movements
   );
-  console.log(currentAccount);
 
-  if (currentAccount?.pin === Number(inputLoginPin.value)) {
-    // Display UI and message
-    labelWelcome.textContent = `Welcome back, ${
-      currentAccount.owner.split(' ')[0]
-    }`;
-    containerApp.style.opacity = 100;
-
-    // Clear input fields
-    inputLoginUsername.value = inputLoginPin.value = '';
-    inputLoginPin.blur();
-
-    // Update UI
-    updateUI(currentAccount);
-  }
-});
-
-btnTransfer.addEventListener('click', function (e) {
-  e.preventDefault();
-  const amount = Number(inputTransferAmount.value);
-  const receiverAcc = accounts.find(
-    acc => acc.username === inputTransferTo.value
-  );
-  inputTransferAmount.value = inputTransferTo.value = '';
-
-  if (
-    amount > 0 &&
-    receiverAcc &&
-    currentAccount.balance >= amount &&
-    receiverAcc?.username !== currentAccount.username
-  ) {
-    // Doing the transfer
-    currentAccount.movements.push(-amount);
-    receiverAcc.movements.push(amount);
-
-    // Update UI
-    updateUI(currentAccount);
-  }
-});
-
-btnLoan.addEventListener('click', function (e) {
-  e.preventDefault();
-
-  const amount = Number(inputLoanAmount.value);
-
-  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add movement
-    currentAccount.movements.push(amount);
-
-    // Update UI
-    updateUI(currentAccount);
-  }
-  inputLoanAmount.value = '';
-});
-
-btnClose.addEventListener('click', function (e) {
-  e.preventDefault();
-
-  if (
-    inputCloseUsername.value === currentAccount.username &&
-    Number(inputClosePin.value) === currentAccount.pin
-  ) {
-    const index = accounts.findIndex(
-      acc => acc.username === currentAccount.username
-    );
-    console.log(index);
-    // .indexOf(23)
-
-    // Delete account
-    accounts.splice(index, 1);
-
-    // Hide UI
-    containerApp.style.opacity = 0;
+  if (Number(transferAmt) > currAccountValance) {
+    alert('Insufficient Balance!');
+    return;
   }
 
-  inputCloseUsername.value = inputClosePin.value = '';
-});
+  const amtTransferAccount = accounts.find(account => {
+    return transferTo === account.userName;
+  });
 
-let sorted = false;
-btnSort.addEventListener('click', function (e) {
+  if (!amtTransferAccount) {
+    alert('User not found !');
+    return;
+  }
+
+  if (currentLoggedInAccount.userName === amtTransferAccount.userName) {
+    alert("You can't transfer money to yourself");
+    return;
+  }
+
+  amtTransferAccount.movements.push(Number(transferAmt));
+  currentLoggedInAccount.movements.push(Number(-transferAmt));
+
+  updateUI(currentLoggedInAccount);
+
+  inputTransferTo.value = null;
+  inputTransferAmount.value = null;
+}
+
+btnTransfer.addEventListener('click', transferMoney);
+
+function requestLoan(e) {
   e.preventDefault();
-  displayMovements(currentAccount.movements, !sorted);
-  sorted = !sorted;
-});
+
+  if (!currentLoggedInAccount) {
+    return;
+  }
+  // const loanAmt = inputLoanAmount.value;
+  const loanAmt = Math.floor(inputLoanAmount.value);
+
+  if (!loanAmt) {
+    alert('Please enter the amount!');
+    return;
+  }
+
+  if (loanAmt < 0) {
+    alert('Please enter a valid amount !');
+    return;
+  }
+
+  const isEligibleForLoan = currentLoggedInAccount.movements.some(mov => {
+    return mov >= loanAmt * 0.1;
+  });
+
+  if (isEligibleForLoan) {
+    currentLoggedInAccount.movements.push(loanAmt);
+  } else {
+    alert('You are not eligible for the loan');
+  }
+
+  updateUI(currentLoggedInAccount);
+
+  inputLoanAmount.value = null;
+}
+
+btnLoan.addEventListener('click', requestLoan);
+
+function closeAccount(e) {
+  e.preventDefault();
+
+  if (!currentLoggedInAccount) {
+    return;
+  }
+
+  const userName = inputCloseUsername.value;
+  const userPin = inputClosePin.value;
+  if (!userName || !userPin) {
+    alert('Enter the account details !');
+    return;
+  }
+
+  if (userName !== currentLoggedInAccount.userName) {
+    alert('You cant close other user account !');
+    return;
+  }
+
+  const currAccountIndex = accounts.findIndex((account, index) => {
+    return userName === account.userName && Number(userPin) === account.pin;
+  });
+
+  if (currAccountIndex < 0) {
+    alert('Account is not exist!');
+    return;
+  }
+
+  accounts.splice(currAccountIndex, 1);
+  alert(`This account is closed!`);
+  inputCloseUsername.value = null;
+  inputClosePin.value = null;
+  containerApp.style.opacity = 0;
+}
+
+btnClose.addEventListener('click', closeAccount);
+
+let isSorted = false;
+function sortMovements() {
+  displayMovements(currentLoggedInAccount.movements, !isSorted);
+  isSorted = !isSorted;
+}
+
+btnSort.addEventListener('click', sortMovements);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -288,3 +356,60 @@ console.log(Number.isInteger(10.5)); // false (not an integer)
 console.log(Number.isInteger('10')); // false (string)
 console.log(Number.isInteger(NaN)); // false
 console.log(Number.isInteger(Infinity)); // false
+
+console.log('=================== Math & Rounding  ========================');
+
+// find square root and cubic root
+console.log(Math.sqrt(25)); //5
+console.log(25 ** (1 / 2)); //5
+console.log(8 ** (1 / 3)); //2 (to find cubic root)
+
+//to find MAX
+console.log(Math.max(1, 29, 9, 17, 25)); //29
+console.log(Math.max(1, '29', 9, 17, 25)); //29 (Did type coersion)
+console.log(Math.max(1, '29px', 9, 17, 25)); //NaN(Did not parsing it(Means to do not remove the character))
+
+//to find MIN
+console.log(Math.min(1, 29, 9, 17, 25)); //1
+
+//find area of circle
+console.log(Math.PI * Number.parseFloat('10px') ** 2); //314.15
+
+// generate random number (Math.random generate num between 0 to 1)
+console.log(Math.trunc(Math.random() * 6 + 1)); //1-6 (We want to number between 1-6 thats why we multiply by 6. It generate number between 1-5 thats why we add + 1. )
+
+// create a function for random number
+
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min) + 1) + min;
+
+console.log(randomInt(10, 20));
+console.log(randomInt(0, 3));
+
+//Rounding integers
+
+console.log(Math.round(29.3)); //29
+console.log(Math.round(29.5)); //30
+console.log(Math.round(29.9)); //30
+
+//remove decimal part
+console.log(Math.trunc(29.3)); //29
+console.log(Math.trunc(29.9)); //29
+
+//round to the UP
+console.log(Math.ceil(29.3)); //30
+console.log(Math.ceil(29.9)); //30
+
+//round to the DOWN
+console.log(Math.floor(29.3)); //29
+console.log(Math.floor(29.9)); //29
+
+//used floor instead of trunc bcoz it properly work for positive and negative numbers
+console.log(Math.floor(-29.3)); //-30
+console.log(Math.trunc(-29.3)); //-29
+
+//Rouding decimals(floating point number)
+console.log((2.7).toFixed(0)); //3
+console.log((2.7).toFixed(3)); //2.700
+console.log((2.345).toFixed(2)); // 2.35
+console.log(+(2.343).toFixed(2)); //2.34

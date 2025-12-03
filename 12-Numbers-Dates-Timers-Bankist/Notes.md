@@ -80,3 +80,101 @@ Number.isInteger(10.5); // false (not an integer)
 Number.isInteger('10'); // false (string)
 Number.isInteger(NaN); // false
 Number.isInteger(Infinity); // false
+
+====================================================================================
+
+Math.floor(): is a JavaScript method that rounds a number DOWN to the nearest integer.
+Syntax:
+Math.floor(number)
+✅ Positive numbers
+Math.floor(4.9); // 4
+Math.floor(4.1); // 4
+Math.floor(4.0); // 4
+
+✅ Negative numbers
+Math.floor(-4.1); // -5 (goes down)
+Math.floor(-4.9); // -5
+Math.floor(-4.0); // -4
+
+========================================================================================
+Math.ceil: rounds a number UP to the nearest integer.
+
+Syntax:
+Math.ceil(number)
+
+✅ Positive numbers
+Math.ceil(4.1); // 5
+Math.ceil(4.9); // 5
+Math.ceil(4.0); // 4
+
+✅ Negative numbers
+Math.ceil(-4.9); // -4 (rounds up toward 0)
+Math.ceil(-4.1); // -4
+Math.ceil(-4.0); // -4
+
+=====================================================================================
+
+Math.trunc(): removes the decimal part of a number and returns only the integer part.
+-It does NOT round — just cuts off decimals.
+
+Syntax
+Math.trunc(number)
+
+✅ Positive numbers
+Math.trunc(4.9); // 4
+Math.trunc(4.1); // 4
+
+✅ Negative numbers
+Math.trunc(-4.9); // -4
+Math.trunc(-4.1); // -4
+
+===========================================================================
+
+Math.round(): rounds a number to the nearest integer.
+
+-If decimal part is 0.5 or more → rounds UP
+-If decimal part is less than 0.5 → rounds DOWN
+
+Syntax
+Math.round(number)
+
+✅ Positive numbers
+Math.round(4.1); // 4
+Math.round(4.4); // 4
+Math.round(4.5); // 5
+Math.round(4.9); // 5
+
+✅ Negative numbers
+Math.round(-4.1); // -4
+Math.round(-4.4); // -4
+Math.round(-4.5); // -4 (because -4 is closer to -4.5 than -5)
+Math.round(-4.6); // -5
+
+====================================================================================
+Rouding decimals(floating point number)
+
+toFixed(): formats a number to a fixed number of decimal places.
+
+-Rounds the number to the specified decimal places
+-Converts the result into a string
+
+Syntax:
+number.toFixed(digits)
+digits → number of decimal places you want
+Default = 0
+
+let num = 5.6789;
+num.toFixed(0); // "6"
+num.toFixed(1); // "5.7"
+num.toFixed(2); // "5.68"
+num.toFixed(3); // "5.679"
+
+(50).toFixed(2); // "50.00"
+
+===============================================================================
+
+What is Boxing in JavaScript?
+
+Boxing means JavaScript automatically converts a primitive value (string, number, boolean) into a wrapper object (String, Number, Boolean) so you can use methods on them. Once the operation is done it coverted back to the premitives.
+Primitive values don't have methods.
+It happens behind the scenes.
