@@ -193,3 +193,67 @@ Even / Odd Check
 Ex.
 console.log(6 % 2); // 0 → even
 console.log(7 % 2); // 1 → odd
+
+=========================================================================================
+Numeric Separator:
+A numeric separator (\_) is used to visually group digits in long numbers, without affecting the actual value.
+It does NOT change the number, it’s only for readability.
+Ex.
+const price = 1_000_000; // 1000000
+console.log(price); // 1000000
+
+================================================================================================
+
+BigInt:
+BigInt in JavaScript is a special data type used to store very large integers that cannot be safely represented by regular Number.
+
+Operations with BigInt
+✔ Valid
+const a = 20n;
+const b = 30n;
+
+console.log(a + b); // 50n
+console.log(a \* b); // 600n
+console.log(b / a); // 1n (decimal is removed)
+
+- Can not mix BigInt with number
+  10n + 5; // ❌ TypeError
+
+Use explicit conversion:
+10n + BigInt(5); // 15n
+
+10n === 10; // false (different types)
+10n == 10; // true (loose equality)
+
+=============================== working with dates =============================
+
+//create a dates
+const now = new Date();
+console.log(now);
+
+console.log(new Date('Aug 29 2025 18:05:06'));
+console.log(new Date('25 December 2025'));
+console.log(new Date(account1.movementsDates[0]));
+console.log(new Date(2025, 10, 29)); //Nov 29 2025
+console.log(new Date(2025, 10, 12, 45, 2, 2));
+console.log(new Date(0));
+
+// working with dates
+
+const future = new Date(2027, 10, 25, 15, 23);
+console.log(future);
+console.log(future.getFullYear()); //2037(Get the year)
+console.log(future.getMonth()); //10(Nov - month is zero based)
+console.log(future.getDay()); // get day of the week
+console.log(future.getHours()); //15 - get hours
+console.log(future.getMinutes()); //23 - get minutes
+console.log(future.getSeconds()); //00 - get second
+
+console.log(future.getTime()); // get the time in miliseocnds from the date 1st jan 1970
+
+console.log(Date.now()); //get the time in miliseocnds from the date 1st jan 1970 to till date or current time
+
+//set the dates method - we can set all the methods of month, day, hrs etc.
+
+console.log(future.setFullYear(2035));
+console.log(future);

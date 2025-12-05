@@ -79,10 +79,13 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-function displayMovements(movements, sort = false) {
+function displayMovements(accObj, sort = false) {
+  //console.log(accObj.movementsDates);
   containerMovements.innerHTML = '';
 
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const movs = sort
+    ? accObj.movements.slice().sort((a, b) => a - b)
+    : accObj.movements;
 
   movs.forEach((mov, i) => {
     const movementsType = mov > 0 ? 'deposit' : 'withdrawal';
@@ -90,7 +93,12 @@ function displayMovements(movements, sort = false) {
     const html = ` <div class="movements__row">
           <div class="movements__type movements__type--${movementsType}">${
       i + 1
-    } ${movementsType}</div>
+    } ${movementsType}</div> 
+
+    <span>${new Date(accObj.movementsDates[i]).toLocaleDateString(
+      'pt-PT'
+    )}</span>
+
           <div class="movements__value">${mov.toFixed(2)}€</div>
         </div>`;
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -151,13 +159,26 @@ function calcDisplaySummary(movements) {
 }
 
 function updateUI(acc) {
-  displayMovements(acc.movements);
+  displayMovements(acc);
   calculateAndDisplayTotalBalance(acc.movements);
   calcDisplaySummary(acc.movements);
   changeColorRow();
 }
 
 let currentLoggedInAccount;
+
+//FAKE LOGIN
+currentLoggedInAccount = account1;
+updateUI(currentLoggedInAccount);
+containerApp.style.opacity = 1;
+
+const currDate = new Date();
+const hrs = `${new Date().getHours()}`.padStart(2, 0);
+const minutes = `${new Date().getMinutes()}`.padStart(2, 0);
+
+labelDate.textContent = `${currDate.getDate()}/${
+  currDate.getMonth() + 1
+}/${currDate.getFullYear()}, ${hrs}:${minutes}`;
 
 function loginUser(e) {
   e.preventDefault();
@@ -183,6 +204,9 @@ function loginUser(e) {
   inputLoginPin.value = null;
   inputLoginPin.blur();
   labelWelcome.textContent = `Welcome, ${currentLoggedInAccount.owner}!`;
+  // labelDate.textContent = `${new Date().getDate()} / ${
+  //   new Date().getMonth() + 1
+  // } / ${new Date().getFullYear()}`;
   updateUI(currentLoggedInAccount);
 }
 
@@ -226,7 +250,10 @@ function transferMoney(e) {
   }
 
   amtTransferAccount.movements.push(Number(transferAmt));
+  amtTransferAccount.movementsDates.push(new Date());
+
   currentLoggedInAccount.movements.push(Number(-transferAmt));
+  currentLoggedInAccount.movementsDates.push(new Date());
 
   updateUI(currentLoggedInAccount);
 
@@ -261,6 +288,7 @@ function requestLoan(e) {
 
   if (isEligibleForLoan) {
     currentLoggedInAccount.movements.push(loanAmt);
+    currentLoggedInAccount.movementsDates.push(new Date());
   } else {
     alert('You are not eligible for the loan');
   }
@@ -311,7 +339,7 @@ btnClose.addEventListener('click', closeAccount);
 
 let isSorted = false;
 function sortMovements() {
-  displayMovements(currentLoggedInAccount.movements, !isSorted);
+  displayMovements(currentLoggedInAccount, !isSorted);
   isSorted = !isSorted;
 }
 
@@ -435,3 +463,42 @@ function changeColorRow() {
     }
   });
 }
+
+const huge = 123456789012345678901234567890n;
+console.log(huge);
+
+const num = BigInt('123456789012345678901234567890');
+console.log(num);
+
+console.log(huge + ' is REALLY BIG number'); // string
+
+//create a dates
+const now = new Date();
+console.log(now);
+
+console.log(new Date('Aug 29 2025 18:05:06'));
+console.log(new Date('25 December 2025'));
+console.log(new Date(account1.movementsDates[0]));
+console.log(new Date(2025, 10, 29)); //Nov 29 2025
+console.log(new Date(2025, 10, 12, 45, 2, 2));
+console.log(new Date(0));
+
+// working with dates
+
+const future = new Date(2027, 10, 25, 15, 23);
+console.log(future);
+console.log(future.getFullYear()); //2037(Get the year)
+console.log(future.getMonth()); //10(Nov - month is zero based)
+console.log(future.getDay()); // get day of the week
+console.log(future.getHours()); //15 - get hours
+console.log(future.getMinutes()); //23 - get minutes
+console.log(future.getSeconds()); //00 - get second
+
+console.log(future.getTime()); // get the time in miliseocnds from the date 1st jan 1970
+
+console.log(Date.now()); //get the time in miliseocnds from the date 1st jan 1970 to till date or current time
+
+//set the dates method - we can set all the methods of month, day, hrs etc.
+
+console.log(future.setFullYear(2035));
+console.log(future);
