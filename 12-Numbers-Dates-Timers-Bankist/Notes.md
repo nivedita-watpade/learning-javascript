@@ -257,3 +257,23 @@ console.log(Date.now()); //get the time in miliseocnds from the date 1st jan 197
 
 console.log(future.setFullYear(2035));
 console.log(future);
+
+======================== operations on dates ==========================
+
+Date Subtraction:
+currDate - movDate automatically converts both Date objects into milliseconds since 1970 (Unix timestamp).
+The subtraction gives the difference in milliseconds.
+But the - operator cannot operate on objects — it only works on numbers.
+So JavaScript automatically performs type coercion.
+
+Conversion to Days:
+The millisecond difference is divided by
+1000 × 60 × 60 × 24 (milliseconds in one day).
+Math.round() is used to convert it into a whole number of days (diffDate).
+
+Conditional Output:
+If diffDate === 0 → returns "Today"
+If diffDate === 1 → returns "Yesterday"
+If diffDate === 2 → returns "2 days ago"
+
+Otherwise (3+ days) → returns localized date string (e.g., "12/1/2025")

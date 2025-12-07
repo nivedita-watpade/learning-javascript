@@ -3,12 +3,6 @@
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
-
-/////////////////////////////////////////////////
-// Data
-
-// DIFFERENT DATA! Contains movement dates, currency and locale
-
 const account1 = {
   owner: 'Jonas Schmedtmann',
   movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
@@ -50,300 +44,10 @@ const account2 = {
 };
 
 const accounts = [account1, account2];
-
 /////////////////////////////////////////////////
+// Data
 
-// Elements
-const labelWelcome = document.querySelector('.welcome');
-const labelDate = document.querySelector('.date');
-const labelBalance = document.querySelector('.balance__value');
-const labelSumIn = document.querySelector('.summary__value--in');
-const labelSumOut = document.querySelector('.summary__value--out');
-const labelSumInterest = document.querySelector('.summary__value--interest');
-const labelTimer = document.querySelector('.timer');
-
-const containerApp = document.querySelector('.app');
-const containerMovements = document.querySelector('.movements');
-
-const btnLogin = document.querySelector('.login__btn');
-const btnTransfer = document.querySelector('.form__btn--transfer');
-const btnLoan = document.querySelector('.form__btn--loan');
-const btnClose = document.querySelector('.form__btn--close');
-const btnSort = document.querySelector('.btn--sort');
-
-const inputLoginUsername = document.querySelector('.login__input--user');
-const inputLoginPin = document.querySelector('.login__input--pin');
-const inputTransferTo = document.querySelector('.form__input--to');
-const inputTransferAmount = document.querySelector('.form__input--amount');
-const inputLoanAmount = document.querySelector('.form__input--loan-amount');
-const inputCloseUsername = document.querySelector('.form__input--user');
-const inputClosePin = document.querySelector('.form__input--pin');
-
-function displayMovements(accObj, sort = false) {
-  //console.log(accObj.movementsDates);
-  containerMovements.innerHTML = '';
-
-  const movs = sort
-    ? accObj.movements.slice().sort((a, b) => a - b)
-    : accObj.movements;
-
-  movs.forEach((mov, i) => {
-    const movementsType = mov > 0 ? 'deposit' : 'withdrawal';
-
-    const html = ` <div class="movements__row">
-          <div class="movements__type movements__type--${movementsType}">${
-      i + 1
-    } ${movementsType}</div> 
-
-    <span>${new Date(accObj.movementsDates[i]).toLocaleDateString(
-      'pt-PT'
-    )}</span>
-
-          <div class="movements__value">${mov.toFixed(2)}€</div>
-        </div>`;
-    containerMovements.insertAdjacentHTML('afterbegin', html);
-  });
-}
-
-function getUserName(userName) {
-  return userName
-    .toLowerCase()
-    .split(' ')
-    .map(word => word[0])
-    .join('');
-
-  // const usersInitials = user.map(word => {
-  //   return word[0];
-  // });
-
-  // const loginUserName = usersInitials.join('');
-  // return loginUserName;
-}
-
-function computeUserName(usersArr) {
-  usersArr.forEach(userObj => {
-    userObj.userName = getUserName(userObj.owner);
-  });
-}
-
-computeUserName(accounts);
-
-function calculateAndDisplayTotalBalance(movArr) {
-  const balance = movArr.reduce((acc, curr) => {
-    const sum = acc + curr;
-    return sum;
-  }, 0);
-  labelBalance.textContent = `${balance.toFixed(2)} €`;
-  return balance;
-}
-
-function calcDisplaySummary(movements) {
-  const totalDeposits =
-    movements?.filter(mov => mov > 0)?.reduce((acc, curr) => acc + curr, 0) ??
-    '0';
-  labelSumIn.textContent = `${totalDeposits.toFixed(2)}€`;
-
-  const totalWithdrawls =
-    movements?.filter(mov => mov < 0)?.reduce((acc, curr) => acc + curr, 0) ??
-    '0';
-  labelSumOut.textContent = `${Math.abs(totalWithdrawls).toFixed(2)}€`;
-
-  const interest = movements
-    ?.filter(mov => mov > 0)
-    .map(mov => (currentLoggedInAccount.interestRate / 100) * mov)
-    .filter(interest => interest >= 1)
-    .reduce((acc, mov, i, arr) => {
-      return acc + mov;
-    }, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
-}
-
-function updateUI(acc) {
-  displayMovements(acc);
-  calculateAndDisplayTotalBalance(acc.movements);
-  calcDisplaySummary(acc.movements);
-  changeColorRow();
-}
-
-let currentLoggedInAccount;
-
-//FAKE LOGIN
-currentLoggedInAccount = account1;
-updateUI(currentLoggedInAccount);
-containerApp.style.opacity = 1;
-
-const currDate = new Date();
-const hrs = `${new Date().getHours()}`.padStart(2, 0);
-const minutes = `${new Date().getMinutes()}`.padStart(2, 0);
-
-labelDate.textContent = `${currDate.getDate()}/${
-  currDate.getMonth() + 1
-}/${currDate.getFullYear()}, ${hrs}:${minutes}`;
-
-function loginUser(e) {
-  e.preventDefault();
-  const userName = inputLoginUsername.value;
-  const pin = Number(inputLoginPin.value);
-
-  if (!userName || !pin) {
-    alert('Please Enter the details');
-    return;
-  }
-
-  currentLoggedInAccount = accounts.find(account => {
-    return userName === account.userName && pin === account.pin;
-  });
-
-  if (!currentLoggedInAccount) {
-    alert('Inavlid Login');
-    return;
-  }
-
-  containerApp.style.opacity = 1;
-  inputLoginUsername.value = null;
-  inputLoginPin.value = null;
-  inputLoginPin.blur();
-  labelWelcome.textContent = `Welcome, ${currentLoggedInAccount.owner}!`;
-  // labelDate.textContent = `${new Date().getDate()} / ${
-  //   new Date().getMonth() + 1
-  // } / ${new Date().getFullYear()}`;
-  updateUI(currentLoggedInAccount);
-}
-
-btnLogin.addEventListener('click', loginUser);
-
-function transferMoney(e) {
-  e.preventDefault();
-  if (!currentLoggedInAccount) {
-    return;
-  }
-
-  const transferTo = inputTransferTo.value;
-  const transferAmt = inputTransferAmount.value;
-
-  if (!transferTo || !transferAmt) {
-    alert('Enter transfer details!');
-    return;
-  }
-
-  const currAccountValance = calculateAndDisplayTotalBalance(
-    currentLoggedInAccount.movements
-  );
-
-  if (Number(transferAmt) > currAccountValance) {
-    alert('Insufficient Balance!');
-    return;
-  }
-
-  const amtTransferAccount = accounts.find(account => {
-    return transferTo === account.userName;
-  });
-
-  if (!amtTransferAccount) {
-    alert('User not found !');
-    return;
-  }
-
-  if (currentLoggedInAccount.userName === amtTransferAccount.userName) {
-    alert("You can't transfer money to yourself");
-    return;
-  }
-
-  amtTransferAccount.movements.push(Number(transferAmt));
-  amtTransferAccount.movementsDates.push(new Date());
-
-  currentLoggedInAccount.movements.push(Number(-transferAmt));
-  currentLoggedInAccount.movementsDates.push(new Date());
-
-  updateUI(currentLoggedInAccount);
-
-  inputTransferTo.value = null;
-  inputTransferAmount.value = null;
-}
-
-btnTransfer.addEventListener('click', transferMoney);
-
-function requestLoan(e) {
-  e.preventDefault();
-
-  if (!currentLoggedInAccount) {
-    return;
-  }
-  // const loanAmt = inputLoanAmount.value;
-  const loanAmt = Math.floor(inputLoanAmount.value);
-
-  if (!loanAmt) {
-    alert('Please enter the amount!');
-    return;
-  }
-
-  if (loanAmt < 0) {
-    alert('Please enter a valid amount !');
-    return;
-  }
-
-  const isEligibleForLoan = currentLoggedInAccount.movements.some(mov => {
-    return mov >= loanAmt * 0.1;
-  });
-
-  if (isEligibleForLoan) {
-    currentLoggedInAccount.movements.push(loanAmt);
-    currentLoggedInAccount.movementsDates.push(new Date());
-  } else {
-    alert('You are not eligible for the loan');
-  }
-
-  updateUI(currentLoggedInAccount);
-
-  inputLoanAmount.value = null;
-}
-
-btnLoan.addEventListener('click', requestLoan);
-
-function closeAccount(e) {
-  e.preventDefault();
-
-  if (!currentLoggedInAccount) {
-    return;
-  }
-
-  const userName = inputCloseUsername.value;
-  const userPin = inputClosePin.value;
-  if (!userName || !userPin) {
-    alert('Enter the account details !');
-    return;
-  }
-
-  if (userName !== currentLoggedInAccount.userName) {
-    alert('You cant close other user account !');
-    return;
-  }
-
-  const currAccountIndex = accounts.findIndex((account, index) => {
-    return userName === account.userName && Number(userPin) === account.pin;
-  });
-
-  if (currAccountIndex < 0) {
-    alert('Account is not exist!');
-    return;
-  }
-
-  accounts.splice(currAccountIndex, 1);
-  alert(`This account is closed!`);
-  inputCloseUsername.value = null;
-  inputClosePin.value = null;
-  containerApp.style.opacity = 0;
-}
-
-btnClose.addEventListener('click', closeAccount);
-
-let isSorted = false;
-function sortMovements() {
-  displayMovements(currentLoggedInAccount, !isSorted);
-  isSorted = !isSorted;
-}
-
-btnSort.addEventListener('click', sortMovements);
+// DIFFERENT DATA! Contains movement dates, currency and locale
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -456,14 +160,6 @@ console.log(isEven(24));
 console.log(isEven(57));
 console.log(isEven(324));
 
-function changeColorRow() {
-  [...document.querySelectorAll('.movements__row')].forEach((row, i) => {
-    if (i % 2 === 0) {
-      row.style.backgroundColor = '#dddddd';
-    }
-  });
-}
-
 const huge = 123456789012345678901234567890n;
 console.log(huge);
 
@@ -502,3 +198,17 @@ console.log(Date.now()); //get the time in miliseocnds from the date 1st jan 197
 
 console.log(future.setFullYear(2035));
 console.log(future);
+
+console.log('================ operation with string =========================');
+
+const futureDate = new Date(2037, 10, 19, 15, 23);
+console.log(Number(futureDate));
+console.log(+futureDate);
+console.log(futureDate);
+
+const calcDaysPassed = (date1, date2) => {
+  return Math.abs(date1 - date2) / (1000 * 60 * 60 * 24);
+};
+
+const Day1 = calcDaysPassed(new Date(2037, 10, 19), new Date(2037, 10, 29));
+console.log(Day1);
