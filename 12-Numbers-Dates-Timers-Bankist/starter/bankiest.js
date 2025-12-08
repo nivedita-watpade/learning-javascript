@@ -68,6 +68,13 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+function formattingNumbers(num) {
+  return new Intl.NumberFormat(currentLoggedInAccount.locale, {
+    style: 'currency',
+    currency: currentLoggedInAccount.currency,
+  }).format(num);
+}
+
 function displayMovements(accObj, sort = false) {
   //console.log(accObj.movementsDates);
   containerMovements.innerHTML = '';
@@ -97,7 +104,9 @@ function displayMovements(accObj, sort = false) {
 
     <span> ${getMovementDisplayDate(new Date(movementDate))}</span>
 
-          <div class="movements__value">${movement.toFixed(2)}€</div>
+          <div class="movements__value">
+          ${formattingNumbers(movement)}
+          </div>
         </div>`;
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
@@ -151,7 +160,7 @@ function calculateAndDisplayTotalBalance(movArr) {
     const sum = acc + curr;
     return sum;
   }, 0);
-  labelBalance.textContent = `${balance.toFixed(2)} €`;
+  labelBalance.textContent = `${formattingNumbers(balance)}`;
   return balance;
 }
 
@@ -159,12 +168,12 @@ function calcDisplaySummary(movements) {
   const totalDeposits =
     movements?.filter(mov => mov > 0)?.reduce((acc, curr) => acc + curr, 0) ??
     '0';
-  labelSumIn.textContent = `${totalDeposits.toFixed(2)}€`;
+  labelSumIn.textContent = formattingNumbers(totalDeposits);
 
   const totalWithdrawls =
     movements?.filter(mov => mov < 0)?.reduce((acc, curr) => acc + curr, 0) ??
     '0';
-  labelSumOut.textContent = `${Math.abs(totalWithdrawls).toFixed(2)}€`;
+  labelSumOut.textContent = formattingNumbers(Math.abs(totalWithdrawls));
 
   const interest = movements
     ?.filter(mov => mov > 0)
@@ -173,7 +182,7 @@ function calcDisplaySummary(movements) {
     .reduce((acc, mov, i, arr) => {
       return acc + mov;
     }, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  labelSumInterest.textContent = formattingNumbers(interest);
 }
 
 function updateUI(acc) {

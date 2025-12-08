@@ -213,4 +213,19 @@ const calcDaysPassed = (date1, date2) => {
 const Day1 = calcDaysPassed(new Date(2037, 10, 19), new Date(2037, 10, 29));
 console.log(Day1);
 
-console.log('============ Dates Internationalization API==========');
+console.log(
+  '============ Numbers with Internationalizatio (Intl) API=========='
+);
+
+const num1 = 29256708.45;
+
+const options = {
+  style: 'currency',
+  unit: 'mile-per-hour',
+  currency: 'INR',
+};
+
+console.log('US:', new Intl.NumberFormat('en-US', options).format(num1));
+console.log('Germany:', new Intl.NumberFormat('de-DE', options).format(num1));
+console.log('Syria:', new Intl.NumberFormat('ar-SY', options).format(num1));
+console.log('India:', new Intl.NumberFormat('en-IN', options).format(num1));

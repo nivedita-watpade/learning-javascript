@@ -278,7 +278,7 @@ If diffDate === 2 → returns "2 days ago"
 
 Otherwise (3+ days) → returns localized date string (e.g., "12/1/2025")
 
-============================= Internationalization API (Intl) =================================
+============================= Internationalization API (Intl) - for Date =================================
 
 Intl.DateTimeFormat — Definition
 
@@ -307,7 +307,43 @@ day: "2-digit"
 console.log(formatted);
 
 Ex.
+
+const options = {
+hour: 'numeric',
+minute: 'numeric',
+day: 'numeric',
+month: 'numeric',
+year: 'numeric',
+// weekday: 'long',
+};
+
 labelDate.textContent = new Intl.DateTimeFormat(
 currentLoggedInAccount.locale,
 options
 ).format(currDate)
+
+============================= Internationalization API (Intl) - for Number =================================
+
+Intl.NumberFormat: Intl.NumberFormat is a built-in JavaScript internationalization API that helps you format numbers (currency, percentages, decimals, etc.) according to a specific locale (country/language format).
+
+It automatically applies:
+Correct commas (grouping)
+Decimal styles
+Currency symbols (₹, $, €…)
+Percent formatting
+Local numbering systems
+
+Basic Syntax
+new Intl.NumberFormat(locale, options)
+
+Ex.
+const amount = 2499.5;
+
+console.log(
+new Intl.NumberFormat("en-IN", {
+style: "currency",
+currency: "INR"
+}).format(amount)
+);
+
+//op = ₹2,499.50
