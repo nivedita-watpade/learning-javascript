@@ -105,13 +105,22 @@ function displayMovements(accObj, sort = false) {
 
 function getMovementDisplayDate(movDate) {
   const currDate = new Date();
+
+  const options = {
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric',
+  };
   const diffDate = Math.round(
     Math.abs(currDate - movDate) / (1000 * 60 * 60 * 24)
   );
   if (diffDate === 0) return 'Today';
   if (diffDate === 1) return 'Yesterday';
   if (diffDate === 2) return '2 days ago';
-  return movDate.toLocaleDateString();
+  // return movDate.toLocaleDateString();
+  return new Intl.DateTimeFormat(currentLoggedInAccount.locale, options).format(
+    movDate
+  );
 }
 
 function getUserName(userName) {
@@ -181,13 +190,29 @@ currentLoggedInAccount = account1;
 updateUI(currentLoggedInAccount);
 containerApp.style.opacity = 1;
 
-const currDate = new Date();
-const hrs = `${new Date().getHours()}`.padStart(2, 0);
-const minutes = `${new Date().getMinutes()}`.padStart(2, 0);
+// const currDate = new Date();
+// const options = {
+//   hour: 'numeric',
+//   minute: 'numeric',
+//   day: 'numeric',
+//   month: 'long',
+//   year: 'numeric',
+//   weekday: 'long',
+// };
 
-labelDate.textContent = `${currDate.getDate()}/${
-  currDate.getMonth() + 1
-}/${currDate.getFullYear()}, ${hrs}:${minutes}`;
+// const locale = navigator.language;
+// console.log(locale);
+
+// labelDate.textContent = new Intl.DateTimeFormat(locale, options).format(
+//   currDate
+// );
+
+// const hrs = `${new Date().getHours()}`.padStart(2, 0);
+// const minutes = `${new Date().getMinutes()}`.padStart(2, 0);
+
+// labelDate.textContent = `${currDate.getDate()}/${
+//   currDate.getMonth() + 1
+// }/${currDate.getFullYear()}, ${hrs}:${minutes}`;
 
 function loginUser(e) {
   e.preventDefault();
@@ -213,6 +238,29 @@ function loginUser(e) {
   inputLoginPin.value = null;
   inputLoginPin.blur();
   labelWelcome.textContent = `Welcome, ${currentLoggedInAccount.owner}!`;
+
+  //create a date and time
+  const currDate = new Date();
+  const options = {
+    hour: 'numeric',
+    minute: 'numeric',
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric',
+    // weekday: 'long',
+  };
+
+  //locale coming from browser
+  // const locale = navigator.language;
+  // console.log(locale);
+
+  console.log(currentLoggedInAccount.locale);
+
+  labelDate.textContent = new Intl.DateTimeFormat(
+    currentLoggedInAccount.locale,
+    options
+  ).format(currDate);
+
   // labelDate.textContent = `${new Date().getDate()} / ${
   //   new Date().getMonth() + 1
   // } / ${new Date().getFullYear()}`;

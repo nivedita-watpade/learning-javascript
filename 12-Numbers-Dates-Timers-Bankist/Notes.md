@@ -277,3 +277,37 @@ If diffDate === 1 → returns "Yesterday"
 If diffDate === 2 → returns "2 days ago"
 
 Otherwise (3+ days) → returns localized date string (e.g., "12/1/2025")
+
+============================= Internationalization API (Intl) =================================
+
+Intl.DateTimeFormat — Definition
+
+The Intl.DateTimeFormat object is part of JavaScript’s Internationalization API (Intl).
+It is used to format dates and times according to different locales (languages/regions) and custom formatting options.
+
+✔ Helps format dates based on a country’s style (India, US, UK, Japan, etc.)
+✔ Allows customizing output like: weekday, month, year, hour, timeZone, etc.
+✔ Automatically handles things like AM/PM, month names, calendars, and formatting rules.
+
+Basic Syntax
+new Intl.DateTimeFormat(locale, options).format(date);
+locale → "en-IN", "en-US", "fr-FR", "hi-IN" etc.
+options → object defining how you want the date/time formatted
+date → any JavaScript Date object
+
+Ex.
+const date = new Date();
+const formatted = new Intl.DateTimeFormat("en-IN", {
+weekday: "long",
+year: "numeric",
+month: "long",
+day: "2-digit"
+}).format(date);
+
+console.log(formatted);
+
+Ex.
+labelDate.textContent = new Intl.DateTimeFormat(
+currentLoggedInAccount.locale,
+options
+).format(currDate)

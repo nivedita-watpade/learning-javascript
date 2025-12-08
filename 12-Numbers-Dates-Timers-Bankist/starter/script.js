@@ -212,3 +212,5 @@ const calcDaysPassed = (date1, date2) => {
 
 const Day1 = calcDaysPassed(new Date(2037, 10, 19), new Date(2037, 10, 29));
 console.log(Day1);
+
+console.log('============ Dates Internationalization API==========');
