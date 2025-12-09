@@ -359,7 +359,9 @@ function requestLoan(e) {
     alert('You are not eligible for the loan');
   }
 
-  updateUI(currentLoggedInAccount);
+  setTimeout(() => {
+    updateUI(currentLoggedInAccount);
+  }, 5000);
 
   inputLoanAmount.value = null;
 }

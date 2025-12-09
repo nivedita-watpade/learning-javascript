@@ -347,3 +347,79 @@ currency: "INR"
 );
 
 //op = ₹2,499.50
+
+=================================== setTimeout =================================
+
+setTimeout() : is a built-in JavaScript function that executes a piece of code (a function) after a specified delay.
+-It is part of the Browser Web APIs (or Node.js timers), meaning it runs asynchronously without blocking other code.
+
+Syntax:
+setTimeout(function, delay, arg1, arg2, ...)
+
+Example:
+setTimeout(
+(ing1, ing2) => {
+console.log(`Here is your Pizza with ${ing1} & ${ing2} 🍕`);
+},
+5000,
+'corn',
+'cheese'
+);
+
+console.log('Waiting...............');
+
+//op = Waiting...............
+Here is your Pizza with corn & cheese 🍕
+
+KEY POINTS:
+
+1. Executes only once: The function runs one time after the delay.
+
+2. Asynchronous (non-blocking) : It doesn't stop your code.
+   -The browser handles the timer and calls the function later using the event loop.
+
+3. Returns a timer ID: You can use this ID to cancel the timeout.
+
+4. Can be cancelled using clearTimeout()
+   clearTimeout(timerID);
+
+5. Minimum delay can be 0ms: Even with 0ms, it waits until the current code finishes (still async).
+
+6. Delay is not guaranteed: If the call stack is busy, the callback is executed after the delay, not exactly at that moment.
+
+========================== setInterval() =============================
+
+setInterval() – is a built-in JavaScript function that repeatedly executes a function after a fixed time interval.
+
+It keeps running until you stop it manually using clearInterval().
+
+Syntax: setInterval(function, delay, arg1, arg2, ...)
+
+Example:
+setInterval(() => {
+const now = new Date();
+// console.log(
+// `${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
+// );
+
+console.log(
+new Intl.DateTimeFormat('en-IN', {
+dateStyle: 'medium',
+timeStyle: 'medium',
+}).format(new Date())
+);
+}, 1000);
+
+KEY POINTS:
+
+1. Executes repeatedly: Runs again and again after the specified delay.
+
+2. Asynchronous: It does not block the main thread—runs in the background through Web APIs + event loop.
+
+3. Returns an interval ID: You use this ID to stop it.
+
+4. Stop using clearInterval(): clearInterval(intervalID);
+
+5. Delay not guaranteed: If the call stack is busy, execution may be slightly delayed.
+
+6. Can pass arguments: Just like setTimeout().

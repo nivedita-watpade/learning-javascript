@@ -229,3 +229,33 @@ console.log('US:', new Intl.NumberFormat('en-US', options).format(num1));
 console.log('Germany:', new Intl.NumberFormat('de-DE', options).format(num1));
 console.log('Syria:', new Intl.NumberFormat('ar-SY', options).format(num1));
 console.log('India:', new Intl.NumberFormat('en-IN', options).format(num1));
+
+console.log(
+  '=================setTimeout & setInterval ========================'
+);
+
+//setTimeout
+// setTimeout(
+//   (ing1, ing2) => {
+//     console.log(`Here is your Pizza with ${ing1} & ${ing2} 🍕`);
+//   },
+//   5000,
+//   'corn',
+//   'cheese'
+// );
+
+// console.log('Waiting...............');
+
+setInterval(() => {
+  const now = new Date();
+  // console.log(
+  //   `${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
+  // );
+
+//   console.log(
+//     new Intl.DateTimeFormat('en-IN', {
+//       dateStyle: 'medium',
+//       timeStyle: 'medium',
+//     }).format(new Date())
+//   );
+// }, 1000);
