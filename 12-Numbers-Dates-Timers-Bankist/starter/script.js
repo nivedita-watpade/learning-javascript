@@ -252,10 +252,10 @@ setInterval(() => {
   //   `${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
   // );
 
-//   console.log(
-//     new Intl.DateTimeFormat('en-IN', {
-//       dateStyle: 'medium',
-//       timeStyle: 'medium',
-//     }).format(new Date())
-//   );
-// }, 1000);
+  console.log(
+    new Intl.DateTimeFormat('en-IN', {
+      dateStyle: 'medium',
+      timeStyle: 'medium',
+    }).format(new Date())
+  );
+}, 1000);

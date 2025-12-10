@@ -76,7 +76,6 @@ function formattingNumbers(num) {
 }
 
 function displayMovements(accObj, sort = false) {
-  //console.log(accObj.movementsDates);
   containerMovements.innerHTML = '';
 
   const combinedMovsDates = accObj.movements.map((mov, i) => ({
@@ -84,13 +83,7 @@ function displayMovements(accObj, sort = false) {
     movementDate: accObj.movementsDates.at(i),
   }));
 
-  console.log(combinedMovsDates);
-
   if (sort) combinedMovsDates.sort((a, b) => a.movement - b.movement);
-
-  // const movs = sort
-  //   ? accObj.movements.slice().sort((a, b) => a - b)
-  //   : accObj.movements;
 
   combinedMovsDates.forEach((obj, i) => {
     const { movement, movementDate } = obj;
@@ -192,36 +185,31 @@ function updateUI(acc) {
   changeColorRow();
 }
 
-let currentLoggedInAccount;
+let currentLoggedInAccount, logoutInterval;
 
-//FAKE LOGIN
-currentLoggedInAccount = account1;
-updateUI(currentLoggedInAccount);
-containerApp.style.opacity = 1;
+function startLogoutTime() {
+  let time = 120;
 
-// const currDate = new Date();
-// const options = {
-//   hour: 'numeric',
-//   minute: 'numeric',
-//   day: 'numeric',
-//   month: 'long',
-//   year: 'numeric',
-//   weekday: 'long',
-// };
+  const startLogoutTimeInternal = () => {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
 
-// const locale = navigator.language;
-// console.log(locale);
+    labelTimer.textContent = `${min}:${sec}`;
 
-// labelDate.textContent = new Intl.DateTimeFormat(locale, options).format(
-//   currDate
-// );
+    if (time === 0) {
+      containerApp.style.opacity = 0;
+      labelWelcome.textContent = `Log in to get started`;
+      clearInterval(logoutInterval);
+    }
 
-// const hrs = `${new Date().getHours()}`.padStart(2, 0);
-// const minutes = `${new Date().getMinutes()}`.padStart(2, 0);
+    time = time - 1;
+  };
 
-// labelDate.textContent = `${currDate.getDate()}/${
-//   currDate.getMonth() + 1
-// }/${currDate.getFullYear()}, ${hrs}:${minutes}`;
+  startLogoutTimeInternal();
+
+  const logoutInterval = setInterval(startLogoutTimeInternal, 1000);
+  return logoutInterval;
+}
 
 function loginUser(e) {
   e.preventDefault();
@@ -259,10 +247,6 @@ function loginUser(e) {
     // weekday: 'long',
   };
 
-  //locale coming from browser
-  // const locale = navigator.language;
-  // console.log(locale);
-
   console.log(currentLoggedInAccount.locale);
 
   labelDate.textContent = new Intl.DateTimeFormat(
@@ -274,6 +258,9 @@ function loginUser(e) {
   //   new Date().getMonth() + 1
   // } / ${new Date().getFullYear()}`;
   updateUI(currentLoggedInAccount);
+
+  if (logoutInterval) clearInterval(logoutInterval);
+  logoutInterval = startLogoutTime();
 }
 
 btnLogin.addEventListener('click', loginUser);
@@ -323,6 +310,9 @@ function transferMoney(e) {
 
   updateUI(currentLoggedInAccount);
 
+  if (logoutInterval) clearInterval(logoutInterval);
+  logoutInterval = startLogoutTime();
+
   inputTransferTo.value = null;
   inputTransferAmount.value = null;
 }
@@ -335,7 +325,7 @@ function requestLoan(e) {
   if (!currentLoggedInAccount) {
     return;
   }
-  // const loanAmt = inputLoanAmount.value;
+
   const loanAmt = Math.floor(inputLoanAmount.value);
 
   if (!loanAmt) {
@@ -362,6 +352,9 @@ function requestLoan(e) {
   setTimeout(() => {
     updateUI(currentLoggedInAccount);
   }, 5000);
+
+  if (logoutInterval) clearInterval(logoutInterval);
+  logoutInterval = startLogoutTime();
 
   inputLoanAmount.value = null;
 }
