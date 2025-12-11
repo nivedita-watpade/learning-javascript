@@ -65,7 +65,42 @@ const allFloat = values.filter(value => {
 });
 console.log(allFloat);
 
-// Rounding Practice
+//2. Number Checks
+// Given:
+
+// const nums = [20, "20", NaN, Infinity, -5, 0, 3.14];
+
+// Return three separate arrays:
+// All integer values.
+// All finite numbers.
+// All values that are NaN.
+
+const nums = [20, '20', NaN, Infinity, -5, 0, 3.14];
+console.log(
+  nums.filter(num => {
+    if (Number.isInteger(num)) {
+      return num;
+    }
+  })
+);
+
+console.log(
+  nums.filter(num => {
+    if (Number.isFinite(num)) {
+      return num;
+    }
+  })
+);
+
+console.log(
+  nums.filter(num => {
+    if (Number.isNaN(num)) {
+      return num;
+    }
+  })
+);
+
+//3. Rounding Practice
 // For each of the following values:
 
 // [4.7, 4.3, -4.7, -4.3]
@@ -81,4 +116,51 @@ const val1 = [4.7, 4.3, -4.7, -4.3];
 const nearestInt = val1.map(val => {
   return Math.round(val);
 });
-console.log(nearestInt);
+console.log('Rounded', nearestInt);
+
+const roundedUp = val1.map(val => {
+  return Math.ceil(val);
+});
+console.log('Rounded Up', roundedUp);
+
+const roundedDown = val1.map(val => {
+  return Math.floor(val);
+});
+console.log('Rounded Down', roundedDown);
+
+const noDecimal = val1.map(val => {
+  return Math.trunc(val);
+});
+console.log('No Decimal', noDecimal);
+
+// 4. Decimal Formatting
+// Given:
+
+// const prices = [49.99, 2.5, 120.456, 5];
+
+// Return a new array where each price is formatted to exactly two decimal places as strings.
+
+const prices = [49.99, 2.5, 120.456, 5];
+console.log(
+  prices.map(price => {
+    return price.toFixed(2);
+  })
+);
+
+// 5. BigInt Operations
+// Given:
+
+// const a = 950000000000000000000n;
+// const b = 65000000000000000000n;
+
+// Compute:
+// a + b
+// a * b
+// b / a (integer result only).
+
+const a = 950000000000000000000n;
+const b = 65000000000000000000n;
+
+console.log(a + b);
+console.log(a * b);
+console.log(b / a);

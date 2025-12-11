@@ -154,3 +154,56 @@ document
 .addEventListener('click', function () {
 message.remove();
 });
+
+============================ Style ================================
+
+//STYLE
+message.style.backgroundColor = '#312e2e';
+message.style.width = '120%';
+
+console.log(message.style.backgroundColor);
+console.log(message.style.height);
+
+console.log(getComputedStyle(message).color);
+console.log(getComputedStyle(message).height);
+
+message.style.height =
+Number.parseFloat(getComputedStyle(message).height) + 25 + 'px';
+
+//Attribute
+const logo = document.querySelector('.nav\_\_logo');
+console.log(logo.alt);
+console.log(logo.className);
+
+logo.alt = 'Beautiful Logo';
+
+//Non-standard
+console.log(logo.designer); //undefined
+console.log(logo.setAttribute('compnay', 'Nivi'));
+
+console.log(logo.src); //http://127.0.0.1:5502/13-Advanced-DOM-Bankist/starter/img/logo.png
+console.log(logo.getAttribute('src')); //img/logo.png
+
+getComputedStyle() is a built-in browser method that lets you read the final, computed CSS styles of any element — exactly as the browser is applying them.
+Syntax:
+getComputedStyle(element).propertyName;
+Ex.
+message.style.height =
+Number.parseFloat(getComputedStyle(message).height) + 25 + 'px';
+
+Data Attributes: Data Attributes allow you to store extra information inside HTML elements using custom attributes that start with: data-
+-They are mainly used to pass data to JavaScript.
+
+✔ Note:
+data-user → becomes → dataset.user
+data-user-name → becomes → dataset.userName
+Ex. console.log(logo.dataset.versionNumber);
+
+//classlist have 4 methods:
+1)add
+2)remove
+3)toggle
+4)contains
+
+Ex.//classList
+logo.classList.add('test', 'dummy');

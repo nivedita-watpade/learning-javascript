@@ -70,3 +70,36 @@ document
   .addEventListener('click', function () {
     message.remove();
   });
+
+//STYLE
+message.style.backgroundColor = '#312e2e';
+message.style.width = '120%';
+
+console.log(message.style.backgroundColor);
+console.log(message.style.height);
+
+console.log(getComputedStyle(message).color);
+console.log(getComputedStyle(message).height);
+
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height) + 25 + 'px';
+
+//Attribute
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.className);
+
+logo.alt = 'Beautiful Logo';
+
+//Non-standard
+console.log(logo.designer); //undefined
+console.log(logo.setAttribute('compnay', 'Nivi'));
+
+console.log(logo.src); //http://127.0.0.1:5502/13-Advanced-DOM-Bankist/starter/img/logo.png
+console.log(logo.getAttribute('src')); //img/logo.png
+
+//Data attributes
+console.log(logo.dataset.versionNumber);
+
+//classList
+logo.classList.add('test', 'dummy');
