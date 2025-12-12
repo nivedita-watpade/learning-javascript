@@ -207,3 +207,26 @@ Ex. console.log(logo.dataset.versionNumber);
 
 Ex.//classList
 logo.classList.add('test', 'dummy');
+
+=======================================================================================
+
+1. element.getBoundingClientRect(): is a JavaScript method that returns the size of an element and its position relative to the viewport (the visible area of the browser).
+
+- It gives an object with properties like:top, left, right, bottom, width, height, x, y
+  Ex. const s1coords = section1.getBoundingClientRect();
+
+2. window.scrollTo(): is a JavaScript method used to scroll the browser window to a specific position on the page.
+   -It scrolls the entire document, not a single element.
+   Ex. window.scrollTo(s1coords.left, s1coords.top);
+
+Ex. window.scrollTo({
+top: 800,
+behavior: "smooth"
+});
+
+3. element.scrollIntoView(): is a JavaScript method that scrolls the webpage so that the element becomes visible inside the viewport.
+   It scrolls the page automatically to bring the selected element into view.
+   Ex. section1.scrollIntoView({ behavior: 'smooth' });
+
+Viewport height: document.documentElement.clientHeight
+Viewport width: document.documentElement.clientWidth
