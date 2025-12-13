@@ -133,7 +133,7 @@ console.log(allButtons);
 4. element.before(): Inserts content just before the element, as its previous sibling.
    Ex.header.before(message);
 
-5. element.before(): Inserts content just after the element, as its next sibling..
+5. element.after(): Inserts content just after the element, as its next sibling..
    Ex.header.after(message);
 
 6. cloneNode() is a DOM method that creates a copy (clone) of a DOM node.
@@ -230,3 +230,26 @@ behavior: "smooth"
 
 Viewport height: document.documentElement.clientHeight
 Viewport width: document.documentElement.clientWidth
+
+==================== Types of events and events handler =========================
+
+In JavaScript (DOM), events are actions that happen in the browser, and event handlers are functions that respond to those events.
+
+//TYPE OF EVENTS
+const h1 = document.querySelector('h1');
+
+const alertH1 = function (e) {
+alert('You are reading the mouseenter events!');
+h1.removeEventListener('mouseenter', alertH1);
+};
+
+h1.addEventListener('mouseenter', alertH1);
+
+h1.onclick = function (e) {
+alert('You are reading the onClick events!');
+};
+
+removeEventListener() in JavaScript
+removeEventListener() is used to remove an event handler that was previously added using addEventListener().
+
+h1.removeEventListener('mouseenter', alertH1);

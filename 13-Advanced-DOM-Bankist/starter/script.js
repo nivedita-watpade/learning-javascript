@@ -122,3 +122,17 @@ btnScrollTo.addEventListener('click', function (e) {
 
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+
+//TYPE OF EVENTS
+const h1 = document.querySelector('h1');
+
+const alertH1 = function (e) {
+  alert('You are reading the mouseenter events!');
+  h1.removeEventListener('mouseenter', alertH1);
+};
+
+h1.addEventListener('mouseenter', alertH1);
+
+h1.onclick = function (e) {
+  alert('You are reading the onClick events!');
+};
