@@ -124,15 +124,44 @@ btnScrollTo.addEventListener('click', function (e) {
 });
 
 //TYPE OF EVENTS
-const h1 = document.querySelector('h1');
+// const h1 = document.querySelector('h1');
 
-const alertH1 = function (e) {
-  alert('You are reading the mouseenter events!');
-  h1.removeEventListener('mouseenter', alertH1);
+// const alertH1 = function (e) {
+//   alert('You are reading the mouseenter events!');
+//   h1.removeEventListener('mouseenter', alertH1);
+// };
+
+// h1.addEventListener('mouseenter', alertH1);
+
+// h1.onclick = function (e) {
+//   alert('You are reading the onClick events!');
+// };
+
+//rgb(255,255,255)
+
+const randomInt = function (min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-h1.addEventListener('mouseenter', alertH1);
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
 
-h1.onclick = function (e) {
-  alert('You are reading the onClick events!');
-};
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('Link', e.target);
+  console.log('Link', e.currentTarget);
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('Container', e.target);
+  console.log('Container', e.currentTarget);
+  //STOP PROPOGATION
+  //e.stopPropagation();
+});
+
+document.querySelector('.nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('Nav', e.target);
+  console.log('Nav', e.currentTarget);
+});

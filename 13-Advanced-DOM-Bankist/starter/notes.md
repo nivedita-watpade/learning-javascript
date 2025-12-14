@@ -253,3 +253,119 @@ removeEventListener() in JavaScript
 removeEventListener() is used to remove an event handler that was previously added using addEventListener().
 
 h1.removeEventListener('mouseenter', alertH1);
+
+=============================== Event Propogation - Capturing & Bubbling ==============================
+Event Propagation – Bubbling Phase
+Definition
+The bubbling phase is the last phase of event propagation in the DOM.
+In this phase, the event starts from the target element and moves upward through its parent elements until it reaches the root (document / window).
+
+Order:
+Target → Parent → Body → HTML → Document → Window
+By default, event listeners listen in the bubbling phase
+
+Example: Bubbling Phase in Action
+
+HTML
+
+<div id="parent">
+  <button id="child">Click me</button>
+</div>
+
+JavaScript
+document.getElementById("parent").addEventListener("click", () => {
+console.log("Parent clicked (bubbling)");
+});
+
+document.getElementById("child").addEventListener("click", () => {
+console.log("Child clicked");
+});
+
+Output when button is clicked
+Child clicked
+Parent clicked (bubbling)
+
+✔️ The event is handled first by the child,
+✔️ then it bubbles up to the parent
+
+================ Example (Bubbling + e.target vs e.currentTarget):================
+
+<div id="parent">
+  <button id="child">Click me</button>
+</div>
+
+document.getElementById("parent").addEventListener("click", function (e) {
+console.log("Parent listener");
+console.log("e.target:", e.target.id);
+console.log("e.currentTarget:", e.currentTarget.id);
+});
+
+document.getElementById("child").addEventListener("click", function (e) {
+console.log("Child listener");
+console.log("e.target:", e.target.id);
+console.log("e.currentTarget:", e.currentTarget.id);
+});
+
+Output:
+
+Child listener
+e.target: child
+e.currentTarget: child
+
+Parent listener
+e.target: child
+e.currentTarget: parent
+
+Quick Rule to Remember
+target = clicked element
+currentTarget = listener element
+
+document.getElementById("child").addEventListener("click", (e) => {
+e.stopPropagation();
+});
+This prevents the event from reaching parent elements
+
+================= Event Propagation – Capturing Phase =================
+Definition
+The capturing phase (also called the trickling phase) is the first phase of event propagation in the DOM.
+In this phase, the event travels from the top of the DOM tree (window → document → ancestors) down to the target element, before the event actually reaches the element where it occurred.
+
+Order:
+Window → Document → HTML → Body → Parent → Target
+By default, event listeners do NOT listen in the capturing phase.
+To enable capturing, you must explicitly set it to true.
+
+<div id="parent">
+<button id="child">Click me</button>
+
+</div>
+
+document.getElementById("parent").addEventListener(
+"click",
+() => {
+console.log("Parent clicked (capturing)");
+},
+true // enable capturing
+);
+
+document.getElementById("child").addEventListener(
+"click",
+() => {
+console.log("Child clicked");
+}
+);
+
+Output when button is clicked:
+Parent clicked (capturing)
+Child clicked
+✔️ The event is captured by the parent first,
+✔️ then it reaches the child (target phase).
+
+Key Points (Easy to Remember)
+
+Capturing phase happens before bubbling:
+
+Direction: Top → Down
+Disabled by default
+Enabled using:
+addEventListener(event, handler, true)
