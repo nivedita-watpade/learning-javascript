@@ -7,6 +7,8 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
 const openModal = function () {
   modal.classList.remove('hidden');
@@ -17,9 +19,6 @@ const closeModal = function () {
   modal.classList.add('hidden');
   overlay.classList.add('hidden');
 };
-
-// for (let i = 0; i < btnsOpenModal.length; i++)
-//   btnsOpenModal[i].addEventListener('click', openModal);
 
 btnsOpenModal.forEach(btnModal => {
   btnModal.addEventListener('click', openModal);
@@ -33,6 +32,50 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+//Buttton Scrolling
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+  console.log(e.target.getBoundingClientRect());
+  console.log(
+    `height/width viewport`,
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  //scrolling
+  // window.scrollTo(s1coords.left, s1coords.top);
+
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+//Page Navigation
+
+// document.querySelectorAll('.nav__link').forEach(el => {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const sectionID = this.getAttribute('href');
+//     document.querySelector(sectionID)?.scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
+
+//Event Delegation
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  //Matching Stategy
+  if (e.target.classList.contains('nav__link')) {
+    const sectionId = e.target.getAttribute('href');
+    if (sectionId === '#') return;
+    document.querySelector(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
 
 // SELECTING ELEMENTS
 
@@ -104,25 +147,6 @@ console.log(logo.dataset.versionNumber);
 //classList
 logo.classList.add('test', 'dummy');
 
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
-
-btnScrollTo.addEventListener('click', function (e) {
-  const s1coords = section1.getBoundingClientRect();
-  console.log(s1coords);
-  console.log(e.target.getBoundingClientRect());
-  console.log(
-    `height/width viewport`,
-    document.documentElement.clientHeight,
-    document.documentElement.clientWidth
-  );
-
-  //scrolling
-  // window.scrollTo(s1coords.left, s1coords.top);
-
-  section1.scrollIntoView({ behavior: 'smooth' });
-});
-
 //TYPE OF EVENTS
 // const h1 = document.querySelector('h1');
 
@@ -139,29 +163,29 @@ btnScrollTo.addEventListener('click', function (e) {
 
 //rgb(255,255,255)
 
-const randomInt = function (min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
+// const randomInt = function (min, max) {
+//   return Math.floor(Math.random() * (max - min + 1) + min);
+// };
 
-const randomColor = () =>
-  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+// const randomColor = () =>
+//   `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
 
-document.querySelector('.nav__link').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('Link', e.target);
-  console.log('Link', e.currentTarget);
-});
+// document.querySelector('.nav__link').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log('Link', e.target);
+//   console.log('Link', e.currentTarget);
+// });
 
-document.querySelector('.nav__links').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('Container', e.target);
-  console.log('Container', e.currentTarget);
-  //STOP PROPOGATION
-  //e.stopPropagation();
-});
+// document.querySelector('.nav__links').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log('Container', e.target);
+//   console.log('Container', e.currentTarget);
+//   //STOP PROPOGATION
+//   //e.stopPropagation();
+// });
 
-document.querySelector('.nav').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('Nav', e.target);
-  console.log('Nav', e.currentTarget);
-});
+// document.querySelector('.nav').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log('Nav', e.target);
+//   console.log('Nav', e.currentTarget);
+// });

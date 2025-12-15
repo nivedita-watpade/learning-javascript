@@ -164,3 +164,157 @@ const b = 65000000000000000000n;
 console.log(a + b);
 console.log(a * b);
 console.log(b / a);
+
+// Date Creation
+// Create Date objects for:
+// 15 August 2027, 9:30 AM (local time).
+// The current moment (now).
+// A date that is exactly 10 days from now.
+
+const aug15Date = new Date(2027, 7, 15, 9, 30, 0);
+console.log('15 August 2027, 9:30 AM:', aug15Date);
+
+const now = new Date();
+console.log('Current time:', now);
+
+const newDate = new Date();
+newDate.setDate(newDate.getDate() + 10);
+console.log('10 days from now:', newDate);
+
+// Date Operations
+// Given:
+
+// const d1 = new Date(2029, 4, 12);
+// const d2 = new Date(2029, 4, 20);
+
+// Find:
+// The difference between d2 and d1 in milliseconds.
+// The difference in whole days.
+// A message like "Today", "Yesterday", "X days ago" based on the difference.
+
+const d1 = new Date(2029, 4, 12);
+const d2 = new Date(2029, 4, 20);
+
+const diffBetweenDate = d2 - d1;
+console.log(diffBetweenDate);
+
+const wholeDay = diffBetweenDate / (1000 * 60 * 60 * 24);
+console.log(wholeDay);
+
+if (wholeDay === 0) {
+  console.log('Today');
+} else if (wholeDay < 0) {
+  console.log('Yesterday');
+} else if (wholeDay > 0) {
+  console.log(`${wholeDay} days ago`);
+}
+
+// Intl – Date Formatting
+// Format the following date:
+
+// const dt = new Date(2030, 10, 5, 18, 45);
+
+// For the following locales:
+// "en-IN"
+// "en-US"
+// "hi-IN"
+// Use:
+// Long weekday
+// Numeric day
+// Long month
+// Numeric year
+
+const dt = new Date(2030, 10, 5, 18, 45);
+
+const options = {
+  week: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+};
+
+console.log('India:', new Intl.DateTimeFormat('en-IN', options).format(dt));
+console.log('US:', new Intl.DateTimeFormat('en-US', options).format(dt));
+console.log('Hindi:', new Intl.DateTimeFormat('hi-IN', options).format(dt));
+
+// Intl – Number Formatting
+// Given:
+
+// const amount = 9876543.21;
+
+// Format this number as:
+// Indian currency (INR).
+// US currency (USD).
+// A percentage.
+// A plain number with exactly three decimal places.
+
+const amount = 9876543.21;
+
+console.log(
+  'India:',
+  new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+  }).format(amount)
+);
+
+console.log(
+  'US:',
+  new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(amount)
+);
+
+// console.log(
+//   'US:',
+//   new Intl.NumberFormat('en-IN', {
+//     style: 'percentage',
+//   }).format(amount)
+// );
+
+const plainNum = Math.trunc(amount);
+const plainNum1 = plainNum.toFixed(3);
+console.log(plainNum1);
+
+// Timer Logic
+// Implement:
+// A timeout that logs "Loading user data..." after 3 seconds.
+// A timeout that is created but then cancelled before it executes.
+// An interval that prints the current time every second, formatted using Intl.DateTimeFormat.
+
+setTimeout(function () {
+  console.log('Loading...');
+}, 3000);
+
+const timeoutToCancel = setTimeout(() => {
+  console.log('This will not run.');
+}, 5000);
+
+clearTimeout(timeoutToCancel);
+
+setInterval(() => {
+  console.log(
+    new Intl.DateTimeFormat('en-IN', {
+      dateStyle: 'medium',
+      timeStyle: 'medium',
+    }).format(new Date())
+  );
+}, 1000);
+
+// D
+// Real-World Scenario-Based Problems
+// Use the concepts above to solve these story-based challenges.
+
+// Scenario 1 – E-Commerce Price Engine
+// A shopping website logs raw product prices in different formats:
+
+// const rawPrices = ["₹1,299.50", "2499.99", "5600", "12.5%", "4,999"];
+
+// Extract the numeric value from each entry.
+// Convert the percentage value into a decimal number.
+// Round all numeric values to two decimal places.
+// Format all cleaned numbers as Indian currency using Intl.NumberFormat.
+// Compute the total price of all valid numeric values.
+
+const rawPrices = ['₹1,299.50', '2499.99', '5600', '12.5%', '4,999'];

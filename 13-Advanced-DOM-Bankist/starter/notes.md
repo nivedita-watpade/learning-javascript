@@ -369,3 +369,58 @@ Direction: Top → Down
 Disabled by default
 Enabled using:
 addEventListener(event, handler, true)
+
+====================================== Event Delegation in JavaScript======================================
+
+Event Delegation: Event delegation is a JavaScript technique where a single event listener is attached to a parent element instead of multiple child elements.
+It works by using event bubbling, where events propagate from the target element up to its ancestors.
+
+Key Points:
+-Uses event bubbling (events move from child → parent)
+-Improves performance by reducing the number of event listeners
+-Useful for dynamically added elements
+-Commonly uses event.target to identify which child triggered the event
+-Cleaner and more maintainable code
+
+Ex.
+
+<div id="container">
+  <button class="btn">Button 1</button>
+  <button class="btn">Button 2</button>
+  <button class="btn">Button 3</button>
+</div>
+
+<script>
+document.getElementById("container").addEventListener("click", function (event) {
+  if (event.target.classList.contains("btn")) {
+    console.log("Clicked:", event.target.textContent);
+  }
+});
+</script>
+
+//Event Delegation
+document.querySelector('.nav\_\_links').addEventListener('click', function (e) {
+e.preventDefault();
+
+//Matching Stategy
+if (e.target.classList.contains('nav\_\_link')) {
+const sectionId = e.target.getAttribute('href');
+if (sectionId === '#') return;
+document.querySelector(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+}
+});
+
+✔ One event listener on the parent
+✔ Works for existing and future buttons
+
+Difference between event.target and event.currentTarget?
+
+event.target
+-Actual clicked element
+-Child element
+-Changes based on click
+
+event.currentTarget
+-Element with listener
+-Parent element
+-Always same
