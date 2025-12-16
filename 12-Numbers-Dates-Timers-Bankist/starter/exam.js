@@ -293,14 +293,14 @@ const timeoutToCancel = setTimeout(() => {
 
 clearTimeout(timeoutToCancel);
 
-setInterval(() => {
-  console.log(
-    new Intl.DateTimeFormat('en-IN', {
-      dateStyle: 'medium',
-      timeStyle: 'medium',
-    }).format(new Date())
-  );
-}, 1000);
+// setInterval(() => {
+//   console.log(
+//     new Intl.DateTimeFormat('en-IN', {
+//       dateStyle: 'medium',
+//       timeStyle: 'medium',
+//     }).format(new Date())
+//   );
+// }, 1000);
 
 // D
 // Real-World Scenario-Based Problems
@@ -313,8 +313,62 @@ setInterval(() => {
 
 // Extract the numeric value from each entry.
 // Convert the percentage value into a decimal number.
+
 // Round all numeric values to two decimal places.
 // Format all cleaned numbers as Indian currency using Intl.NumberFormat.
 // Compute the total price of all valid numeric values.
 
 const rawPrices = ['₹1,299.50', '2499.99', '5600', '12.5%', '4,999'];
+//1.
+const numericValue = rawPrices.map(price => Number.parseInt(price, 10));
+console.log(numericValue.filter(num => Number.isFinite(num)));
+
+// Scenario 2 – Fitness App Streak Calculation
+// A user's workout dates are stored as:
+
+// const logs = [
+//   "2025-01-01",
+//   "2025-01-03",
+//   "2025-01-04",
+//   "2025-01-10",
+//   "2025-01-11"
+// ];
+
+// Convert each log string into a Date object.
+// Calculate the gap in days between each consecutive workout.
+// Identify the longest gap between any two workouts.
+// For the most recent workout, output a message like "Yesterday", "2 days ago", or "X days ago".
+
+const logs = [
+  '2025-01-01',
+  '2025-01-03',
+  '2025-01-04',
+  '2025-01-10',
+  '2025-01-11',
+];
+
+//1
+const datesObj = logs.map(log => new Date(log));
+console.log(datesObj);
+
+// Scenario 3 – Banking App Statement Generator
+// A banking app stores transaction timestamps as:
+
+// const txDates = [
+//   "2025-07-01T10:15",
+//   "2025-07-03T14:20",
+//   "2025-07-03T14:25",
+//   "2025-07-10T09:00"
+// ];
+
+// Convert each timestamp string into a Date object.
+// Compute the time difference (in hours or minutes) between each consecutive transaction.
+// Format each timestamp in the user's locale (assume "en-IN").
+// For each transaction, display a relative message such as "Today", "Yesterday", or "X days ago".
+
+const txDates = [
+  '2025-07-01T10:15',
+  '2025-07-03T14:20',
+  '2025-07-03T14:25',
+  '2025-07-10T09:00',
+];

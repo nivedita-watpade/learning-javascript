@@ -424,3 +424,75 @@ event.currentTarget
 -Element with listener
 -Parent element
 -Always same
+
+==================================== DOM Traversing =================================
+
+DOM Traversing –
+DOM Traversing in JavaScript is the process of navigating through the Document Object Model (DOM) tree to access, select, and manipulate parent, child, and sibling elements of a given HTML element.
+
+DOM traversing is the technique of moving through the DOM tree to access related elements such as parents, children, and siblings.
+
+DOM Traversing – Going Downwards (Children)
+
+1. h1.querySelectorAll('.highlight')
+   Searches inside h1 only
+   Returns all descendant elements with class .highlight
+   Output type: NodeList
+   Can select deeply nested children
+
+2. h1.childNodes: Returns all child nodes of h1
+
+3. h1.children: Returns only element nodes
+   Ignores text and comment nodes
+   Most commonly used for DOM traversal
+
+4. h1.firstElementChild: Selects the first child element
+   Used to apply styles or manipulate first child
+   Example:
+   h1.firstElementChild.style.color = 'white';
+
+5. h1.lastElementChild: Selects the last child element
+   Example:
+   h1.lastElementChild.style.color = 'red';
+
+DOM Traversing – Going Upwards (Parent)
+
+//Going upwards: Parent
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+h1.closest('.header').style.background = 'var(--gradient-primary)';
+h1.closest('h1').style.background = 'var(--gradient-secondary)';
+
+closest() finds the nearest ancestor (including itself) that matches a given CSS selector.
+
+1. h1.closest('.header')
+   Searches upwards in the DOM tree
+   Finds the nearest ancestor (or itself) matching .header
+   Very useful when working with event delegation
+
+2. h1.closest('h1')
+   Checks the element itself first
+   Since h1 matches, it returns the same element
+
+DOM Traversing – Going Sideways (Siblings)
+
+1. h1.previousElementSibling : Returns the previous sibling element of h1
+   -if no previous element exists it returns null
+
+2. h1.nextElementSibling : Returns the next sibling element of h1
+   -if no previous element exists it returns null
+
+//Going sideways: Siblings
+
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+console.log(h1.parentElement.children);
+[...h1.parentElement.children].forEach(el => {
+if (el !== h1) {
+el.style.transform = 'scale(0.5)';
+}
+});
