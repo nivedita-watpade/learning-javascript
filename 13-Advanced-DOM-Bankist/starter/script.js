@@ -72,6 +72,34 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   }
 });
 
+const tabsBtn = document.querySelectorAll('.operations__tab');
+const operationsContent = document.querySelectorAll('.operations__content');
+const tabContainer = document.querySelector('.operations__tab-container');
+
+tabContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab');
+
+  //Gaurd Clause
+  if (!clicked) return;
+
+  //Remove Active class
+  tabsBtn.forEach(btn => {
+    btn.classList.remove('operations__tab--active');
+  });
+  //Activate tab btn
+  clicked.classList.add('operations__tab--active');
+
+  operationsContent.forEach(content =>
+    content.classList.remove('operations__content--active')
+  );
+
+  const tabId = clicked.dataset.tab;
+  const selectedTab = document.querySelector(`.operations__content--${tabId}`);
+
+  //Activate tab content
+  selectedTab.classList.add('operations__content--active');
+});
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
