@@ -464,6 +464,7 @@ h1.closest('.header').style.background = 'var(--gradient-primary)';
 h1.closest('h1').style.background = 'var(--gradient-secondary)';
 
 closest() finds the nearest ancestor (including itself) that matches a given CSS selector.
+Finds the nearest parent matching a selector
 
 1. h1.closest('.header')
    Searches upwards in the DOM tree
@@ -496,3 +497,41 @@ if (el !== h1) {
 el.style.transform = 'scale(0.5)';
 }
 });
+
+============================= Intersection Observer API ===================
+
+Intersection Observer API (JavaScript): The Intersection Observer API lets you detect when an element enters or leaves the viewport (or a parent container) — without using scroll events.
+It’s efficient, modern, and widely used for lazy loading, animations, infinite scroll, etc.
+
+Intersection Observer observes a target element and tells you when it intersects with a root element (usually the viewport).
+
+Observer: Watches one or more elements
+Target: Element being observed
+Root: Viewport or parent container
+Threshold: % of visibility needed to trigger
+isIntersecting: true when element is visible
+
+Basic Syntax
+const observer = new IntersectionObserver(callback, options);
+observer.observe(targetElement);
+
+const box = document.querySelector(".box");
+
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+console.log("Element is visible!");
+}
+});
+});
+
+observer.observe(box);
+const options = {
+root: null, // viewport
+rootMargin: "0px",
+threshold: 0.5 // 50% visible
+};
+
+threshold: 0 // Trigger as soon as element appears
+threshold: 1 // Trigger when fully visible
+threshold: [0, 0.5, 1]

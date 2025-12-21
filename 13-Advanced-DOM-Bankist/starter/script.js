@@ -100,6 +100,90 @@ tabContainer.addEventListener('click', function (e) {
   selectedTab.classList.add('operations__content--active');
 });
 
+//Added animation to the nav links
+
+const nav = document.querySelector('.nav');
+const navLinks = document.querySelectorAll('.nav__link');
+
+// const handleHover = function (e, opacity) {
+//   if (e.target.classList.contains('nav__link')) {
+//     navLinks.forEach(navLink => (navLink.style.opacity = opacity));
+//     e.target.style.opacity = 1;
+//     const logo = e.target.closest('.nav__links')?.previousElementSibling;
+//     logo ? (logo.style.opacity = opacity) : null;
+//   }
+// };
+
+// nav.addEventListener('mouseover', function (e) {
+//   handleHover(e, 0.5);
+// });
+
+// nav.addEventListener('mouseout', function (e) {
+//   handleHover(e, 1);
+// });
+
+const handleHover = function (e) {
+  if (e.target.classList.contains('nav__link')) {
+    navLinks.forEach(navLink => (navLink.style.opacity = this));
+    e.target.style.opacity = 1;
+    const logo = e.target.closest('.nav__links')?.previousElementSibling;
+    logo ? (logo.style.opacity = this) : null;
+  }
+};
+
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+
+nav.addEventListener('mouseout', handleHover.bind(1));
+
+//Sticky Navigation:
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+
+const obsCallback = function (entries, observer) {
+  entries.forEach(entry => {
+    console.log(entry);
+    if (entry.isIntersecting) nav.classList.remove('sticky');
+    if (!entry.isIntersecting) nav.classList.add('sticky');
+  });
+};
+
+const obsOptions = {
+  root: null, //relative to viewport
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+};
+
+const observer = new IntersectionObserver(obsCallback, obsOptions).observe(
+  header
+);
+
+// Revealing Sections on the scroll
+
+const sections = document.querySelectorAll('.section');
+
+function obsSectionCallback(entries, observer) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.remove('section--hidden');
+      observer.unobserve(entry.target);
+    }
+  });
+}
+
+const obsSectionOpt = {
+  root: null,
+  threshold: 0.1,
+};
+
+const sectionObserver = new IntersectionObserver(
+  obsSectionCallback,
+  obsSectionOpt
+);
+
+sections.forEach(section => {
+  sectionObserver.observe(section);
+});
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -111,7 +195,6 @@ console.log(document.documentElement);
 console.log(document.head);
 console.log(document.body);
 
-const header = document.querySelector('.header');
 const allSections = document.querySelectorAll('.section');
 console.log(allSections);
 
