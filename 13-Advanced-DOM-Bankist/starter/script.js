@@ -184,6 +184,36 @@ sections.forEach(section => {
   sectionObserver.observe(section);
 });
 
+//Lazy Load effect
+
+const allImages = document.querySelectorAll('.features__img');
+
+function obsImgCallback(entries, observe) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const dataImg = entry.target.getAttribute('data-src');
+      entry.target.setAttribute('src', dataImg);
+      entry.target.addEventListener('load', function () {
+        entry.target.classList.remove('lazy-img');
+      });
+
+      observe.unobserve(entry.target);
+    }
+  });
+}
+
+const obsImgOpt = {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px',
+};
+
+const imgObserver = new IntersectionObserver(obsImgCallback, obsImgOpt);
+
+allImages.forEach(img => {
+  imgObserver.observe(img);
+});
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
