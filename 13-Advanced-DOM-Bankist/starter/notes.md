@@ -576,3 +576,86 @@ e.returnValue = '';
 });
 
 Use DOMContentLoaded for DOM manipulation, load for full page readiness, and beforeunload to warn users before leaving the page.
+
+======================== Defer & async ========================
+
+Regular Script (<script>): A regular script is loaded and executed immediately when the browser encounters it while parsing HTML.
+Key Points:
+-HTML parsing stops until:
+1.the script is downloaded
+2.the script is executed
+-Can block page rendering
+-Scripts execute in the order they appear
+-DOM may not be fully available
+Ex. <script src="script.js"></script>
+
+Async Script (async): An async script is downloaded in parallel with HTML parsing and executed as soon as it’s ready, without waiting for HTML to finish parsing.
+
+Key Points:
+-Does not block HTML parsing while downloading
+-Execution pauses HTML parsing
+-Execution order is not guaranteed
+-DOM may not be fully loaded
+-Best for independent scripts
+Ex. <script src="script.js" async></script>
+
+Defer Script (defer): A deferred script is downloaded in parallel with HTML parsing but executed after HTML parsing is complete.
+
+Key Points:
+-Does not block HTML parsing
+-Executes after DOM is fully built
+-Execution order is preserved
+-Safe to access DOM elements
+Ex. <script src="script.js" defer></script>
+
+1. DOMContentLoaded with defer:
+   defer scripts are downloaded in parallel
+   Executed after HTML parsing
+   Before DOMContentLoaded fires
+
+Key Points:
+-DOMContentLoaded waits for all defer scripts
+-DOM is 100% ready
+-Execution order is preserved
+-Safest for DOM manipulation
+
+HTML parsing
+↓
+Defer scripts execute (in order)
+↓
+DOMContentLoaded fires
+
+2. DOMContentLoaded with async
+   async scripts download in parallel
+   Execute immediately when ready
+   Do NOT wait for HTML parsing
+   Do NOT wait for DOMContentLoaded
+
+Key Points:
+DOMContentLoaded does NOT wait for async scripts
+Async script may run:
+Before DOM is ready
+After DOM is ready
+Execution order not guaranteed
+
+HTML parsing
+↙ ↘
+Async script executes (any time)
+↓
+DOMContentLoaded fires
+
+Execution Order in async:
+Async scripts execute as soon as they finish downloading, not in the order they appear in HTML.
+HTML parsing ──────────────
+↓ ↓
+b.js a.js (any order)
+↓
+DOMContentLoaded
+
+Execution Order in defer:
+Defer scripts execute after HTML parsing is complete, in the exact order they appear in HTML.
+HTML parsing ──────────────
+↓
+a.js → b.js
+↓
+DOMContentLoaded
