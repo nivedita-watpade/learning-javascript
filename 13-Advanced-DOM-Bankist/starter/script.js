@@ -214,6 +214,96 @@ allImages.forEach(img => {
   imgObserver.observe(img);
 });
 
+//Slider
+
+const slider = function () {
+  const slides = document.querySelectorAll('.slide');
+  const dotContainers = document.querySelector('.dots');
+
+  let currSlide = 0;
+
+  slides.forEach((slide, index) => {
+    const transformValue = index * 100;
+    slide.style.transform = `translateX(${transformValue}%)`;
+  });
+
+  function goToSlide(slideNum) {
+    slides.forEach((slide, index) => {
+      slide.style.transform = `translateX(${(index - slideNum) * 100}%)`;
+    });
+  }
+
+  function nextSlide() {
+    if (currSlide === slides.length - 1) {
+      currSlide = 0;
+    } else {
+      currSlide++;
+    }
+
+    goToSlide(currSlide);
+    activateDot(currSlide);
+  }
+
+  function prevSlide() {
+    if (currSlide === slides.length - 1) {
+      currSlide--;
+    } else {
+      currSlide = 0;
+    }
+    goToSlide(currSlide);
+    activateDot(currSlide);
+  }
+
+  const createDots = function () {
+    slides.forEach(function (_, i) {
+      dotContainers.insertAdjacentHTML(
+        'beforeend',
+        `<button class="dots__dot" data-slide="${i}"></button>`
+      );
+    });
+  };
+
+  const activateDot = function (slide) {
+    document
+      .querySelectorAll('.dots__dot')
+      .forEach(dot => dot.classList.remove('dots__dot--active'));
+
+    document
+      .querySelector(`.dots__dot[data-slide = "${slide}"]`)
+      .classList.add('dots__dot--active');
+  };
+
+  function init() {
+    goToSlide(0);
+    createDots();
+    activateDot(0);
+  }
+
+  init();
+
+  document
+    .querySelector('.slider__btn--right')
+    .addEventListener('click', nextSlide);
+
+  document
+    .querySelector('.slider__btn--left')
+    .addEventListener('click', prevSlide);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') nextSlide();
+    e.key === 'ArrowLeft' && prevSlide();
+  });
+
+  dotContainers.addEventListener('click', function (e) {
+    if (e.target.classList.contains('dots__dot')) {
+      const { slide } = e.target.dataset;
+      goToSlide(slide);
+      activateDot(slide);
+    }
+  });
+};
+
+slider();
 //////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -363,4 +453,17 @@ console.log(h1.nextSibling);
 //   if (el !== h1) {
 //     el.style.transform = 'scale(0.5)';
 //   }
+// });
+
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML Parsed & DOM tree built!', e);
+});
+
+window.addEventListener('load', function (e) {
+  console.log('Page fully loaded', e);
+});
+
+// window.addEventListener('beforeunload', function (e) {
+//   e.preventDefault();
+//   e.returnValue = '';
 // });

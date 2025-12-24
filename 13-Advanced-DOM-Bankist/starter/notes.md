@@ -535,3 +535,44 @@ threshold: 0.5 // 50% visible
 threshold: 0 // Trigger as soon as element appears
 threshold: 1 // Trigger when fully visible
 threshold: [0, 0.5, 1]
+
+==============================================================================
+
+1. DOMContentLoaded:
+   -Fires when the HTML is completely parsed
+   -The DOM tree is built
+   -Does NOT wait for images, videos, fonts, or external resources
+   -Best event to run DOM-related JavaScript
+   -Faster than window.load
+   -Triggered on document
+
+Ex. document.addEventListener('DOMContentLoaded', function (e) {
+console.log('HTML Parsed & DOM tree built!', e);
+});
+
+2. load
+   -Fires after the entire page is fully loaded
+   -Waits for:bImages, CSS, Fonts, Videos
+   -Triggered on window
+   -Slower than DOMContentLoaded
+
+window.addEventListener('load', function (e) {
+console.log('Page fully loaded', e);
+});
+
+3. beforeunload
+   Fires just before the user leaves the page
+   Triggered when:
+   -Closing tab/browser
+   -Refreshing page
+   -Navigating to another URL
+   Allows you to warn the user
+   e.preventDefault() is required
+   Modern browsers show a default confirmation message (custom text not allowed)
+
+Ex. window.addEventListener('beforeunload', function (e) {
+e.preventDefault();
+e.returnValue = '';
+});
+
+Use DOMContentLoaded for DOM manipulation, load for full page readiness, and beforeunload to warn users before leaving the page.
