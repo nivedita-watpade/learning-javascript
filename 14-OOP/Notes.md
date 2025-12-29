@@ -35,3 +35,60 @@
 
 -Same method name → different behavior in different classes
 -Child class can override parent class methods
+
+======================================= Prototype in js =========================
+
+-Objects are linked to a prototype object;
+
+-Prototypal inheritance: The prototype contains methods (behavior) that are accessible to all objects linked to that prototype;
+
+-Behavior is delegated to the linked prototype object;
+
+Prototype: (Contains methods)
+
+Object:(Can access methods)
+
+3 ways of implementing prototypal inheritance in JavaScript are:
+
+1. Constructor Functions
+   Technique to create objects from a function
+   This is how built-in objects like Arrays, Maps or Sets are actually implemented
+
+2. ES6 Classes
+   Modern alternative to constructor function syntax
+   “Syntactic sugar”: behind the scenes, ES6 classes work exactly like constructor functions
+   ES6 classes do NOT behave like classes in “classical OOP”
+
+3. Object.create()
+   The easiest and most straightforward way of linking an object to a prototype object
+
+=======================================================================================
+
+new operator: The new operator is used to create an instance of an object from a constructor function or class.
+
+const user = new Person("John");
+
+JavaScript does 4 things automatically:
+
+1. A new empty object is created
+2. The object is linked to the constructor’s prototype
+3. this inside the constructor points to the new object
+4. The object is returned automatically
+
+Ex.
+const Person = function (firstName, birthYear) {
+this.firstName = firstName;
+this.birthYear = birthYear;
+};
+
+console.log(new Person('Nivi', 2001));
+console.log(new Person('Pranit', 2000));
+
+instanceof Operator:
+The instanceof operator checks if an object was created from a specific constructor (or belongs to its prototype chain).
+Ex.
+const nivi = new Person('Nivi', 2001);
+const jay = 'abc';
+
+console.log(nivi instanceof Person); //true
+console.log(jay instanceof Person); //false
