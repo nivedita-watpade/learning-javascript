@@ -92,3 +92,157 @@ const jay = 'abc';
 
 console.log(nivi instanceof Person); //true
 console.log(jay instanceof Person); //false
+
+============================================================================================
+
+Prototype:
+In JavaScript, objects can inherit properties and methods from another object through a special internal link called prototype.
+Constructor functions + prototype together help us create many objects efficiently and share common methods.
+
+Ex.
+Person.prototype.calcAge = function () {
+console.log(2037 - this.birthYear);
+};
+
+Prototypal inheritance using constructor functions allows:
+Creating objects with a blueprint (constructor)
+Sharing methods using .prototype
+Reusing functionality using inheritance chain
+
+1. Person.prototype.isPrototypeOf(object)
+   Checks whether Person.prototype exists in the prototype chain of the given object.
+   Returns true or false.
+   Ex. console.log(Person.prototype.isPrototypeOf(nivi)); //true
+   console.log(Person.prototype.isPrototypeOf(Person)); //false
+
+2. **proto**(consider ** as a underscore)
+   It is an internal reference that points to the prototype object from which it inherits.
+   Every created object automatically has a **proto\*\* property.
+   Ex. console.log(nivi.**proto**);
+
+Add property in the prototype:
+
+Properties added on prototype are shared
+Ex.Person.prototype.species = 'Devil';
+console.log(nivi.species);
+
+hasOwnProperty(): Used to check if a property exists directly on the object itself, NOT on the prototype.
+
+Ex.console.log(nivi.hasOwnProperty('firstName')); //true
+console.log(nivi.hasOwnProperty('species')); //false
+
+============================================================================================================
+
+How Prototypal Inheritance / Delegation Works
+
+1️⃣ Constructor Function
+const Person = function(name, birthYear) {
+this.name = name;
+this.birthYear = birthYear;
+};
+
+Acts like a blueprint for creating objects.
+Defines properties that will exist on each object made using new.
+
+2️⃣ Prototype
+Every constructor function automatically gets a property called:
+Person.prototype
+This prototype object is not the prototype of the constructor itself — it is the prototype of objects created by Person.
+You add shared methods here → more memory-efficient.
+
+Example:
+Person.prototype.calcAge = function() { ... };
+
+3️⃣ The new Operator – What Happens Behind the Scenes
+When you call:
+const jonas = new Person('Jonas', 1990);
+
+The new keyword performs 4 steps:
+Step Description
+1️⃣ Creates a new empty object
+2️⃣ Sets this inside the constructor function → refers to that new object
+3️⃣ Links the new object to the constructor’s prototype → sets jonas.**proto** = Person.prototype
+4️⃣ Returns the new object automatically
+
+Every object has an internal link called:
+**proto**
+
+It always points to the object's prototype.
+
+For objects created with new Person():
+jonas.**proto** === Person.prototype // true
+
+This enables delegation:
+If property/method is not on the object → JavaScript looks for it on the prototype.
+
+5️⃣ Final Object Structure Example
+const jonas = new Person('Jonas', 1990);
+
+Inside jonas:
+name: "Jonas"
+birthYear: 1990
+**proto**: Person.prototype ← where calcAge() lives
+
+==========================================================================================
+
+The Prototype Chain
+
+🔹 What is the Prototype Chain?
+A series of linked objects, connected through their **proto** reference.
+If JavaScript cannot find a property/method on the object itself → it walks up the prototype chain to search.
+Works similar to the scope chain, but for objects and inheritance.
+
+🔹 Built-in Constructor Function – Object()
+JavaScript provides a built-in constructor for creating basic objects:
+{} === new Object()
+Every object in JavaScript ultimately inherits from:
+Object.prototype
+And at the top of the chain:
+Object.prototype.**proto** === null
+
+🔹 Custom Constructor Function – Person()
+function Person() {}
+When using new Person(), a new object is created and linked to:
+Person.prototype
+Important: Person.prototype is itself an object, meaning:
+Person.prototype.**proto** === Object.prototype
+
+🔹 Prototype Chain Flow (Bottom → Top)
+For an object created with new Person():
+jonas → **proto** → Person.prototype → **proto** → Object.prototype → **proto** → null
+
+Walking the chain 🔼:
+1️⃣ jonas (object instance)
+2️⃣ Delegates missing properties → Person.prototype
+3️⃣ Delegates again → Object.prototype
+4️⃣ End of chain → null
+
+🔹 Why This Matters
+Enables inheritance and method sharing.
+Example: jonas.toString() works even if you didn’t define toString — because it exists inside Object.prototype.
+
+=========================== ES6 Classes =============================================
+
+ES6 Classes are a new syntax introduced in EES6 that provide a cleaner and more structured way to create objects and implement object-oriented programming in JavaScript.
+But internally, classes still use prototypes — it is just syntactic sugar over prototype-based OOP.
+
+Basic Structure
+class Person {
+constructor(name, age) {
+this.name = name;
+this.age = age;
+}
+
+// Method
+greet() {
+console.log(`Hello, I am ${this.name}`);
+}
+}
+
+const p1 = new Person("John", 25);
+p1.greet();
+
+✨ Key Points
+constructor() runs automatically when object is created.
+Methods inside a class are added to prototype.
+Use new keyword to create objects.

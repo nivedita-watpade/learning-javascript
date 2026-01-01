@@ -65,6 +65,7 @@ Step3(Execution): Machine code executed right away
 
 Callback queue: Its a data structure that contains asynchronus function(Callback functions) that are ready to be executed.
 btn.addEventListner("click", displayMessage)
+
 Here displayMessage is a callback function in the callback queue. Once user clicks on the button the event loop puts callback function into the stack only if stack is free or empty
 
 ================ Execution Contexts and The Call Stack ==================================
