@@ -106,3 +106,21 @@ const nivedita = new PersonCl1('Nivedita Watpade', 2000);
 nivedita.age;
 console.log(nivedita);
 PersonCl1.hey();
+
+//Object.create
+
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    (this.firstName = firstName), (this.birthYear = birthYear);
+  },
+};
+
+const rani = Object.create(PersonProto);
+console.log(rani);
+
+rani.init('Rani', 2000);
+console.log(rani);

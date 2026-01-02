@@ -336,3 +336,26 @@ console.log(MathUtils.multiply(4, 3)); // 12
 ❌ Invalid:
 const obj = new MathUtils();
 obj.add(2, 3); // Error
+
+=============================================================================
+
+Object.create() in JavaScript
+
+Object.create() is used to create a new object with a specified prototype.
+It allows direct prototypal inheritance without using constructor functions or classes.
+
+Object.create(proto);
+proto → the object that should be the prototype of the new object
+
+const person = {
+greet() {
+console.log("Hello!");
+}
+};
+
+const student = Object.create(person);
+
+student.name = "Nivedita";
+student.greet(); // Hello!
+
+student inherits methods from person.
