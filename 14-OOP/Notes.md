@@ -246,3 +246,93 @@ p1.greet();
 constructor() runs automatically when object is created.
 Methods inside a class are added to prototype.
 Use new keyword to create objects.
+
+==========================================================================================
+
+Getter and Setter Functions in OOP (JavaScript)
+Getters and Setters are special methods used to access and update object properties in a controlled way.
+They help in encapsulation—one of the core OOP principles.
+
+🔹 What is a Getter?
+-Used to read/access a property
+-Looks like a property but works like a function
+-Defined using the get keyword
+
+🔹 What is a Setter?
+-Used to update/modify a property
+-Allows validation or logic before setting a value
+-Defined using the set keyword
+
+class Person {
+constructor(name, age) {
+this._name = name; // convention: _ means "private-like"
+this.\_age = age;
+}
+
+// Getter
+get name() {
+return this.\_name;
+}
+
+// Setter
+set name(newName) {
+if (newName.length < 3) {
+console.log("Name is too short");
+} else {
+this.\_name = newName;
+}
+}
+
+// Getter
+get age() {
+return this.\_age;
+}
+
+// Setter
+set age(newAge) {
+if (newAge < 0) {
+console.log("Age cannot be negative");
+} else {
+this.\_age = newAge;
+}
+}
+}
+//op
+
+const p1 = new Person("Riya", 22);
+
+console.log(p1.name); // Getter → Riya
+p1.name = "An"; // Setter → Name is too short
+p1.age = 25; // Setter
+console.log(p1.age); // Getter → 25
+
+===============================================================================================
+
+Static Method in OOP (JavaScript)
+A static method is a method that belongs to the class itself, not to the objects (instances) created from the class.
+👉 It is called directly using the class name, not using this or object reference.
+
+🔹 Key Points
+-Defined using the static keyword
+-Cannot be called on class instances
+-Commonly used for utility/helper functions
+-Cannot access instance properties directly
+
+📌 Example: Static Method in Class
+class MathUtils {
+static add(a, b) {
+return a + b;
+}
+
+static multiply(a, b) {
+return a \* b;
+}
+}
+
+🔸 Usage
+console.log(MathUtils.add(10, 5)); // 15
+console.log(MathUtils.multiply(4, 3)); // 12
+
+❌ Invalid:
+const obj = new MathUtils();
+obj.add(2, 3); // Error
