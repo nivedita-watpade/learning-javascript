@@ -359,3 +359,72 @@ student.name = "Nivedita";
 student.greet(); // Hello!
 
 student inherits methods from person.
+
+========================================================================================
+
+Inheritance between constructor functions
+
+const Person1 = function (firstName, birthYear) {
+this.firstName = firstName;
+this.birthYear = birthYear;
+};
+
+Person1.prototype.calcAge = function () {
+console.log(2037 - this.birthYear);
+};
+
+const Student = function (firstName, birthYear, course) {
+// this.firstName = firstName;
+// this.birthYear = birthYear;
+Person1.call(this, firstName, birthYear);
+this.course = course;
+};
+
+//Link the prototype
+Student.prototype = Object.create(Person1.prototype);
+
+Student.prototype.introduce = function () {
+console.log(`My name is ${this.firstName} & I am studying ${this.course}`);
+};
+
+const nivedi = new Student('Nivedita', 2000, 'Javascript');
+nivedi.introduce();
+nivedi.calcAge();
+
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
+
+console.log(nivedi);
+
+===========================================================================
+
+Inheritance in ES6 Classes (JavaScript)
+
+Inheritance allows one class (child/subclass) to reuse the properties and methods of another class (parent/superclass).
+In ES6, inheritance is implemented using the extends keyword.
+
+🔹 super Keyword:
+super() → calls the parent class constructor
+super() → mandatory in child constructor before using this
+
+Example:
+
+class StudentCl extends PersonCl1 {
+constructor(fullName, birthYear, course) {
+super(fullName, birthYear);
+this.course = course;
+}
+
+introduce() {
+console.log(`My name is ${this._fullName} & I am studying ${this.course}`);
+}
+
+calcAge() {
+console.log(`I am a ${2037 - this.birthYear} years old`);
+}
+}
+
+const student = new StudentCl('Niviiiii Watpade', 2000, 'React Js');
+console.log(student);
+student.introduce();
+student.calcAge();

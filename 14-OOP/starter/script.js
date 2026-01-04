@@ -76,7 +76,8 @@ niva.greet();
 
 class PersonCl1 {
   constructor(fullName, birthYear) {
-    (this.fullName = fullName), (this.birthYear = birthYear);
+    this.fullName = fullName;
+    this.birthYear = birthYear;
   }
 
   // Methos will be added in .prototype property
@@ -124,3 +125,56 @@ console.log(rani);
 
 rani.init('Rani', 2000);
 console.log(rani);
+
+const Person1 = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+Person1.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+const Student = function (firstName, birthYear, course) {
+  // this.firstName = firstName;
+  // this.birthYear = birthYear;
+  Person1.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+Student.prototype = Object.create(Person1.prototype);
+
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} & I am studying ${this.course}`);
+};
+
+const nivedi = new Student('Nivedita', 2000, 'Javascript');
+nivedi.introduce();
+nivedi.calcAge();
+
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
+
+console.log(nivedi);
+
+// Inheritance in ES6 Classes
+
+class StudentCl extends PersonCl1 {
+  constructor(fullName, birthYear, course) {
+    super(fullName, birthYear);
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`My name is ${this._fullName} & I am studying ${this.course}`);
+  }
+
+  calcAge() {
+    console.log(`I am a ${2037 - this.birthYear} years old`);
+  }
+}
+
+const student = new StudentCl('Niviiiii Watpade', 2000, 'React Js');
+console.log(student);
+student.introduce();
+student.calcAge();
