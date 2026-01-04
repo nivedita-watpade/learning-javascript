@@ -428,3 +428,42 @@ const student = new StudentCl('Niviiiii Watpade', 2000, 'React Js');
 console.log(student);
 student.introduce();
 student.calcAge();
+
+=======================================================================
+
+Inheritance between Classes using Object.create()
+
+Object.create() is a pure prototypal inheritance approach (ES5 style) that allows one object to inherit directly from another object—without using classes or constructors.
+
+Ex.
+//Inheritance between classes : Object.create()
+
+const PersonProto1 = {
+calcAge() {
+console.log(2037 - this.birthYear);
+},
+
+init(firstName, birthYear) {
+this.firstName = firstName;
+this.birthYear = birthYear;
+},
+};
+
+const StudentProto = Object.create(PersonProto1);
+
+StudentProto.init = function (firstName, birthYear, course) {
+PersonProto1.init.call(this, firstName, birthYear);
+this.course = course;
+
+console.log(`My name is ${this.firstName} & I am studying ${this.course}`);
+};
+
+StudentProto.introduce = function () {
+console.log(`My name is ${this.firstName} & I am studying ${this.course}`);
+};
+
+const ajay = Object.create(StudentProto);
+
+ajay.init('Niveditaaaa', 2000, 'JS');
+ajay.introduce();
+ajay.calcAge();
