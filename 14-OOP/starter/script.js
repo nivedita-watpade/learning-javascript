@@ -252,3 +252,62 @@ acc1.withdraw(150);
 acc1.requestLoan(1000);
 acc1.approveLoan(1000);
 console.log(acc1);
+
+console.log(
+  '========================================================================='
+);
+
+//1) Public methods
+//2) Private fields
+//3) Public methods
+//4) Private methods
+
+class Account1 {
+  locale = navigator.language;
+  #movements = [];
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin;
+    // this.movements = [];
+    //   this.locale = navigator.language;
+  }
+
+  //Public interface
+
+  getMovements() {
+    return this.#movements;
+  }
+
+  deposit(val) {
+    this.#movements.push(val);
+  }
+
+  withdraw(val) {
+    this.deposit(-val);
+  }
+
+  #approveLoan(val) {
+    return true;
+  }
+
+  requestLoan(val) {
+    if (this.#approveLoan(val)) {
+      this.deposit(val);
+      console.log('Loan Approved!!!');
+    }
+  }
+}
+
+const acc2 = new Account1('Nivedita', 'Rupees', 1111);
+// acc1.movements.push(400);
+// acc1.movements.push(-150);
+acc2.deposit(500);
+acc2.withdraw(150);
+
+acc2.requestLoan(1000);
+//acc2.approveLoan(1000);
+console.log(acc2.getMovements());
+console.log(acc2);

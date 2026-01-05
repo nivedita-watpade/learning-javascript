@@ -467,3 +467,63 @@ const ajay = Object.create(StudentProto);
 ajay.init('Niveditaaaa', 2000, 'JS');
 ajay.introduce();
 ajay.calcAge();
+
+=============================================================================================
+
+Encapsulation: Private class Fields & Methods
+
+Private fields & methods (#) are ES2022 feature
+They cannot be accessed or overridden outside the class
+Provides true encapsulation (unlike \_private naming convention)
+
+Public Fields:
+-Accessible outside the class
+-Defined normally (no #)
+
+Private Fields:
+-Prefixed with #
+-Accessible only inside the class
+
+Public Methods:
+-Called using object reference
+-login() {}
+
+Private Methods
+-Also prefixed with #
+-Used internally only
+
+Ex.
+class User {
+// 1️⃣ Public field
+role = "User";
+
+// 2️⃣ Private field
+#password;
+
+constructor(name, password) {
+this.name = name; // public property
+this.#password = password; // private field
+}
+
+// 3️⃣ Public method
+login() {
+if (this.#checkPassword()) {
+console.log(`${this.name} logged in`);
+} else {
+console.log("Invalid password");
+}
+}
+
+// 4️⃣ Private method
+#checkPassword() {
+return this.#password === "1234";
+}
+}
+
+const user1 = new User("Nivedita", "1234");
+user1.login(); // ✅ Works
+console.log(user1.role); // ✅ Public field
+
+// ❌ Errors (private members not accessible)
+// console.log(user1.#password);
+// user1.#checkPassword();
