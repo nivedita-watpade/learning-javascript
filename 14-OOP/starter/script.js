@@ -210,3 +210,45 @@ const ajay = Object.create(StudentProto);
 ajay.init('Niveditaaaa', 2000, 'JS');
 ajay.introduce();
 ajay.calcAge();
+
+//Another Class Example
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+  }
+
+  //Public interface
+  deposit(val) {
+    this.movements.push(val);
+  }
+
+  withdraw(val) {
+    this.deposit(-val);
+  }
+
+  approveLoan(val) {
+    return true;
+  }
+
+  requestLoan(val) {
+    if (this.approveLoan(val)) {
+      this.deposit(val);
+      console.log('Loan Approved!!!');
+    }
+  }
+}
+
+const acc1 = new Account('Nivedita', 'Rupees', 1111);
+// acc1.movements.push(400);
+// acc1.movements.push(-150);
+acc1.deposit(500);
+acc1.withdraw(150);
+
+acc1.requestLoan(1000);
+acc1.approveLoan(1000);
+console.log(acc1);
