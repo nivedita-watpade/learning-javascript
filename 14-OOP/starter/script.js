@@ -279,14 +279,17 @@ class Account1 {
 
   getMovements() {
     return this.#movements;
+    //Not chainable
   }
 
   deposit(val) {
     this.#movements.push(val);
+    return this;
   }
 
   withdraw(val) {
     this.deposit(-val);
+    return this;
   }
 
   #approveLoan(val) {
@@ -298,6 +301,7 @@ class Account1 {
       this.deposit(val);
       console.log('Loan Approved!!!');
     }
+    return this;
   }
 }
 
@@ -311,3 +315,12 @@ acc2.requestLoan(1000);
 //acc2.approveLoan(1000);
 console.log(acc2.getMovements());
 console.log(acc2);
+
+const movements = acc2
+  .deposit(600)
+  .withdraw(800)
+  .withdraw(100)
+  .deposit(1100)
+  .getMovements();
+
+console.log(movements);

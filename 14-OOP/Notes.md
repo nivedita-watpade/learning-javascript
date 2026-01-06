@@ -527,3 +527,47 @@ console.log(user1.role); // ✅ Public field
 // ❌ Errors (private members not accessible)
 // console.log(user1.#password);
 // user1.#checkPassword();
+
+================================================================================
+
+Method Chaining in JavaScript (Classes):
+Method chaining means calling multiple methods on the same object in a single line, where each method returns this.
+
+Key Rule for Method Chaining:
+👉 Each method must return this
+return this;
+Without it, chaining will break.
+Ex.
+class Calculator {
+constructor(value = 0) {
+this.value = value;
+}
+
+add(num) {
+this.value += num;
+return this; // 👈 key for chaining
+}
+
+subtract(num) {
+this.value -= num;
+return this;
+}
+
+multiply(num) {
+this.value \*= num;
+return this;
+}
+
+getResult() {
+console.log(this.value);
+return this; // optional (for further chaining)
+}
+}
+
+const calc = new Calculator();
+
+calc
+.add(10)
+.subtract(2)
+.multiply(3)
+.getResult(); // 👉 24
