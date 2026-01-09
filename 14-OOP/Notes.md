@@ -537,6 +537,7 @@ Key Rule for Method Chaining:
 👉 Each method must return this
 return this;
 Without it, chaining will break.
+
 Ex.
 class Calculator {
 constructor(value = 0) {
