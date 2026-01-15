@@ -12,3 +12,5 @@ console.log(latitude, longitude);
 },
 () => alert('Could not get your position!')
 );
+
+**\* Construtor method is called immedaitely when new objet is created from this calss**
