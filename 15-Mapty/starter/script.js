@@ -20,11 +20,20 @@ class App {
     inputType.addEventListener('change', this._toggleElevationField);
   }
 
+  _geoLocationErrorHandler() {
+    const pandaneCordinates = {
+      coords: { latitude: '20.3633277', longitude: '73.851463' },
+    };
+    this._loadMap(pandaneCordinates);
+  }
+
   _getPosition() {
-    if (navigator.geolocation)
-      navigator.geolocation.getCurrentPosition(this._loadMap.bind(this), () =>
-        alert('Could not get your position!')
-      );
+    if (navigator.geolocation);
+    navigator.geolocation.getCurrentPosition(
+      this._loadMap.bind(this),
+      this._geoLocationErrorHandler.bind(this),
+      { timeout: 2000 }
+    );
   }
 
   _loadMap(position) {
