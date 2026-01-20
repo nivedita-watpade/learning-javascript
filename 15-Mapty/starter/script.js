@@ -17,15 +17,14 @@ class App {
   constructor() {
     this._getPosition();
     form.addEventListener('submit', this._newWorkOut.bind(this));
-    // Toggle input fields
     inputType.addEventListener('change', this._toggleElevationField);
   }
 
   _getPosition() {
-    if (navigator.geolocation);
-    navigator.geolocation.getCurrentPosition(this._loadMap.bind(this), () =>
-      alert('Could not get your position!')
-    );
+    if (navigator.geolocation)
+      navigator.geolocation.getCurrentPosition(this._loadMap.bind(this), () =>
+        alert('Could not get your position!')
+      );
   }
 
   _loadMap(position) {
@@ -82,3 +81,45 @@ class App {
 }
 
 const app = new App();
+
+class Workout {
+  date = new Date();
+  id = (Date.now() + '').slice(-10);
+  constructor(coords, duration, distance) {
+    this.coords = coords; //[lat. lan]
+    this.duration = duration; //min
+    this.distance = distance; // km
+  }
+}
+
+class Running extends Workout {
+  constructor(coords, duration, distance, cadence) {
+    super(coords, duration, distance);
+    this.cadence = cadence;
+    this.calcPace();
+  }
+
+  calcPace() {
+    this.pace = this.duration / this.distance;
+    return this.pace;
+  }
+}
+
+class Cycling extends Workout {
+  constructor(coords, duration, distance, elevationGain) {
+    super(coords, duration, distance);
+    this.elevationGain = elevationGain;
+    this.calcSpeed();
+  }
+
+  calcSpeed() {
+    this.speed = this.distance / (this.duration / 60);
+    return this.speed;
+  }
+}
+
+const run = new Running([12, -34], 25, 5.1, 128);
+console.log(run);
+
+const cycle = new Cycling([12, -34], 150, 29, 275);
+console.log(cycle);
