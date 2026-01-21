@@ -10,13 +10,21 @@ const inputElevation = document.querySelector('.form__input--elevation');
 
 class App {
   #map;
+  #mapZoomLevel = 13;
   #mapEvent;
   #workouts = [];
 
   constructor() {
+    //Get user's position
     this._getPosition();
+
+    //Get data from local storage
+    this._getLocalStorage();
+
+    //Attach event handlers
     form.addEventListener('submit', this._newWorkOut.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
+    containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
   }
 
   _geoLocationErrorHandler() {
@@ -31,15 +39,15 @@ class App {
     navigator.geolocation.getCurrentPosition(
       this._loadMap.bind(this),
       this._geoLocationErrorHandler.bind(this),
-      { timeout: 2000 }
+      { timeout: 2000 },
     );
   }
 
   _loadMap(position) {
     const { latitude, longitude } = position.coords;
-    console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
     const coords = [latitude, longitude];
-    this.#map = L.map('map').setView(coords, 13);
+
+    this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -47,6 +55,10 @@ class App {
 
     //Handling clicks on  map
     this.#map.on('click', this._showForm.bind(this));
+
+    this.#workouts.forEach(workout => {
+      this._renderWorkoutMarker(workout);
+    });
   }
 
   _showForm(mapE) {
@@ -116,14 +128,20 @@ class App {
 
     //Add new object to workout array
     this.#workouts.push(workout);
-    console.log(workout);
 
     //Render workout on map as  Marker
     this._renderWorkoutMarker(workout);
 
     //Render a workout on list
     this._renderWorkout(workout);
+
+    //Hide form + clear input fields
+    this._hideForm();
+
+    //Set local storage to all workouts
+    this._setLocalStorage();
   }
+
   _renderWorkoutMarker(workout) {
     L.marker(workout.coords)
       .addTo(this.#map)
@@ -134,10 +152,10 @@ class App {
           autoClose: false,
           closeOnClick: false,
           className: `${workout.type}-popup`,
-        })
+        }),
       )
       .setPopupContent(
-        `${workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'}${workout.description}`
+        `${workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'}${workout.description}`,
       )
       .openPopup();
   }
@@ -187,7 +205,49 @@ class App {
     }
 
     form.insertAdjacentHTML('afterend', html);
-    this._hideForm();
+  }
+
+  _moveToPopup(e) {
+    const workoutEl = e.target.closest('.workout');
+
+    if (!workoutEl) return;
+
+    const workout = this.#workouts.find(
+      work => work.id === workoutEl.dataset.id,
+    );
+
+    this.#map.setView(workout.coords, this.#mapZoomLevel, {
+      animate: true,
+      pan: {
+        duration: 1,
+      },
+    });
+
+    //using public interface
+    // workout.click();
+  }
+
+  _setLocalStorage() {
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+  }
+
+  _getLocalStorage() {
+    const data = JSON.parse(localStorage.getItem('workouts'));
+
+    console.log(data);
+
+    if (!data) return;
+
+    this.#workouts = data;
+
+    this.#workouts.forEach(workout => {
+      this._renderWorkout(workout);
+    });
+  }
+
+  reset() {
+    localStorage.removeItem('workouts');
+    location.reload();
   }
 }
 
@@ -196,6 +256,8 @@ const app = new App();
 class Workout {
   date = new Date();
   id = (Date.now() + '').slice(-10);
+  clicks = 0;
+
   constructor(coords, duration, distance) {
     this.coords = coords; //[lat. lan]
     this.duration = duration; //min
@@ -209,6 +271,10 @@ class Workout {
     this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${
       months[this.date.getMonth()]
     } ${this.date.getDate()}`;
+  }
+
+  click() {
+    this.clicks++;
   }
 }
 
@@ -244,8 +310,8 @@ class Cycling extends Workout {
   }
 }
 
-const run = new Running([12, -34], 25, 5.1, 128);
-console.log(run);
+// const run = new Running([12, -34], 25, 5.1, 128);
+// console.log(run);
 
-const cycle = new Cycling([12, -34], 150, 29, 275);
-console.log(cycle);
+// const cycle = new Cycling([12, -34], 150, 29, 275);
+// console.log(cycle);

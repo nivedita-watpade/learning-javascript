@@ -572,3 +572,11 @@ calc
 .subtract(2)
 .multiply(3)
 .getResult(); // 👉 24
+
+==========================================================================================
+
+Localstorage: Local storage is basically a place in the browser where we can store data that will stay there even after we close the page.
+
+-Localstorage is an API that the browser provides for us
+
+-object that are coming from local storage will not inherit methods that they did before
