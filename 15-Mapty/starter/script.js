@@ -98,6 +98,7 @@ class App {
     const duration = +inputDuration.value;
     const { lat, lng } = this.#mapEvent.latlng;
     let workout;
+
     //If workout running, create running object
     if (type === 'running') {
       const cadence = +inputCadence.value;
