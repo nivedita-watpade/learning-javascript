@@ -74,3 +74,31 @@ API acts as a bridge between two applications so they can talk to each other.
 It helps one program request data or services from another program.
 
 API allows applications to communicate with servers and exchange data using formats like JSON, often through AJAX.
+
+==========================================================================
+
+What Happens When We Access a Web Server (Short Notes)
+
+1. DNS Lookup
+   Browser asks DNS to convert the website name (URL) into an IP address.
+
+2. TCP/IP Connection
+   Browser creates a secure connection with the web server.
+
+3. HTTP Request
+   Browser sends a request to the server.
+   It includes:
+   -Start line (GET/POST + URL + HTTP version)
+   -Headers (browser info, language, etc.)
+   -Body (only for POST/PUT requests)
+
+4. HTTP Response
+   Server sends back a response.
+   It includes:
+   -Status line (200 OK, 404 Not Found, etc.)
+   -Headers (content type, date, etc.)
+   -Body (HTML data)
+
+5. Page Loading
+   Browser loads index.html first, then downloads CSS, JS, images.
+   This process repeats for each file.

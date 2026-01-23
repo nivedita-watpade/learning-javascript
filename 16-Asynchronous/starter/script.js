@@ -14,26 +14,46 @@ const countriesContainer = document.querySelector('.countries');
 //Old way
 
 function countryData(country) {
+  //Ajax Call 1
   const request = new XMLHttpRequest();
-  request.open('GET', `https://restcountries.com/v2/name/${country}`);
+  request.open(
+    'GET',
+    `https://restcountries.com/v2/name/${country}?fullText=true`,
+  );
   request.send();
 
   request.addEventListener('load', function () {
-    //console.log(this.responseText);
-    const data = JSON.parse(this.responseText);
+    const [data] = JSON.parse(this.responseText);
     console.log(data);
 
-    data.forEach(countryObj => {
-      displayCountry(countryObj);
+    //Country UI
+    displayCountry(data);
+
+    // Ajax Call 2
+    const neighbours = data.borders;
+    console.log(neighbours);
+
+    if (!neighbours) return;
+
+    neighbours.forEach(neighbour => {
+      //Ajax Call 1
+      const request2 = new XMLHttpRequest();
+      request2.open('GET', `https://restcountries.com/v2/alpha/${neighbour}`);
+      request2.send();
+
+      request2.addEventListener('load', function () {
+        const data2 = JSON.parse(this.responseText);
+        displayCountry(data2, 'neighbour');
+      });
     });
   });
 }
 
-countryData('India');
+countryData('germany');
 // countryData('US');
 
-function displayCountry(data) {
-  const html = `<article class="country">
+function displayCountry(data, classname = '') {
+  const html = `<article class="country ${classname}">
           <img class="country__img" src=${data.flag} />
           <div class="country__data">
             <h3 class="country__name">${data.name}</h3>
@@ -44,7 +64,7 @@ function displayCountry(data) {
           </div>
         </article>`;
 
-  countriesContainer.insertAdjacentHTML('afterbegin', html);
+  countriesContainer.insertAdjacentHTML('beforeend', html);
 }
 
 function getLangauges(langArr) {
