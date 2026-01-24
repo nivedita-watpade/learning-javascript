@@ -96,7 +96,16 @@ function populationFormatter(population, alpha2Code) {
 const getContryData = function (country) {
   fetch(`https://restcountries.com/v2/name/${country}?fullText=true`) //return a pending promise
     .then(response => response.json()) // return a promise
-    .then(data => displayCountry(data[0]));
+    .then(data => {
+      displayCountry(data[0]);
+
+      //Fetching neighbour's country
+      data[0].borders.forEach(border => {
+        fetch(`https://restcountries.com/v2/alpha/${border}`)
+          .then(response => response.json())
+          .then(data => displayCountry(data, 'neighbour'));
+      });
+    });
 };
 
 getContryData('India');

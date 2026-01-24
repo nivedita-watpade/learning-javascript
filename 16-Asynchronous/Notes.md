@@ -104,12 +104,13 @@ What Happens When We Access a Web Server (Short Notes)
    This process repeats for each file.
 
 =================================================================================
+
 JavaScript Promises
 
 🔹 What is a Promise?
 👉 Definition (Formal): A Promise is an object that acts as a placeholder for the future result of an asynchronous operation.
 
-👉 Simple Meaning:A Promise is a container for a value that will be available in the future.
+👉 Simple Meaning: A Promise is a container for a value that will be available in the future.
 
 👉 Example:
 -Response from an AJAX / Fetch API call
