@@ -102,3 +102,87 @@ What Happens When We Access a Web Server (Short Notes)
 5. Page Loading
    Browser loads index.html first, then downloads CSS, JS, images.
    This process repeats for each file.
+
+=================================================================================
+JavaScript Promises
+
+🔹 What is a Promise?
+👉 Definition (Formal): A Promise is an object that acts as a placeholder for the future result of an asynchronous operation.
+
+👉 Simple Meaning:A Promise is a container for a value that will be available in the future.
+
+👉 Example:
+-Response from an AJAX / Fetch API call
+-File loading
+-API data fetching
+
+🔹 Why Promises Are Used?
+
+- Handle asynchronous operations easily
+- Avoid callback functions
+- Prevent callback hell
+- Enable chaining of async operations
+- Cleaner and readable code
+
+Promise Lifecycle (States):
+A Promise goes through 3 main states:
+
+🟡 1. Pending
+Initial state
+Async task is still running
+Value is not available yet
+Example:
+API request is in progress
+
+🟢 2. Fulfilled (Resolved)
+Operation completed successfully
+Result is available
+Example:
+Data received from server
+
+🔴 3. Rejected
+Operation failed
+Error occurred
+Example:
+Network error / Server error
+
+Settled State
+When a promise is either fulfilled or rejected, it becomes:
+-Settled: (Settled = Finished state)
+
+🔹 Promise Flow (Lifecycle Process)
+Pending
+↓
+Async Task Finished
+↓
+Settled
+↙ ↘
+Fulfilled Rejected
+
+=================================== fetch ========================================
+
+What is Fetch?
+Fetch API is a modern JavaScript method used to request data from a server (API) and receive responses asynchronously.
+
+-Fetch is used to get or send data to a server without reloading the page.
+-Fetch always returns a Promise
+
+👉 It is used to make HTTP requests like GET, POST, PUT, DELETE.
+
+So we use:
+.then()
+.catch()
+or
+async/await
+
+🔹 Basic Fetch Example (GET Request)
+fetch("https://api.example.com/users")
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.log(error));
+
+🔍 How It Works:
+1️⃣ Fetch sends request to server
+2️⃣ Server sends response
+3️⃣ Response converted to JSON
+4️⃣ Data is used in app

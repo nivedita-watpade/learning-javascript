@@ -13,44 +13,42 @@ const countriesContainer = document.querySelector('.countries');
 
 //Old way
 
-function countryData(country) {
-  //Ajax Call 1
-  const request = new XMLHttpRequest();
-  request.open(
-    'GET',
-    `https://restcountries.com/v2/name/${country}?fullText=true`,
-  );
-  request.send();
+// function countryData(country) {
+//   //Ajax Call 1
+//   const request = new XMLHttpRequest();
+//   request.open(
+//     'GET',
+//     `https://restcountries.com/v2/name/${country}?fullText=true`,
+//   );
+//   request.send();
 
-  request.addEventListener('load', function () {
-    const [data] = JSON.parse(this.responseText);
-    console.log(data);
+//   request.addEventListener('load', function () {
+//     const [data] = JSON.parse(this.responseText);
+//     console.log(data);
 
-    //Country UI
-    displayCountry(data);
+//     //Country UI
+//     displayCountry(data);
 
-    // Ajax Call 2
-    const neighbours = data.borders;
-    console.log(neighbours);
+//     const neighbours = data.borders;
+//     console.log(neighbours);
 
-    if (!neighbours) return;
+//     if (!neighbours) return;
 
-    neighbours.forEach(neighbour => {
-      //Ajax Call 1
-      const request2 = new XMLHttpRequest();
-      request2.open('GET', `https://restcountries.com/v2/alpha/${neighbour}`);
-      request2.send();
+//     neighbours.forEach(neighbour => {
+//       //Ajax Call 2
+//       const request2 = new XMLHttpRequest();
+//       request2.open('GET', `https://restcountries.com/v2/alpha/${neighbour}`);
+//       request2.send();
 
-      request2.addEventListener('load', function () {
-        const data2 = JSON.parse(this.responseText);
-        displayCountry(data2, 'neighbour');
-      });
-    });
-  });
-}
+//       request2.addEventListener('load', function () {
+//         const data2 = JSON.parse(this.responseText);
+//         displayCountry(data2, 'neighbour');
+//       });
+//     });
+//   });
+// }
 
-countryData('germany');
-// countryData('US');
+// countryData('germany');
 
 function displayCountry(data, classname = '') {
   const html = `<article class="country ${classname}">
@@ -81,3 +79,24 @@ function populationFormatter(population, alpha2Code) {
   );
   return formattedPop;
 }
+
+// const getContryData = function (country) {
+//   fetch(`https://restcountries.com/v2/name/${country}?fullText=true`)
+//     .then(function (response) {
+//       return response.json();
+//     })
+//     .then(function (data) {
+//       console.log(data);
+//       displayCountry(data[0]);
+//     });
+// };
+
+// getContryData('India');
+
+const getContryData = function (country) {
+  fetch(`https://restcountries.com/v2/name/${country}?fullText=true`) //return a pending promise
+    .then(response => response.json()) // return a promise
+    .then(data => displayCountry(data[0]));
+};
+
+getContryData('India');
