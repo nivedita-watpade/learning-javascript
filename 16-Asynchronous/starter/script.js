@@ -93,6 +93,10 @@ function populationFormatter(population, alpha2Code) {
 
 // getContryData('India');
 
+function renderError(msg) {
+  countriesContainer.insertAdjacentText('beforeend', msg);
+}
+
 const getContryData = function (country) {
   fetch(`https://restcountries.com/v2/name/${country}?fullText=true`) //return a pending promise
     .then(response => response.json()) // return a promise
@@ -105,7 +109,13 @@ const getContryData = function (country) {
           .then(response => response.json())
           .then(data => displayCountry(data, 'neighbour'));
       });
+    })
+    .catch(err => {
+      renderError(`Something went wrong:${err.message}😞😔☹☹☹`);
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
     });
 };
 
-getContryData('India');
+btn.addEventListener('click', () => getContryData('India'));

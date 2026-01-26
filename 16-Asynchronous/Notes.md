@@ -187,3 +187,59 @@ fetch("https://api.example.com/users")
 2️⃣ Server sends response
 3️⃣ Response converted to JSON
 4️⃣ Data is used in app
+
+===========================================================================
+
+✅ .then(), .catch(), and .finally() in JavaScript (Promises)
+
+These methods are used to handle Promise results.
+
+1. .then() — Success Handler - Used to handle the fulfilled (successful) result of a Promise.
+   -Runs when the promise is resolved successfully.
+   Syntax:
+   promise.then(result => {
+   // handle success
+   });
+   Ex.
+   fetch(url)
+   .then(response => response.json())
+   .then(data => console.log(data));
+
+2. .catch() — Error Handler
+   -Used to handle errors or rejected promises.
+   -Runs when something goes wrong.
+   Syntax:
+   promise.catch(error => {
+   // handle error
+   });
+   Example:
+   fetch(url)
+   .then(response => response.json())
+   .catch(error => console.log(error));
+
+3. .finally() — Always Runs
+   -Runs no matter what happens(success or error)
+   Used for: ✔ Stop loader
+   ✔ Hide spinner
+   ✔ Cleanup tasks
+   Syntax:
+   promise.finally(() => {
+   // always executed
+   });
+   Example:
+   fetch(url)
+   .then(res => res.json())
+   .then(data => console.log(data))
+   .catch(err => console.log(err))
+   .finally(() => {
+   console.log("Request Completed");
+   });
+
+   Execution Flow
+   Promise
+   ↓
+   .then() → Success
+   ↓
+   .catch() → Error
+   ↓
+   .finally() → Always runs
