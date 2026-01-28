@@ -255,3 +255,164 @@ throw new Error("Error message");
 
 new Error() is used to create a new Error object with a custom error message.
 👉 It represents an error that occurs in your program.
+
+===================================================================
+
+Runtime & Asynchronous Behavior
+
+1. What is JavaScript Runtime?
+   JavaScript Runtime is a container/environment that provides everything needed to execute JavaScript code.
+   It includes:
+   -JavaScript Engine
+   -Web APIs
+   -Event Loop
+   -Callback Queue
+   -Microtask Queue
+   Examples of runtime environments:
+   -Browser (Chrome, Firefox, Edge)
+   -Node.js
+
+Concurrency Model (Important Concept)
+JavaScript uses a single-threaded concurrency model.
+👉 This means:
+-Only one piece of code executes at a time
+-No true parallel execution in the call stack
+-Uses asynchronous behavior to handle multiple tasks efficiently
+
+JavaScript Engine (Heart of Runtime)
+The JS Engine contains:
+✅ Call Stack
+-Where JavaScript code is executed
+-Follows LIFO (Last In First Out)
+-Only one function runs at a time
+Ex.
+function a() {
+b();
+}
+
+function b() {
+console.log("Hello");
+}
+
+a();
+
+Execution order:
+a() → b() → console.log()
+
+✅ Heap
+-Memory area where objects and variables are stored
+-Used for dynamic memory allocation
+
+Web APIs (Provided by Browser)
+Web APIs are not part of JavaScript.
+They are provided by the browser:
+Examples:
+-DOM API
+-fetch()
+-setTimeout()
+-Event Listeners
+-Geolocation API
+👉 They handle asynchronous tasks.
+
+How Asynchronous Code Works (Behind the Scenes)
+
+Step 1: Code Enters Call Stack
+When JS code runs:
+-Global Execution Context is pushed into call stack
+-Synchronous code executes immediately
+
+Step 2: Async Function Goes to Web API
+Ex.
+setTimeout(() => {
+console.log("Timer done");
+}, 2000);
+
+What happens:
+-setTimeout() is sent to Web API
+-Timer starts in background
+-Call stack continues executing other code
+
+Step 3: Callback Moves to Queue
+After async task finishes:
+Callback is placed into:
+-Callback Queue (for events, timers)
+-Microtask Queue (for Promises)
+
+Callback Queue (Task Queue)
+Contains callbacks from:
+-setTimeout
+-DOM events (click, scroll)
+-setInterval
+Example:
+click → timer → event callbacks
+
+Microtask Queue (High Priority Queue)
+Used for:
+-Promises (.then, .catch, .finally)
+-MutationObserver
+
+👉 It has higher priority than callback queue.
+
+fetch(url).then(res => console.log(res));
+
+Ex.fetch(url).then(res => console.log(res));
+The .then() callback goes into:
+➡ Microtask Queue
+
+Event Loop (The Controller)
+Event Loop is responsible for:
+✔ Checking call stack
+✔ Checking microtask queue
+✔ Checking callback queue
+✔ Moving tasks to call stack
+
+📌 Event Loop Priority Order
+
+When Call Stack is empty:
+1️⃣ Microtask Queue (First Priority)
+All promise callbacks execute first
+
+2️⃣ Callback Queue (Second Priority)
+Timers and event callbacks execute after microtasks
+
+Example Flow
+console.log("Start");
+
+setTimeout(() => {
+console.log("Timer");
+}, 0);
+
+Promise.resolve().then(() => {
+console.log("Promise");
+});
+
+console.log("End");
+
+Output:
+Start
+End
+Promise
+Timer
+
+Why?
+Execution order:
+Synchronous code → Start, End
+Microtask queue → Promise
+Callback queue → Timer
+
+📌 Important Points
+
+✅ JavaScript is single-threaded
+✅ Web APIs handle async tasks
+✅ Event Loop manages execution
+✅ Promises execute before timers
+✅ Call Stack executes one task at a time
+
+📌 Why Async Code is Non-Blocking?
+
+Because:
+-Heavy tasks run in Web APIs
+-JS engine keeps running other code
+-Event loop schedules callbacks later
+
+👉 This makes JavaScript non-blocking and fast.

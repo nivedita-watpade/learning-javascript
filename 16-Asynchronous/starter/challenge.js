@@ -13,7 +13,9 @@ PART 1
 The AJAX call will be done to a URL with this format: https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=52.508&longitude=13.381. Use the fetch API and promises to get the data. Do NOT use the getJSON function we created, that is cheating 😉
 
 3. Once you have the data, take a look at it in the console to see all the attributes that you recieved about the provided location. Then, using this data, log a messsage like this to the console: 'You are in Berlin, Germany'
+
 4. Chain a .catch method to the end of the promise chain and log errors to the console
+
 5. This API allows you to make only 3 requests per second. If you reload fast, you will get this error with code 403. This is an error with the request. Remember, fetch() does NOT reject the promise in this case. So create an error to reject the promise yourself, with a meaningful error message.
 
 PART 2
@@ -74,25 +76,23 @@ function whereAmI(lat, lng) {
     `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
   )
     .then(response => {
-      console.log(response);
       if (!response.ok) {
-        console.log(`Something went wrong ${response.status}`);
+        throw new Error(`Something went wrong ${response.status}`);
       }
       return response.json();
     })
-    .then(data => {
-      console.log(data);
-      console.log(`You are in a ${data.city}, ${data.countryName} `);
 
+    .then(data => {
+      console.log(`You are in a ${data.city}, ${data.countryName} `);
       return getJSON(
         `https://restcountries.com/v2/name/${data.countryName}?fullText=true`,
         `Country not found`,
       ).then(data => {
-        console.log(data);
         displayCountry(data[0]);
         countriesContainer.style.opacity = 1;
       });
     })
+
     .catch(err => {
       console.log(`Something went wrong:${err.message}😞😔☹☹☹`);
     });
