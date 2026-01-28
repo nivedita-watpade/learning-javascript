@@ -219,7 +219,8 @@ These methods are used to handle Promise results.
 
 3. .finally() — Always Runs
    -Runs no matter what happens(success or error)
-   Used for: ✔ Stop loader
+   Used for:
+   ✔ Stop loader
    ✔ Hide spinner
    ✔ Cleanup tasks
    Syntax:
@@ -243,3 +244,14 @@ These methods are used to handle Promise results.
    .catch() → Error
    ↓
    .finally() → Always runs
+
+===================================================
+
+🔹 What is throw?
+-throw is used to manually create and send an error in JavaScript.
+-👉 It stops normal code execution and jumps to the nearest catch block.
+Syntax
+throw new Error("Error message");
+
+new Error() is used to create a new Error object with a custom error message.
+👉 It represents an error that occurs in your program.

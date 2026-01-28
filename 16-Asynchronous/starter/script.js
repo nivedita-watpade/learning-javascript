@@ -97,17 +97,29 @@ function renderError(msg) {
   countriesContainer.insertAdjacentText('beforeend', msg);
 }
 
+function getJSON(url, errorMsg = 'Something went wrong!') {
+  return fetch(url).then(response => {
+    if (!response.ok) {
+      throw new Error(`${errorMsg} ${response.status}`);
+    }
+    return response.json();
+  });
+}
+
 const getContryData = function (country) {
-  fetch(`https://restcountries.com/v2/name/${country}?fullText=true`) //return a pending promise
-    .then(response => response.json()) // return a promise
+  getJSON(
+    `https://restcountries.com/v2/name/${country}?fullText=true`,
+    `Country not found`,
+  )
     .then(data => {
       displayCountry(data[0]);
 
       //Fetching neighbour's country
-      data[0].borders.forEach(border => {
-        fetch(`https://restcountries.com/v2/alpha/${border}`)
-          .then(response => response.json())
-          .then(data => displayCountry(data, 'neighbour'));
+      data[0]?.borders?.forEach(border => {
+        getJSON(
+          `https://restcountries.com/v2/alpha/${border}`,
+          `Country not found`,
+        ).then(data => displayCountry(data, 'neighbour'));
       });
     })
     .catch(err => {
@@ -118,4 +130,49 @@ const getContryData = function (country) {
     });
 };
 
-btn.addEventListener('click', () => getContryData('India'));
+//btn.addEventListener('click', () => getContryData('India'));
+
+getContryData('australia');
+
+// const getContryData = function (country) {
+//   // fetch(`https://restcountries.com/v2/name/${country}?fullText=true`) //return a pending promise
+//   //   .then(response => {
+//   //     console.log(response);
+//   //     if (!response.ok) {
+//   //       throw new Error(`Country not found ${response.status}`);
+//   //     }
+//   //     return response.json();
+//   //   }); // return a promise
+
+//   getJSON(
+//     `https://restcountries.com/v2/name/${country}?fullText=true`,
+//     `Country not found`,
+//   )
+//     .then(data => {
+//       displayCountry(data[0]);
+
+//       //Fetching neighbour's country
+//       data[0].borders.forEach(border => {
+//         // fetch(`https://restcountries.com/v2/alpha/${border}`).then(response => {
+//         //   if (!response.ok) {
+//         //     throw new Error(`Country not found ${response.status}`);
+//         //   }
+//         //   return response.json();
+//         // });
+//         getJSON(
+//           `https://restcountries.com/v2/alpha/${border}`,
+//           `Country not found ${response.status}`,
+//         ).then(data => displayCountry(data, 'neighbour'));
+//       });
+//     })
+//     .catch(err => {
+//       renderError(`Something went wrong:${err.message}😞😔☹☹☹`);
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
+
+// // btn.addEventListener('click', () => getContryData('India'));
+
+// getContryData('jdfdjhfgj');
