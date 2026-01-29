@@ -176,3 +176,14 @@ getContryData('australia');
 // // btn.addEventListener('click', () => getContryData('India'));
 
 // getContryData('jdfdjhfgj');
+
+// ======================Event Loop in practice======================================
+
+console.log('Test Start');
+setTimeout(() => console.log('Execute after 0 sec'), 0);
+Promise.resolve('Resolve promise 1').then(res => console.log(res));
+Promise.resolve('Resolve promise 2').then(res => {
+  for (let i = 0; i < 10000000000; i++) {}
+  console.log(res);
+});
+console.log('Test End');

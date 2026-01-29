@@ -409,10 +409,68 @@ Callback queue → Timer
 ✅ Call Stack executes one task at a time
 
 📌 Why Async Code is Non-Blocking?
-
 Because:
 -Heavy tasks run in Web APIs
 -JS engine keeps running other code
 -Event loop schedules callbacks later
 
 👉 This makes JavaScript non-blocking and fast.
+
+=========================================================================================
+
+Events loop in practice
+
+Ex.
+console.log('Test Start');
+
+setTimeout(() => console.log('Execute after 0 sec'), 0);
+
+Promise.resolve('Resolve promise 1').then(res => console.log(res));
+Promise.resolve('Resolve promise 2').then(res => {
+for (let i = 0; i < 10000000000; i++) {}
+console.log(res);
+});
+
+console.log('Test End');
+
+Execution Flow
+1️⃣ Synchronous Code Runs First (Call Stack)
+JavaScript executes synchronous code line by line.
+console.log('Test Start');
+
+2️⃣ setTimeout() is Registered (Callback Queue)
+setTimeout(() => console.log('Execute after 0 sec'), 0);
+
+Does NOT run immediately
+Goes to Web API
+After 0 ms → moves to Callback Queue
+Will wait until:
+-Call stack is empty
+-Microtask queue is empty
+
+3️⃣ Promise.then() Goes To Microtask Queue
+Promise.resolve('Resolve promise 1')
+Promise.resolve('Resolve promise 2')
+
+Promise callbacks go to Microtask Queue
+Microtasks have higher priority than setTimeout
+
+-Second Promise (Heavy Loop)
+This is blocking code:
+-Blocks main thread
+-Delays everything else
+-setTimeout must WAIT
+-After loop finishes:
+
+//Output
+Test Start
+Test End
+Resolve promise 1
+Resolve promise 2
+Execute after 0 sec
+
+Call Stack
+↓
+Microtask Queue (Promise.then)
+↓
+Callback Queue (setTimeout)
