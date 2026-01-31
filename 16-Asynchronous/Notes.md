@@ -474,3 +474,82 @@ Call Stack
 Microtask Queue (Promise.then)
 ↓
 Callback Queue (setTimeout)
+
+============================================================
+
+Building Promises (Creating Promises)
+
+Syntax (Creating a Promise)
+const myPromise = new Promise((resolve, reject) => {
+// async task
+});
+
+resolve(value) → when task is successful
+reject(error) → when task fails
+
+Ex.
+const getData = new Promise((resolve, reject) => {
+let success = true;
+
+if (success) {
+resolve("Data fetched successfully");
+} else {
+reject("Error while fetching data");
+}
+});
+
+getData
+.then(result => console.log(result))
+.catch(error => console.log(error));
+
+Promisifying (Converting Callback to Promise)
+What is Promisifying?
+Promisifying means converting a callback-based function into a Promise-based function.
+
+Ex.
+function fetchDataPromise() {
+return new Promise((resolve, reject) => {
+setTimeout(() => {
+resolve("Data received");
+}, 1000);
+});
+}
+
+======================== async / await =================================================
+
+✅ Async / Await in JavaScript — Definition
+Async/Await is a modern JavaScript syntax used to handle asynchronous operations in a synchronous-looking way, making code cleaner, more readable, and easier to debug.
+It is built on top of Promises.
+
+Async/Await is a JavaScript feature that allows handling asynchronous code using synchronous syntax, improving readability and error handling.
+
+✅ Key Points
+-async keyword → makes a function return a Promise
+-await keyword → pauses execution until the Promise is resolved
+-Works only inside async functions
+-Avoids .then() chaining and callback hell
+
+Ex.
+const myPosition = async function (country) {
+const res = await fetch(
+`https://restcountries.com/v2/name/${country}?fullText=true`,
+);
+const data = await res.json();
+console.log(data);
+};
+
+const myPosition = async function (country)
+async keyword → Makes the function return a Promise and allows using await.
+
+const res = await fetch(`https://restcountries.com/v2/name/${country}?fullText=true`);
+fetch() → Sends an API request to get country data.
+await → Waits until the API response is received.
+res → Stores the HTTP response object.
+
+const data = await res.json();
+res.json() → Converts response body into JavaScript object.
+
+await → Waits until JSON parsing is completed.
+
+console.log(data);
+console.log() → Prints the country data in console.

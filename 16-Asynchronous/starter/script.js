@@ -132,7 +132,7 @@ const getContryData = function (country) {
 
 //btn.addEventListener('click', () => getContryData('India'));
 
-getContryData('australia');
+//getContryData('australia');
 
 // const getContryData = function (country) {
 //   // fetch(`https://restcountries.com/v2/name/${country}?fullText=true`) //return a pending promise
@@ -179,11 +179,166 @@ getContryData('australia');
 
 // ======================Event Loop in practice======================================
 
-console.log('Test Start');
-setTimeout(() => console.log('Execute after 0 sec'), 0);
-Promise.resolve('Resolve promise 1').then(res => console.log(res));
-Promise.resolve('Resolve promise 2').then(res => {
-  for (let i = 0; i < 10000000000; i++) {}
-  console.log(res);
+// console.log('Test Start');
+// setTimeout(() => console.log('Execute after 0 sec'), 0);
+// Promise.resolve('Resolve promise 1').then(res => console.log(res));
+// Promise.resolve('Resolve promise 2').then(res => {
+//   // for (let i = 0; i < 10000000000; i++) {}
+//   console.log(res);
+// });
+// console.log('Test End');
+
+// ================================ Building a  Promise ======================
+
+const lotteryPromise = new Promise(function (resolve, reject) {
+  console.log('Lottery draw is happening 🎉');
+  setTimeout(() => {
+    if (Math.random() <= 0.5) {
+      resolve('You WIN 💰');
+    } else {
+      reject('You lost your money ☹');
+    }
+  }, 3000);
 });
-console.log('Test End');
+console.log(lotteryPromise);
+
+lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
+
+//Promisifying setTimeout
+const wait = function (second) {
+  return new Promise(function (resolve, reject) {
+    if (!second) reject(new Error('Please enter the time'));
+
+    setTimeout(resolve, second);
+  });
+};
+
+// wait(2000)
+//   .then(() => {
+//     console.log('We have waited for 2 second');
+//     return wait(1000);
+//   })
+//   .then(() => console.log('We have waited for 1 second'))
+//   .catch(err => console.error(err));
+
+// ===========================================================================
+
+function geoLocationErrorHandler() {
+  const pandaneCordinates = {
+    coords: { latitude: '20.3633277', longitude: '73.851463' },
+  };
+  return pandaneCordinates;
+}
+
+const getLocation = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject, {
+      timeout: 2000,
+    });
+  });
+};
+
+getLocation()
+  .then(res => console.log(res))
+  .catch(() => {
+    const coords = geoLocationErrorHandler();
+  });
+
+function whereAmI(lat, lng) {
+  fetch(
+    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
+  )
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Something went wrong ${response.status}`);
+      }
+      return response.json();
+    })
+
+    .then(data => {
+      console.log(`You are in a ${data.city}, ${data.countryName} `);
+      return getJSON(
+        `https://restcountries.com/v2/name/${data.countryName}?fullText=true`,
+        `Country not found`,
+      ).then(data => {
+        displayCountry(data[0]);
+        countriesContainer.style.opacity = 1;
+      });
+    })
+
+    .catch(err => {
+      console.log(`Something went wrong:${err.message}😞😔☹☹☹`);
+    });
+}
+
+function getPosition() {
+  getLocation()
+    .then(res => console.log(res))
+    .catch(() => {
+      const coords = geoLocationErrorHandler();
+      const lat = coords.coords.latitude;
+      const lng = coords.coords.longitude;
+      return fetch(
+        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
+      );
+    })
+
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Something went wrong ${response.status}`);
+      }
+      return response.json();
+    })
+
+    .then(data => {
+      console.log(`You are in a ${data.city}, ${data.countryName} `);
+      return getJSON(
+        `https://restcountries.com/v2/name/${data.countryName}?fullText=true`,
+        `Country not found`,
+      ).then(data => {
+        displayCountry(data[0]);
+        countriesContainer.style.opacity = 1;
+      });
+    })
+
+    .catch(err => {
+      console.log(`Something went wrong:${err.message}😞😔☹☹☹`);
+    });
+}
+
+btn.addEventListener('click', getPosition);
+
+// ============================================ async/await ============================================
+
+const myPosition = async function (country) {
+  const res = await fetch(
+    `https://restcountries.com/v2/name/${country}?fullText=true`,
+  );
+  const data = await res.json();
+  console.log(data);
+};
+
+function myPosition1(country) {
+  fetch(`https://restcountries.com/v2/name/${country}?fullText=true`)
+    .then(res => {
+      return res.json();
+    })
+    .then(data => console.log(data));
+}
+
+const whereAmI1 = async function (lat, lng) {
+  const result = await fetch(
+    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
+  );
+  const data = await result.json();
+
+  const country = await fetch(
+    `https://restcountries.com/v2/name/${data.countryName}?fullText=true`,
+  );
+  const countryData = await country.json();
+
+  displayCountry(countryData[0]);
+  countriesContainer.style.opacity = 1;
+};
+
+whereAmI1(19.037, 72.873);
