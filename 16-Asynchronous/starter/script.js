@@ -327,18 +327,47 @@ function myPosition1(country) {
 }
 
 const whereAmI1 = async function (lat, lng) {
-  const result = await fetch(
-    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
-  );
-  const data = await result.json();
+  try {
+    const result = await fetch(
+      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
+    );
+    if (!result.ok) {
+      throw new Error(`Coordinates not found ${result.status}`);
+    }
+    const data = await result.json();
 
-  const country = await fetch(
-    `https://restcountries.com/v2/name/${data.countryName}?fullText=true`,
-  );
-  const countryData = await country.json();
+    console.log(data);
 
-  displayCountry(countryData[0]);
-  countriesContainer.style.opacity = 1;
+    const country = await fetch(
+      `https://restcountries.com/v2/name/${data.countryName}?fullText=true`,
+    );
+    if (!country.ok) {
+      throw new Error(`Something went wrong with country ${country.status}`);
+    }
+    const countryData = await country.json();
+    console.log(countryData);
+    displayCountry(countryData[0]);
+    countriesContainer.style.opacity = 1;
+    return `You are in ${data.city}, ${data.countryName}`;
+  } catch (err) {
+    console.log(err);
+    renderError(`Something went wrong:${err.message}😞😔☹☹☹`);
+    throw err;
+  }
 };
+// whereAmI1(19.037, 72.873);
+// whereAmI1(19.037, 72.873)
+//   .then(city => console.log(city))
+//   .catch(err => console.log('Something wrong', err));
+// // whereAmI1(19.037, 72.873);
 
-whereAmI1(19.037, 72.873);
+// btn.addEventListener('click', whereAmI1);
+
+(async function () {
+  try {
+    const data = await whereAmI1(19.037, 72.873);
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+})();

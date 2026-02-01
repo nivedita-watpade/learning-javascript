@@ -553,3 +553,91 @@ await → Waits until JSON parsing is completed.
 
 console.log(data);
 console.log() → Prints the country data in console.
+
+============================================= try...catch in JavaScript===============================
+
+try...catch is used to handle runtime errors (exceptions) so that your program does not crash and can continue running.
+
+Syntax:
+try {
+// Code that may cause an error
+} catch (error) {
+// Code to handle the error
+} finally {
+// (Optional) Always runs
+}
+
+Ex.
+try {
+let result = 10 / x; // x is not defined
+console.log(result);
+} catch (error) {
+console.log("Error occurred:", error.message);
+}
+
+//output
+Error occurred: x is not defined
+
+================================ returning values from async function ==========================
+In JavaScript, an async function always returns a Promise. So when you “return a value”, it is automatically wrapped inside a Promise.
+
+Ex.
+async function getNumber() {
+return 10;
+}
+
+getNumber().then(result => {
+console.log(result); // 10
+});
+👉 return 10 becomes Promise.resolve(10)
+
+async function getUser() {
+const res = await fetch('https://jsonplaceholder.typicode.com/users/1');
+const data = await res.json();
+return data;
+}
+
+getUser().then(user => {
+console.log(user);
+});
+
+Using await to Get Returned Value:
+You can also handle it inside another async function:
+
+async function main() {
+const result = await getNumber();
+console.log(result); // 10
+}
+main();
+
+//Re - throwing
+async function fetchUser() {
+try {
+const res = await fetch('https://jsonplaceholder.typicode.com/users/1');
+
+    if (!res.ok) {
+      throw new Error("API request failed");
+    }
+
+    const data = await res.json();
+    return data;
+
+} catch (error) {
+console.log("Inside function:", error.message);
+
+    // Rethrow error to caller
+    throw error;
+
+}
+}
+
+async function main() {
+try {
+const user = await fetchUser();
+console.log(user);
+} catch (err) {
+console.log("Handled in main:", err.message);
+}
+}
+
+main();
