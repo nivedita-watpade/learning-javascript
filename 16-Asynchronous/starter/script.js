@@ -402,3 +402,53 @@ const get3Countries = async function (c1, c2, c3) {
 };
 
 get3Countries('india', 'USA', 'Sri lanka');
+
+//Promise.race
+
+(async function () {
+  const res = await Promise.race([
+    getJSON(`https://restcountries.com/v2/name/india?fullText=true`),
+    getJSON(`https://restcountries.com/v2/name/italy?fullText=true`),
+    getJSON(`https://restcountries.com/v2/name/mexico?fullText=true`),
+  ]);
+  console.log(res);
+})();
+
+function timeout(s) {
+  return new Promise(function (_, reject) {
+    setTimeout(() => {
+      reject(new Error('Request took too long'));
+    }, s);
+  });
+}
+
+const res1 = async function () {
+  try {
+    const data = await Promise.race([
+      getJSON(`https://restcountries.com/v2/name/india?fullText=true`),
+      timeout(100),
+    ]);
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+console.log(res1());
+
+//Promise.allSettled
+
+Promise.allSettled([
+  Promise.resolve('SUCCESS'),
+  Promise.reject('ERROR'),
+  Promise.resolve('ANOTHER SUCCESS'),
+]).then(res => console.log(res));
+
+//Promise.any
+
+Promise.any([
+  Promise.reject('ERROR'),
+  Promise.resolve('SUCCESS'),
+
+  Promise.resolve('ANOTHER SUCCESS'),
+]).then(res => console.log(res));

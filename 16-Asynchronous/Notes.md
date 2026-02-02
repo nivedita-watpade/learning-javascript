@@ -643,7 +643,8 @@ console.log("Handled in main:", err.message);
 main();
 
 ================================== Promise.all() in JavaScript ==================================
-Promise.all() in JavaScript
+
+1. Promise.all() in JavaScript
 
 Promise.all() - is used to run multiple promises in parallel and wait until all of them are resolved.
 Syntax:
@@ -653,3 +654,62 @@ Promise.all(iterable)
 -Returns a new Promise
 -Resolves when all promises resolve
 -Rejects if any one promise fails
+
+2. Promise.race()
+   Promise.race() returns the result of the FIRST settled promise:
+   -Can be resolve OR reject
+   -Whichever finishes first wins
+   Ex.
+   const p1 = new Promise(resolve =>
+   setTimeout(() => resolve("Fast"), 1000)
+   );
+
+const p2 = new Promise(resolve =>
+setTimeout(() => resolve("Slow"), 3000)
+);
+
+Promise.race([p1, p2])
+.then(result => console.log(result));
+
+// Output: Fast
+
+3. Promise.allSettled()
+   Promise.allSettled() waits for ALL promises to finish:
+   -Doesn't fail on error
+   -Returns status + value/reason
+   -Always resolves
+
+Ex. const p1 = Promise.resolve(100);
+const p2 = Promise.reject("Error");
+const p3 = Promise.resolve(300);
+
+Promise.allSettled([p1, p2, p3])
+.then(result => console.log(result));
+//op
+[
+{ status: "fulfilled", value: 100 },
+{ status: "rejected", reason: "Error" },
+{ status: "fulfilled", value: 300 }
+]
+
+4. Promise.any()
+   Promise.any() returns the FIRST SUCCESSFUL promise:
+   -Ignores rejected promises
+   -Rejects only if ALL promises fail
+   -Returns single value
+
+Ex.
+const p1 = Promise.reject("Fail 1");
+const p2 = Promise.resolve("Success");
+const p3 = Promise.reject("Fail 2");
+
+Promise.any([p1, p2, p3])
+.then(result => console.log(result))
+.catch(err => console.log(err));
+
+//op Success
+
+✔ Promise.all → "All or nothing" (all resolve)
+✔ Promise.race → "First finished wins" (First resolve or reject)
+✔ Promise.allSettled → "Wait for all, no failure" (all resolve and reject)
+✔ Promise.any → "First success wins" (first reolved value)
