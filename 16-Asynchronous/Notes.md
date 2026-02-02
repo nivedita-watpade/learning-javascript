@@ -641,3 +641,15 @@ console.log("Handled in main:", err.message);
 }
 
 main();
+
+================================== Promise.all() in JavaScript ==================================
+Promise.all() in JavaScript
+
+Promise.all() - is used to run multiple promises in parallel and wait until all of them are resolved.
+Syntax:
+Promise.all(iterable)
+
+-Takes an array (or iterable) of promises
+-Returns a new Promise
+-Resolves when all promises resolve
+-Rejects if any one promise fails

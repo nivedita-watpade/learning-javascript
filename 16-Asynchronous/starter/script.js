@@ -371,3 +371,34 @@ const whereAmI1 = async function (lat, lng) {
     console.log(err);
   }
 })();
+
+const get3Countries = async function (c1, c2, c3) {
+  try {
+    // const [data1] = await getJSON(
+    //   `https://restcountries.com/v2/name/${c1}?fullText=true`,
+    // );
+
+    // const [data2] = await getJSON(
+    //   `https://restcountries.com/v2/name/${c2}?fullText=true`,
+    // );
+
+    // const [data3] = await getJSON(
+    //   `https://restcountries.com/v2/name/${c3}?fullText=true`,
+    // );
+
+    // console.log([data1.capital, data2.capital, data3.capital]);
+
+    const data = await Promise.all([
+      getJSON(`https://restcountries.com/v2/name/${c1}?fullText=true`),
+      getJSON(`https://restcountries.com/v2/name/${c2}?fullText=true`),
+      getJSON(`https://restcountries.com/v2/name/${c3}?fullText=true`),
+    ]);
+
+    const allCapitals = data.map(d => d[0].capital);
+    console.log(allCapitals);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+get3Countries('india', 'USA', 'Sri lanka');
