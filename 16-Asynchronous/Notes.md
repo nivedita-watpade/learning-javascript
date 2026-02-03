@@ -656,6 +656,7 @@ Promise.all(iterable)
 -Rejects if any one promise fails
 
 2. Promise.race()
+
    Promise.race() returns the result of the FIRST settled promise:
    -Can be resolve OR reject
    -Whichever finishes first wins

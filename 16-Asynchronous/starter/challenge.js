@@ -151,31 +151,91 @@ function createImage(imagePath) {
   });
 }
 
-createImage('img/img-1.jpg')
-  .then(res => {
-    img = res;
-    return wait(2000);
-  })
-  .then(() => {
-    img.style.display = 'none';
-    return createImage('img/img-2.jpg');
-  })
-  .then(res => {
-    img = res;
-    return wait(2000);
-  })
-  .then(() => {
-    img.style.display = 'none';
-    return createImage('img/img-3.jpg');
-  })
-  .then(res => {
-    img = res;
-    return wait(2000);
-  })
-  .then(() => {
-    img.style.display = 'none';
-  })
-  .catch(err => console.error(err));
+// createImage('img/img-1.jpg')
+//   .then(res => {
+//     img = res;
+//     return wait(2000);
+//   })
+//   .then(() => {
+//     img.style.display = 'none';
+//     return createImage('img/img-2.jpg');
+//   })
+//   .then(res => {
+//     img = res;
+//     return wait(2000);
+//   })
+//   .then(() => {
+//     img.style.display = 'none';
+//     return createImage('img/img-3.jpg');
+//   })
+//   .then(res => {
+//     img = res;
+//     return wait(2000);
+//   })
+//   .then(() => {
+//     img.style.display = 'none';
+//   })
+//   .catch(err => console.error(err));
 
 // const img = (document.createElement('img').src = 'img/img-1.jpg');
 // console.log(img);
+
+///////////////////////////////////////
+// Coding Challenge #3
+
+/* 
+PART 1
+Write an async function 'loadNPause' that recreates Coding Challenge #2, this time using async/await (only the part where the promise is consumed). Compare the two versions, think about the big differences, and see which one you like more.
+Don't forget to test the error handler, and to set the network speed to 'Fast 3G' in the dev tools Network tab.
+
+PART 2
+1. Create an async function 'loadAll' that receives an array of image paths 'imgArr';
+2. Use .map to loop over the array, to load all the images with the 'createImage' function (call the resulting array 'imgs')
+3. Check out the 'imgs' array in the console! Is it like you expected?
+4. Use a promise combinator function to actually get the images from the array 😉
+5. Add the 'paralell' class to all the images (it has some CSS styles).
+
+TEST DATA: ['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']. To test, turn off the 'loadNPause' function.
+
+GOOD LUCK 😀
+*/
+
+// async function loadNPause() {
+//   try {
+//     const res1 = await createImage('img/img-1.jpg');
+//     img = res1;
+//     await wait(2000);
+//     img.style.display = 'none';
+
+//     const res2 = await createImage('img/img-2.jpg');
+//     img = res2;
+//     await wait(2000);
+//     img.style.display = 'none';
+
+//     const res3 = await createImage('img/img-3.jpg');
+//     img = res3;
+//     await wait(2000);
+//     // img.style.display = 'none';
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+
+// loadNPause();
+
+async function loadAll(imgArr) {
+  try {
+    const imgs = imgArr.map(img => {
+      return createImage(img);
+    });
+    console.log(imgs);
+
+    const data = await Promise.all(imgs);
+    console.log(data);
+    data.forEach(img => img.classList.add('parallel'));
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']);

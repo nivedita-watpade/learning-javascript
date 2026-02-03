@@ -372,6 +372,9 @@ const whereAmI1 = async function (lat, lng) {
   }
 })();
 
+///////////////////////////////////////
+// Running Promises in Parallel
+
 const get3Countries = async function (c1, c2, c3) {
   try {
     // const [data1] = await getJSON(
