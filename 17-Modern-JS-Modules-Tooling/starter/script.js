@@ -16,3 +16,19 @@ add('pizza', 10);
 add('burger', 4);
 add('bread', 9);
 console.log(cart);
+
+// const res = await fetch('https://jsonplaceholder.typicode.com/todos');
+// const data = await res.json();
+// console.log(data);
+
+const getLastTodo = async function () {
+  const res = await fetch('https://jsonplaceholder.typicode.com/todos');
+  const data = await res.json();
+  //   console.log(data);
+  return { id: data.at(-1).id, title: data.at(-1).title };
+};
+
+console.log(getLastTodo());
+
+const lastTodo = await getLastTodo();
+console.log(lastTodo);
