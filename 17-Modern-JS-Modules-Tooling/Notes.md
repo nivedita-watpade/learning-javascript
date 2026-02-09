@@ -176,3 +176,30 @@ import { addToCart } from './shoppingcart.js';
     console.log(cart); // updated array
     📌 Reason:
     Both modules point to the same memory reference
+
+============================ Top Level await ======================================
+
+What is Top-Level await?
+Top-level await lets you use the await keyword outside of an async function, directly at the top level of a module.
+👉 Before this feature, await was only allowed inside async functions.
+
+Before Top-Level await:
+You had to wrap everything in an async function:
+
+async function loadData() {
+const res = await fetch('https://api.example.com/data');
+const data = await res.json();
+console.log(data);
+}
+
+loadData();
+
+With Top-Level await
+Now you can write:
+const res = await fetch('https://api.example.com/data');
+const data = await res.json();
+
+console.log(data);
+
+1️⃣ It blocks module execution:
+If a module uses top-level await, any module importing it will pause until the await is resolved.
