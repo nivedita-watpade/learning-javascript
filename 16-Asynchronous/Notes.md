@@ -714,3 +714,5 @@ Promise.any([p1, p2, p3])
 ✔ Promise.race → "First finished wins" (First resolve or reject)
 ✔ Promise.allSettled → "Wait for all, no failure" (all resolve and reject)
 ✔ Promise.any → "First success wins" (first reolved value)
+
+======================================================================
