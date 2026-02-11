@@ -203,3 +203,34 @@ console.log(data);
 
 1️⃣ It blocks module execution:
 If a module uses top-level await, any module importing it will pause until the await is resolved.
+
+============================== CommonJS ================================
+
+✅ What is CommonJS?
+CommonJS is a module system used in Node.js to organize code into separate files (modules).
+
+It allows us to:
+Export code from one file
+Import that code into another file
+
+In CommonJS, we use:
+require() → to import
+module.exports → to export
+Ex.
+function add(a, b) {
+return a + b;
+}
+
+module.exports = add;
+
+const add = require('./math');
+
+console.log(add(5, 3)); // 8
+
+===================================== NPM (Node Package Manager) =============================
+
+NPM (Node Package Manager) is a tool used to:
+-Install libraries/packages
+-Manage project dependencies
+-Share reusable code
+It comes automatically when you install Node.js.

@@ -193,50 +193,90 @@ function taskThree() {
   });
 }
 
-async function allTask() {
-  try {
-    const res1 = await taskOne();
-    const res2 = await taskTwo();
-    console.log(res1, res2);
-  } catch (err) {
-    console.log(err);
-  }
-}
+// async function allTask() {
+//   try {
+//     const res1 = await taskOne();
+//     const res2 = await taskTwo();
+//     console.log(res1, res2);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
 
 //allTask();
 
 // CHALLENGE 2 – Parallel Async Tasks
 // Create a function that receives multiple asynchronous tasks and starts all of them at the same time. Once all tasks complete, collect and display the results together. Errors must be handled properly without silent failures.
 
-async function multipleTask(tasks) {
-  try {
-    const res = await Promise.all(
-      tasks.map(task => {
-        task();
-      }),
-    );
-  } catch (err) {
-    console.log(err);
-  }
-}
+// async function multipleTask(tasks) {
+//   try {
+//     const res = await Promise.all(
+//       tasks.map(task => {
+//         task();
+//       }),
+//     );
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
 
-multipleTask([taskOne, taskTwo, taskThree]);
+// multipleTask([taskOne, taskTwo, taskThree]);
 
 // CHALLENGE 3 – Fastest Successful Result
 // Create a function that triggers multiple asynchronous operations simultaneously and returns the first successful result. If all operations fail, the function must fail gracefully.
 
-async function fastSuccessFunction(arr) {
-  try {
-    const res = await Promise.any(arr.map(task => task()));
-    return res;
-  } catch (err) {
-    console.log('All tasks failed:', err.message);
-  }
-}
+// async function fastSuccessFunction(arr) {
+//   try {
+//     const res = await Promise.any(arr.map(task => task()));
+//     return res;
+//   } catch (err) {
+//     console.log('All tasks failed:', err.message);
+//   }
+// }
 
-fastSuccessFunction([taskZer0, taskOne, taskTwo]).then(result => {
-  console.log('Fastest Successful Result', result);
-});
+// fastSuccessFunction([taskZer0, taskOne, taskTwo]).then(result => {
+//   console.log('Fastest Successful Result', result);
+// });
 
 // CHALLENGE 4 – Partial Success Collection
 // Create a function that executes several asynchronous operations in parallel. Both successful results and failures must be collected. Execution must not stop when some operations fail, and the final output must clearly separate successes from failures.
+
+async function runParallel(tasks) {
+  const results = await Promise.allSettled(tasks.map(task => task()));
+
+  return {
+    successes: results.filter(r => r.status === 'fulfilled').map(r => r.value),
+
+    failures: results.filter(r => r.status === 'rejected').map(r => r.reason),
+  };
+}
+
+runParallel([taskZer0, taskOne, taskTwo]);
+
+// CHALLENGE 6 – Guaranteed Cleanup
+// Create an asynchronous process that performs a data-loading operation. A loading state must be activated before the operation starts. Cleanup logic must always run regardless of success or failure.
+
+// CHALLENGE 8 – Timers and Promises Ordering
+// Create a function that schedules:
+
+// A synchronous log
+// A zero-delay timer
+// A resolved Promise
+// Another synchronous log
+// The output order must follow correct JavaScript runtime execution rules.
+
+function order() {
+  console.log('synchronous log 1');
+
+  setTimeout(() => {
+    console.log('Timer (0ms)');
+  }, 0);
+
+  Promise.resolve().then(() => {
+    console.log('Promise resolved');
+  });
+
+  console.log('synchronous log 2');
+}
+
+order();
