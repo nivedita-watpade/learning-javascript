@@ -234,3 +234,47 @@ NPM (Node Package Manager) is a tool used to:
 -Manage project dependencies
 -Share reusable code
 It comes automatically when you install Node.js.
+
+===============================Functional Programming Principles =====================================
+
+Functional Programming Principles – Notes
+🔹 What is Functional Programming?
+-A declarative programming paradigm
+-Focuses on writing software by combining pure functions
+-Avoids side effects and data mutation
+
+🔹 Key Concepts
+1️⃣ Side Effects
+Modification (mutation) of data outside the function
+Examples:
+-Mutating external variables
+-Logging to console
+-Writing to DOM
+Functional programming tries to avoid side effects
+
+2️⃣ Pure Function
+-A function without side effects
+-Does not depend on external variables
+-Given the same inputs, always returns the same output
+
+3️⃣ Immutability
+State (data) is never modified directly
+Instead:
+-Create a copy
+-Modify the copy
+Return the new updated version
+
+🔹 Functional Programming Techniques
+-Avoid data mutations
+-Use built-in methods that don’t create side effects
+Perform transformations using:
+.map()
+.filter()
+.reduce()
+Try to avoid side effects in functions (though not always possible)
+
+🔹 Declarative Syntax
+-Use array and object destructuring
+-Use the spread operator (...)
+-Use the ternary (conditional) operator
+-Use template literals
