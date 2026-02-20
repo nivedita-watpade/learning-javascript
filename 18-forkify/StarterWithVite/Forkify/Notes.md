@@ -50,3 +50,40 @@ Step-by-step flow:
 4.Model processes data (business logic / API calls)
 5.Controller receives updated data
 6.View updates and displays new data to User
+
+===================================================================
+
+🔹 1. Config File in MVC
+✅ What is a Config File?
+A config file stores application settings and environment-related values that should not be hardcoded inside controllers or models.
+
+It helps in:
+Centralizing configuration
+Easy environment change (dev / staging / production)
+Keeping sensitive data secure
+
+✅ What Usually Goes Inside config?
+Examples:
+Database connection details
+API base URLs
+Port numbers
+Secret keys
+Environment variables
+App constants
+
+🔹 2. Helpers File in MVC
+✅ What is a Helper?
+A helper file contains reusable utility functions that are not directly part of business logic.
+
+Helpers:
+Reduce duplicate code
+Keep controllers clean
+Improve reusability
+
+✅ What Usually Goes Inside helpers?
+Examples:
+Date formatting
+Password hashing
+Token generation
+Response formatting
+Validation utilities
