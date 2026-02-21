@@ -19,7 +19,8 @@ async function controlRecipes(urlId) {
     //2) Rendering Recipe
     recipeView.render(model.state.recipe);
   } catch (err) {
-    alert(err);
+    // alert(err);
+    recipeView.renderError();
   }
 }
 
@@ -28,5 +29,8 @@ function getUrlId() {
   return id.slice(1);
 }
 
-window.addEventListener('hashchange', () => controlRecipes(getUrlId()));
-window.addEventListener('load', () => controlRecipes(getUrlId()));
+const init = function () {
+  recipeView.addEventlistnerRender(controlRecipes, getUrlId);
+};
+
+init();

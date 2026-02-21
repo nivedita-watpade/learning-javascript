@@ -5,6 +5,8 @@
 class RecipeView {
   #parenrElememnt = document.querySelector('.recipe');
   #data;
+  #errorMessage = 'We could not find that recipe. Please try another one!';
+  #successMessage = '';
 
   render(data) {
     this.#data = data;
@@ -17,13 +19,44 @@ class RecipeView {
     this.#parenrElememnt.innerHTML = '';
   }
 
-  renderSpinner = function () {
+  renderSpinner() {
     const markup = `<div class="spinner">
           <svg><use href="src/img/icons.svg#icon-loader"></use></svg>
         </div>`;
-    this.#clear;
+    this.#clear();
     this.#parenrElememnt.insertAdjacentHTML('afterBegin', markup);
-  };
+  }
+
+  renderError(message = this.#errorMessage) {
+    const markup = `<div class="error">
+            <div>
+              <svg>
+                <use href="src/img/icons.svg#icon-alert-triangle"></use>
+              </svg>
+            </div>
+            <p>${message}</p>
+          </div>`;
+    this.#clear();
+    this.#parenrElememnt.insertAdjacentHTML('afterBegin', markup);
+  }
+
+  renderMessage(message = this.#successMessage) {
+    const markup = `<div class="error">
+            <div>
+              <svg>
+                <use href="src/img/icons.svg#icon-smile"></use>
+              </svg>
+            </div>
+            <p>${message}</p>
+          </div>`;
+    this.#clear();
+    this.#parenrElememnt.insertAdjacentHTML('afterBegin', markup);
+  }
+
+  addEventlistnerRender(handler, getUrlId) {
+    window.addEventListener('hashchange', () => handler(getUrlId()));
+    window.addEventListener('load', () => handler(getUrlId()));
+  }
 
   #generateMarkup() {
     return `<figure class="recipe__fig">
