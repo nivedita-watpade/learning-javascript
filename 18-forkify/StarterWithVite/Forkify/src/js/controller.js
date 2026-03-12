@@ -5,6 +5,7 @@ import recipeView from './views/recipeView.js';
 import resultView from './views/resultView.js';
 import SearchView from './views/SearchView.js';
 import bookmarksView from './views/bookmarksView.js';
+import addRecipeView from './views/addRecipeView.js';
 
 const recipeContainer = document.querySelector('.recipe');
 
@@ -99,14 +100,43 @@ const controlLocalStorageBookmark = function (bookmarks) {
   bookmarksView.render(model.state.bookmarks);
 };
 
+const controlAddRecipe = async function (newRecipe) {
+  console.log(newRecipe);
+  //show loader
+  addRecipeView.renderSpinner();
+  try {
+    await model.uploadRecipe(newRecipe);
+
+    //render recipe
+    recipeView.render(model.state.recipe);
+
+    //Success message
+    addRecipeView.renderMessage();
+
+    //Render bookmark view
+    bookmarksView.render(model.state.bookmarks);
+
+    //Change id in the URL
+    // window.history.pushState(null, '', `#${model.state.recipe.key}`);
+
+    //Close form window
+    setTimeout(function () {
+      addRecipeView.toggleWindow();
+    }, 2500);
+  } catch (err) {
+    console.log(err);
+    addRecipeView.renderError(err.message);
+  }
+};
+
 const init = function () {
   recipeView.addEventlistnerRender(controlRecipes, getUrlId);
   recipeView.addHnadlerUpdateServings(controlServings);
   recipeView.addHandlerAddBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResult);
   paginationView.addHandlerClick(controlPagination);
-
   bookmarksView.onPageLoadHandler(controlLocalStorageBookmark);
+  addRecipeView.addHandlerUpload(controlAddRecipe);
 };
 
 init();

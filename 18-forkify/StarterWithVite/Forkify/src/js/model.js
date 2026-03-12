@@ -1,5 +1,6 @@
-import { API_URL, REQ_PER_PAGE } from './config.js';
-import { getJSON } from './helpers.js';
+import { API_URL, REQ_PER_PAGE, KEY } from './config.js';
+// import { getJSON, sendJSON } from './helpers.js';
+import { AJAX } from './helpers.js';
 
 export const state = {
   recipe: {},
@@ -14,8 +15,8 @@ export const state = {
 
 export const loadRecipe = async function (urlId) {
   try {
-    const data = await getJSON(`${API_URL}/${urlId}`);
-
+    const data = await AJAX(`${API_URL}/${urlId}`);
+    console.log(data);
     const { recipe } = data.data;
     state.recipe = {
       id: recipe.id,
@@ -34,7 +35,8 @@ export const loadRecipe = async function (urlId) {
     }
     // console.log(state.recipe);
   } catch (err) {
-    console.error(err);
+    console.error(err.message);
+
     throw err;
   }
 };
@@ -42,7 +44,7 @@ export const loadRecipe = async function (urlId) {
 export const loadSearchRecipe = async function (query) {
   state.search.query = query;
   try {
-    const data = await getJSON(`${API_URL}?search=${query}`);
+    const data = await AJAX(`${API_URL}?search=${query}`);
     const { recipes } = data.data;
     state.search.results = recipes;
     return recipes;
@@ -93,3 +95,42 @@ export const deleteBookmark = function (id) {
 function syncBookmarksToLocalStorage() {
   localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
 }
+
+export const uploadRecipe = async function (newRecipe) {
+  try {
+    const ingredients = Object.entries(newRecipe)
+      .filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
+      .map(ing => {
+        const ingArr = ing[1].replaceAll(' ', '').split(',');
+        if (ingArr.length !== 3)
+          throw new Error(
+            'Wrong ingredient fromat! Please use the correct format :)',
+          );
+
+        const [quantity, unit, description] = ingArr;
+
+        return { quantity: quantity ? +quantity : null, unit, description };
+      });
+
+    console.log(ingredients);
+
+    const recipe = {
+      title: newRecipe.title,
+      source_url: newRecipe.sourceUrl,
+      image_url: newRecipe.image,
+      publisher: newRecipe.publisher,
+      cookingTime: +newRecipe.cookingTime,
+      servings: +newRecipe.servings,
+      ingredients,
+      key: crypto.randomUUID(),
+      id: newRecipe.id,
+    };
+    console.log(recipe);
+    const data = await AJAX(`http://localhost:3000/recipes`, recipe);
+    console.log(data);
+    state.recipe = data.data;
+    addBookmark(state.recipe);
+  } catch (err) {
+    throw err;
+  }
+};

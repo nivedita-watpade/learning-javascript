@@ -10,7 +10,7 @@ class BookmarksView extends View {
   }
 
   _generateMarkupPreview(data) {
-    console.log(data);
+    // console.log(data);
     const id = window.location.hash.slice(1);
 
     return `<li class="preview">
